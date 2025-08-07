@@ -1,0 +1,22 @@
+Welcome to the documentation of EPCOT!
+======================================
+
+This is a documentation for usage of **EPCOT** pre-trained models, including installation instructions and tutorials on how to effectively utilize the models.
+
+.. note::
+
+   The weights for the EPCOT models can be downloaded from HuggingFace.
+
+Contents
+--------
+.. toctree::
+   :maxdepth: 2
+   :caption: Installation
+
+   install/index
+
+.. toctree::
+   :maxdepth: 4
+   :caption: Tutorials
+
+   tutorial/index

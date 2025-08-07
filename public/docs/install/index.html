@@ -1,0 +1,189 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installation &mdash; EPCOT 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+
+  
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="EPCOT Installation" href="install_v1.html" />
+    <link rel="prev" title="Welcome to the documentation of EPCOT!" href="../index.html" />
+   
+  <script>
+    // 如果 URL 中有 ?embed=true，则给 <body> 添加 .embed 类
+    const isEmbed = new URLSearchParams(window.location.search).get("embed");
+    if (isEmbed === "true") {
+      document.addEventListener("DOMContentLoaded", () => {
+        document.body.classList.add("embed");
+      });
+    }
+  </script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            EPCOT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install_v1.html">EPCOT Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="install_v1.html#environment-setup">Environment Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install_v1.html#dependencies">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install_v1.html#pretrained-models">Pretrained Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install_v1.html#input-preparation">Input Preparation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install_v1.html#colab-tutorial">Colab Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install_v1.html#tf-motif-analysis">TF Motif Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="install_v2.html">EPCOTv2 Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="install_v2.html#dependencies">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install_v2.html#installation-steps">Installation Steps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install_v2.html#clone-the-space-repository">Clone the Space repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install_v2.html#create-and-activate-virtual-environment">Create and activate virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install_v2.html#install-dependencies">Install dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install_v2.html#running-locally-or-in-colab">Running Locally or in Colab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install_v2.html#usage-steps">Usage Steps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install_v2.html#notes">Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install_v2.html#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials for using EPCOT</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/tutorial_v1.html">EPCOT: Predicting Human Genomic Modalities from ATAC-seq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/tutorial_v1.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/tutorial_v1.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/tutorial_v1.html#quickstart">Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/tutorial_v1.html#inputs-outputs">Inputs &amp; Outputs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/tutorial_v1.html#predicted-modalities">Predicted Modalities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/tutorial_v1.html#notes">Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/tutorial_v1.html#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/tutorial_v2.html">EPCOTv2: Predicting Human and Mouse Genomic Modalities from ATAC-seq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/tutorial_v2.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/tutorial_v2.html#human-data-prediction">Human Data Prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/tutorial_v2.html#mouse-data-prediction">Mouse Data Prediction</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EPCOT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Installation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/install/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install_v1.html">EPCOT Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install_v1.html#environment-setup">Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install_v1.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install_v1.html#pretrained-models">Pretrained Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install_v1.html#input-preparation">Input Preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install_v1.html#colab-tutorial">Colab Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install_v1.html#tf-motif-analysis">TF Motif Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install_v2.html">EPCOTv2 Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install_v2.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install_v2.html#installation-steps">Installation Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install_v2.html#clone-the-space-repository">Clone the Space repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install_v2.html#create-and-activate-virtual-environment">Create and activate virtual environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install_v2.html#install-dependencies">Install dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install_v2.html#running-locally-or-in-colab">Running Locally or in Colab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install_v2.html#usage-steps">Usage Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install_v2.html#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install_v2.html#references">References</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to the documentation of EPCOT!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="install_v1.html" class="btn btn-neutral float-right" title="EPCOT Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, JingYin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

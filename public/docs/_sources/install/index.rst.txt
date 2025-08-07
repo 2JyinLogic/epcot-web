@@ -1,0 +1,8 @@
+Installation
+============
+
+.. toctree::
+   :maxdepth: 10
+
+   install_v1
+   install_v2

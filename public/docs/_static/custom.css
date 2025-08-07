@@ -1,0 +1,15 @@
+/* Hide top bar and left sidebar when embedding */
+body.embed header,
+body.embed .wy-side-nav-search,
+body.embed .wy-nav-side {
+    display: none;
+}
+
+body.embed .wy-nav-content-wrap {
+    margin-left: 0;
+}
+
+body.embed .wy-nav-content {
+    max-width: 100%;
+    padding: 2rem;
+}

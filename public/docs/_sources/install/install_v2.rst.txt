@@ -1,0 +1,80 @@
+EPCOTv2 Installation
+====================
+
+This document explains how to install and run **EPCOTv2**, the latest version hosted on Hugging Face Spaces, supporting inference on ATAC‑seq input to predict multiple genomic modalities in both human and mouse.
+
+Dependencies
+------------
+
+- **Python 3.9+**
+- `torch` (PyTorch) with GPU support recommended
+- `huggingface_hub`, `gradio` (Space frontend)
+- Standard Python libraries: `numpy`, `scipy`, `einops`, etc.
+
+Installation Steps
+------------------
+Clone the Space repository
+---------------------------
+
+.. code-block:: bash
+
+   git clone https://huggingface.co/spaces/luosanj/EPCOTv2
+   cd EPCOTv2
+
+Create and activate virtual environment
+---------------------------------------
+
+.. code-block:: bash
+
+   python -m venv .venv
+   source .venv/bin/activate
+
+Install dependencies
+--------------------
+
+.. code-block:: bash
+
+   pip install -r requirements.txt
+
+
+Otherwise manually install core packages:
+
+.. code-block:: bash
+
+   pip install torch gradio huggingface_hub numpy scipy einops
+
+Running Locally or in Colab
+----------------------------
+
+You can run the Gradio demo locally or on Google Colab:
+
+- Local execution:
+
+  .. code-block:: bash
+
+     python app.py
+
+- Colab:
+
+  Open the Space and click “Open in Colab” (if enabled) to run interactive demo on GPU.
+
+Usage Steps
+-----------
+
+1. Prepare an ATAC‑seq input file in `.pickle` format using provided scripts (e.g. `atac_process.py`).
+2. Launch the demo either locally or via Colab.
+3. Upload the `.pickle` file and specify genome (human/mouse) and modalities to predict.
+4. Download outputs such as prediction archives and formatted `.bigWig` / `.bedpe` for visualization.
+
+Notes
+-----
+
+- EPCOTv2 supports **both human (hg38)** and **mouse (mm10)** genomes.
+- Internal scripts use **LoRA fine-tuned models** for efficient inference (see ``curriculum/loralib/utils.py``).
+- The interface is provided through Hugging Face **Spaces** and is built using the **Gradio** framework.
+
+References
+----------
+
+- Hugging Face Space: `luosanj/EPCOTv2 <https://huggingface.co/spaces/luosanj/EPCOTv2>`_
+- Related methods described in the associated preprint and demo page: `bioRxiv preprint <https://www.biorxiv.org/content/10.1101/2025.05.08.652986>`_

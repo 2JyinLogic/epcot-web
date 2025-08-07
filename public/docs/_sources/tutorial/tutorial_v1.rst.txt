@@ -1,0 +1,107 @@
+EPCOT: Predicting Human Genomic Modalities from ATAC-seq
+=========================================================
+
+Introduction
+------------
+
+**EPCOT** is a deep learning framework designed to predict multiple human genomic modalities from DNA sequence and a cell-type-specific ATAC-seq profile. It leverages a pre-training and fine-tuning structure to support cross-cell type prediction of:
+
+- Epigenomic features (ChIP-seq for 236 TFs and 9 histone marks)
+- Transcriptomic activity (CAGE-seq)
+- 3D chromatin contact maps (Hi-C, Micro-C, ChIA-PET)
+
+This tutorial demonstrates how to use the `EPCOT_gradio` repository to run the model and visualize results.
+
+Prerequisites
+-------------
+
+- Python 3.9
+- samtools
+- (Optional) Google Colab with GPU support
+
+Quickstart
+----------
+
+1. **Clone repository and install dependencies**
+
+.. code-block:: bash
+
+    git clone https://github.com/zzh24zzh/EPCOT_gradio.git
+    cd EPCOT_gradio
+    pip install -r requirements.txt
+
+2. **Download pretrained models and hg38 reference**
+
+.. code-block:: bash
+
+    python download.py
+
+3. **Convert ATAC-seq BAM file to EPCOT input**
+
+.. code-block:: bash
+
+    python atac_process.py -b <ATAC-seq.bam> -p <num_threads>
+
+   Notes:
+   - Use BAM files processed with ENCODE's ATAC-seq pipeline
+   - Recommended to downsample to ~30M aligned reads using GATK DownsampleSam
+
+4. **Launch the Gradio demo**
+
+.. code-block:: bash
+
+   python gradio_epcot.py
+
+This starts a local Gradio server with two interfaces:
+
+- **Run Model**: Submit genomic region and ATAC-seq ``.pickle`` input
+- **Visualize Results**: Upload predictions for interactive exploration
+
+
+Inputs & Outputs
+----------------
+
+**Input**:
+- Processed ``.pickle`` file from ATAC-seq ``.bam``
+
+**Outputs**:
+
+- ``prediction_xxxx.npz``: raw model prediction  
+- ``formatted_xxxx.zip``: formatted data for visualization  
+  (ChIP/CAGE in ``.bigWig``, contacts in ``.bedpe``)
+
+
+Predicted Modalities
+---------------------
+
++------------------+-----------------------------------------------+
+| Modality         | Format                                        |
++==================+===============================================+
+| ChIP-seq         | arcsinh-transformed signal p-values           |
++------------------+-----------------------------------------------+
+| CAGE-seq         | log2(x+1)-transformed signal                  |
++------------------+-----------------------------------------------+
+| Micro-C          | Observed/Expected contact ratio (1kb bins)    |
++------------------+-----------------------------------------------+
+| Hi-C             | Observed/Expected contact ratio (5kb bins)    |
++------------------+-----------------------------------------------+
+| ChIA-PET         | log2(x+1)-transformed Obs/Exp (5kb bins)      |
++------------------+-----------------------------------------------+
+
+Notes
+-----
+
+- The model supports only **human genome (hg38)**.
+- All predictions are **cell-type specific** and can generalize to new cell types.
+- Both DNase-seq and ATAC-seq are supported; use ATAC-seq by default.
+- The Gradio UI also works in **Google Colab**.
+
+Reference
+---------
+
+Zhang, Z. et al. (2023). *A generalizable framework to comprehensively predict epigenome, chromatin organization, and transcriptome*.  
+Nucleic Acids Research, 51(12), 5931–5947. https://doi.org/10.1093/nar/gkad436
+
+Project repositories:
+- Code: https://github.com/zzh24zzh/EPCOT_gradio
+- Core model: https://github.com/liu-bioinfo-lab/EPCOT

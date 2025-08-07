@@ -1,0 +1,66 @@
+EPCOT Installation
+==================
+
+This guide walks you through the installation of the original **EPCOT** framework, which predicts epigenomic features, chromatin organization, and transcriptional activity from DNA sequence and cell-type-specific chromatin accessibility data.
+
+Environment Setup
+-----------------
+
+We recommend using `conda` to create an isolated environment:
+
+.. code-block:: bash
+
+   conda create -n epcot python=3.9
+   conda activate epcot
+
+Then, install dependencies via pip:
+
+.. code-block:: bash
+
+   pip install -r requirements.txt
+
+Dependencies
+------------
+
+The main dependencies are:
+
+- einops==0.3.2
+- kipoiseq==0.5.2
+- numpy==1.19.5
+- torch==1.10.1
+- scipy==1.7.3
+- scikit-learn==1.0.2
+
+Pretrained Models
+-----------------
+
+You can download the pretrained models (trained on DNA sequence and DNase-seq or ATAC-seq) from:
+
+- Google Drive: https://drive.google.com/drive/folders/1gsveyTgYwlXK5Ntnx5nLKSzIW3JvxLse
+- Zenodo: https://doi.org/10.5281/zenodo.7485616
+
+Input Preparation
+-----------------
+
+To prepare the required input formats (e.g., one-hot encoded DNA sequences and normalized DNase-seq), visit:
+
+https://github.com/liu-bioinfo-lab/EPCOT/tree/main/Input
+
+Note:
+All data used in EPCOT are based on the **human hg38 reference genome**.
+
+Colab Tutorial
+--------------
+
+A ready-to-run notebook is available to demonstrate EPCOT usage:
+
+- `EPCOT_usage.ipynb`: https://github.com/liu-bioinfo-lab/EPCOT/blob/main/EPCOT_usage.ipynb
+
+TF Motif Analysis
+-----------------
+
+For transcription factor sequence pattern visualization and comparison, see:
+
+- `sequence_pattern.ipynb`: https://github.com/liu-bioinfo-lab/EPCOT/blob/main/Data/sequence_pattern.ipynb
+- GitHub page: https://zzh24zzh.github.io/epcot.github.io/
+- Motif summary Excel: https://github.com/liu-bioinfo-lab/EPCOT/blob/main/Data/motif_comparison_summary.xls

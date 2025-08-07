@@ -1,0 +1,221 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EPCOT Installation &mdash; EPCOT 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+
+  
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="EPCOTv2 Installation" href="install_v2.html" />
+    <link rel="prev" title="Installation" href="index.html" />
+   
+  <script>
+    // 如果 URL 中有 ?embed=true，则给 <body> 添加 .embed 类
+    const isEmbed = new URLSearchParams(window.location.search).get("embed");
+    if (isEmbed === "true") {
+      document.addEventListener("DOMContentLoaded", () => {
+        document.body.classList.add("embed");
+      });
+    }
+  </script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            EPCOT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Installation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">EPCOT Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#environment-setup">Environment Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pretrained-models">Pretrained Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#input-preparation">Input Preparation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#colab-tutorial">Colab Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tf-motif-analysis">TF Motif Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="install_v2.html">EPCOTv2 Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="install_v2.html#dependencies">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install_v2.html#installation-steps">Installation Steps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install_v2.html#clone-the-space-repository">Clone the Space repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install_v2.html#create-and-activate-virtual-environment">Create and activate virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install_v2.html#install-dependencies">Install dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install_v2.html#running-locally-or-in-colab">Running Locally or in Colab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install_v2.html#usage-steps">Usage Steps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install_v2.html#notes">Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install_v2.html#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorials for using EPCOT</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/tutorial_v1.html">EPCOT: Predicting Human Genomic Modalities from ATAC-seq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/tutorial_v1.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/tutorial_v1.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/tutorial_v1.html#quickstart">Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/tutorial_v1.html#inputs-outputs">Inputs &amp; Outputs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/tutorial_v1.html#predicted-modalities">Predicted Modalities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/tutorial_v1.html#notes">Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/tutorial_v1.html#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/tutorial_v2.html">EPCOTv2: Predicting Human and Mouse Genomic Modalities from ATAC-seq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/tutorial_v2.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/tutorial_v2.html#human-data-prediction">Human Data Prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/tutorial_v2.html#mouse-data-prediction">Mouse Data Prediction</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EPCOT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Installation</a></li>
+      <li class="breadcrumb-item active">EPCOT Installation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/install/install_v1.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="epcot-installation">
+<h1>EPCOT Installation<a class="headerlink" href="#epcot-installation" title="Link to this heading">¶</a></h1>
+<p>This guide walks you through the installation of the original <strong>EPCOT</strong> framework, which predicts epigenomic features, chromatin organization, and transcriptional activity from DNA sequence and cell-type-specific chromatin accessibility data.</p>
+<section id="environment-setup">
+<h2>Environment Setup<a class="headerlink" href="#environment-setup" title="Link to this heading">¶</a></h2>
+<p>We recommend using <cite>conda</cite> to create an isolated environment:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>epcot<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.9
+conda<span class="w"> </span>activate<span class="w"> </span>epcot
+</pre></div>
+</div>
+<p>Then, install dependencies via pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+</section>
+<section id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">¶</a></h2>
+<p>The main dependencies are:</p>
+<ul class="simple">
+<li><p>einops==0.3.2</p></li>
+<li><p>kipoiseq==0.5.2</p></li>
+<li><p>numpy==1.19.5</p></li>
+<li><p>torch==1.10.1</p></li>
+<li><p>scipy==1.7.3</p></li>
+<li><p>scikit-learn==1.0.2</p></li>
+</ul>
+</section>
+<section id="pretrained-models">
+<h2>Pretrained Models<a class="headerlink" href="#pretrained-models" title="Link to this heading">¶</a></h2>
+<p>You can download the pretrained models (trained on DNA sequence and DNase-seq or ATAC-seq) from:</p>
+<ul class="simple">
+<li><p>Google Drive: <a class="reference external" href="https://drive.google.com/drive/folders/1gsveyTgYwlXK5Ntnx5nLKSzIW3JvxLse">https://drive.google.com/drive/folders/1gsveyTgYwlXK5Ntnx5nLKSzIW3JvxLse</a></p></li>
+<li><p>Zenodo: <a class="reference external" href="https://doi.org/10.5281/zenodo.7485616">https://doi.org/10.5281/zenodo.7485616</a></p></li>
+</ul>
+</section>
+<section id="input-preparation">
+<h2>Input Preparation<a class="headerlink" href="#input-preparation" title="Link to this heading">¶</a></h2>
+<p>To prepare the required input formats (e.g., one-hot encoded DNA sequences and normalized DNase-seq), visit:</p>
+<p><a class="reference external" href="https://github.com/liu-bioinfo-lab/EPCOT/tree/main/Input">https://github.com/liu-bioinfo-lab/EPCOT/tree/main/Input</a></p>
+<p>Note:
+All data used in EPCOT are based on the <strong>human hg38 reference genome</strong>.</p>
+</section>
+<section id="colab-tutorial">
+<h2>Colab Tutorial<a class="headerlink" href="#colab-tutorial" title="Link to this heading">¶</a></h2>
+<p>A ready-to-run notebook is available to demonstrate EPCOT usage:</p>
+<ul class="simple">
+<li><p><cite>EPCOT_usage.ipynb</cite>: <a class="reference external" href="https://github.com/liu-bioinfo-lab/EPCOT/blob/main/EPCOT_usage.ipynb">https://github.com/liu-bioinfo-lab/EPCOT/blob/main/EPCOT_usage.ipynb</a></p></li>
+</ul>
+</section>
+<section id="tf-motif-analysis">
+<h2>TF Motif Analysis<a class="headerlink" href="#tf-motif-analysis" title="Link to this heading">¶</a></h2>
+<p>For transcription factor sequence pattern visualization and comparison, see:</p>
+<ul class="simple">
+<li><p><cite>sequence_pattern.ipynb</cite>: <a class="reference external" href="https://github.com/liu-bioinfo-lab/EPCOT/blob/main/Data/sequence_pattern.ipynb">https://github.com/liu-bioinfo-lab/EPCOT/blob/main/Data/sequence_pattern.ipynb</a></p></li>
+<li><p>GitHub page: <a class="reference external" href="https://zzh24zzh.github.io/epcot.github.io/">https://zzh24zzh.github.io/epcot.github.io/</a></p></li>
+<li><p>Motif summary Excel: <a class="reference external" href="https://github.com/liu-bioinfo-lab/EPCOT/blob/main/Data/motif_comparison_summary.xls">https://github.com/liu-bioinfo-lab/EPCOT/blob/main/Data/motif_comparison_summary.xls</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="install_v2.html" class="btn btn-neutral float-right" title="EPCOTv2 Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, JingYin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

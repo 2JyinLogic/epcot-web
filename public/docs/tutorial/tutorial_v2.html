@@ -1,0 +1,286 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EPCOTv2: Predicting Human and Mouse Genomic Modalities from ATAC-seq &mdash; EPCOT 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+
+  
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="EPCOT: Predicting Human Genomic Modalities from ATAC-seq" href="tutorial_v1.html" />
+   
+  <script>
+    // 如果 URL 中有 ?embed=true，则给 <body> 添加 .embed 类
+    const isEmbed = new URLSearchParams(window.location.search).get("embed");
+    if (isEmbed === "true") {
+      document.addEventListener("DOMContentLoaded", () => {
+        document.body.classList.add("embed");
+      });
+    }
+  </script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            EPCOT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install/index.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install/install_v1.html">EPCOT Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../install/install_v1.html#environment-setup">Environment Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install/install_v1.html#dependencies">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install/install_v1.html#pretrained-models">Pretrained Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install/install_v1.html#input-preparation">Input Preparation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install/install_v1.html#colab-tutorial">Colab Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install/install_v1.html#tf-motif-analysis">TF Motif Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../install/install_v2.html">EPCOTv2 Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../install/install_v2.html#dependencies">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install/install_v2.html#installation-steps">Installation Steps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install/install_v2.html#clone-the-space-repository">Clone the Space repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install/install_v2.html#create-and-activate-virtual-environment">Create and activate virtual environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install/install_v2.html#install-dependencies">Install dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install/install_v2.html#running-locally-or-in-colab">Running Locally or in Colab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install/install_v2.html#usage-steps">Usage Steps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install/install_v2.html#notes">Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install/install_v2.html#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials for using EPCOT</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tutorial_v1.html">EPCOT: Predicting Human Genomic Modalities from ATAC-seq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial_v1.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial_v1.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial_v1.html#quickstart">Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial_v1.html#inputs-outputs">Inputs &amp; Outputs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial_v1.html#predicted-modalities">Predicted Modalities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial_v1.html#notes">Notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial_v1.html#reference">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">EPCOTv2: Predicting Human and Mouse Genomic Modalities from ATAC-seq</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#human-data-prediction">Human Data Prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mouse-data-prediction">Mouse Data Prediction</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EPCOT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Tutorials for using EPCOT</a></li>
+      <li class="breadcrumb-item active">EPCOTv2: Predicting Human and Mouse Genomic Modalities from ATAC-seq</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorial/tutorial_v2.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="epcotv2-predicting-human-and-mouse-genomic-modalities-from-atac-seq">
+<h1>EPCOTv2: Predicting Human and Mouse Genomic Modalities from ATAC-seq<a class="headerlink" href="#epcotv2-predicting-human-and-mouse-genomic-modalities-from-atac-seq" title="Link to this heading">¶</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
+<p>EPCOT v2 predicts diverse molecular modalities for the central 500kb regions extracted from 600kb segments across the entire genome.</p>
+</section>
+<section id="human-data-prediction">
+<h2>Human Data Prediction<a class="headerlink" href="#human-data-prediction" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Input file preparation.</strong> The initial BAM file, is pre-processed to become the input for EPCOT v2. The name of the generated .bigWig file is formatted as ‘{cell_line_name}_atac’. <strong>Note</strong> The detailed locations (chrom id, start pos, end pos) of each 600kb region is stored in file “input_region_600kb.bed”, which can be found on Github. There are 11,123 600kb regions across the whole human genome.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## Generate the .bigWig file</span>
+bamCoverage<span class="w"> </span>--bam<span class="w"> </span>input.bam<span class="w"> </span>-o<span class="w"> </span><span class="si">${</span><span class="nv">cell_line</span><span class="si">}</span>_atac.bigWig<span class="w"> </span>--outFileFormat<span class="w"> </span>bigwig<span class="w"> </span>--normalizeUsing<span class="w"> </span>RPGC<span class="w"> </span><span class="se">\</span>
+--effectiveGenomeSize<span class="w"> </span><span class="m">2913022398</span><span class="w"> </span>--Offset<span class="w"> </span><span class="m">1</span><span class="w"> </span>--binSize<span class="w"> </span><span class="m">10</span><span class="w"> </span>--numberOfProcessors<span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="se">\</span>
+--blackListFileName<span class="w"> </span>../data/black_list.bed
+<span class="c1">## Run atac_process.py to generate the .pickle file which is the required input format of EPCOT v2.</span>
+python<span class="w"> </span>atac_process.py<span class="w"> </span><span class="si">${</span><span class="nv">cell_line</span><span class="si">}</span>_atac.bigWig
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Prediction.</strong> Please confirm the directories of input ${cell_line}_atac.pickle file and the output ${cell_line}.pickle file. You can specify which modality you want to predict in file “tt_pred_gw.py” by modifying variable “pred_modalities”.</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## Run the model execution file tt_pred_gw.py to predict desired molecular modalities.</span>
+python<span class="w"> </span>tt_pred_gw.py
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p><strong>Extraction of each predicted modality.</strong> Assume the output file is called ‘spleen.pickle’. Each predicted sample is the central 500kb from 600kb segments, composed of 500 1kb genomic bin.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;spleen.pickle&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">spleen_pickle</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+<span class="c1">## All predicted modalities</span>
+<span class="n">spleen_pickle</span><span class="p">[</span><span class="s1">&#39;epi&#39;</span><span class="p">]</span>
+<span class="n">spleen_pickle</span><span class="p">[</span><span class="s1">&#39;rna&#39;</span><span class="p">]</span> <span class="c1"># expected shape: (11123, 500, 3)</span>
+<span class="n">spleen_pickle</span><span class="p">[</span><span class="s1">&#39;bru&#39;</span><span class="p">]</span> <span class="c1"># expected shape: (11123, 500, 3)</span>
+<span class="n">spleen_pickle</span><span class="p">[</span><span class="s1">&#39;microc&#39;</span><span class="p">]</span>  <span class="c1"># expected shape: (11123, 500, 500, 2)</span>
+<span class="n">spleen_pickle</span><span class="p">[</span><span class="s1">&#39;hic&#39;</span><span class="p">]</span> <span class="c1"># expected shape: (11123, 100, 100, 3) Hi-C is predicted at 5kb resolution.</span>
+<span class="n">spleen_pickle</span><span class="p">[</span><span class="s1">&#39;intacthic&#39;</span><span class="p">]</span> <span class="c1"># expected shape: (11123, 500, 2)</span>
+<span class="n">spleen_pickle</span><span class="p">[</span><span class="s1">&#39;rna_strand&#39;</span><span class="p">]</span> <span class="c1"># expected shape: (11123, 500, 2)</span>
+<span class="n">spleen_pickle</span><span class="p">[</span><span class="s1">&#39;external_tf&#39;</span><span class="p">]</span>
+<span class="n">spleen_pickle</span><span class="p">[</span><span class="s1">&#39;tt&#39;</span><span class="p">]</span> <span class="c1"># expected shape: (11123, 500, 2)</span>
+<span class="n">spleen_pickle</span><span class="p">[</span><span class="s1">&#39;groseq&#39;</span><span class="p">]</span> <span class="c1"># expected shape: (11123, 500, 2)</span>
+<span class="n">spleen_pickle</span><span class="p">[</span><span class="s1">&#39;grocap&#39;</span><span class="p">]</span> <span class="c1"># expected shape: (11123, 500, 4)</span>
+<span class="n">spleen_pickle</span><span class="p">[</span><span class="s1">&#39;proseq&#39;</span><span class="p">]</span> <span class="c1"># expected shape: (11123, 500, 3)</span>
+<span class="n">spleen_pickle</span><span class="p">[</span><span class="s1">&#39;netcage&#39;</span><span class="p">]</span> <span class="c1"># expected shape: (11123, 500, 2)</span>
+<span class="n">spleen_pickle</span><span class="p">[</span><span class="s1">&#39;starr&#39;</span><span class="p">]</span> <span class="c1"># expected shape: (11123, 500, 1)</span>
+</pre></div>
+</div>
+<p>Here is the explanation of each modality that can be predicted:</p>
+<ol class="arabic simple">
+<li><p>Epigenomic features. The list of epigenomic features can be found on Github in a file named “epigenomes.txt”.</p></li>
+<li><p>RNA-seq. 1. CAGE-seq 2. Total RNA-seq 3. PolyA+ RNA-seq</p></li>
+<li><p>Bru-seq. 1. Bru-seq 2. BruUV-seq 3. BruChase-seq</p></li>
+<li><p>Micro-c. 1. O/E normalized Micro-C 2. KR normalized Micro-C</p></li>
+<li><p>Hi-C. 1. CTCF ChIA-PET 2. RNApol2 ChIA-PET 3. Hi-C</p></li>
+<li><p>Intact Hi-C. 1. O/E normalized intact Hi-C 2. KR normalized intact Hi-C</p></li>
+<li><p>RNA Strand. 1. Total RNA-seq (forward) 2. Total RNA-seq (reverse)</p></li>
+<li><p>Additional TFs. The list of additional TFs can be found on Github in a file named unseeen_tf.txt</p></li>
+<li><p>TT-seq. 1. TT-seq (forward) 2. TT-seq (reverse)</p></li>
+<li><p>GRO-seq. 1. GRO-seq (forward) 2. GRO-seq (reverse)</p></li>
+<li><p>GRO-cap. 1. GRO-cap (forward) 2. GRO-cap (reverse) 3. GRO-cap_wTAP (forward) 4. GRO-cap_wTAP(reverse)</p></li>
+<li><p>PRO-seq. 1. PRO-seq (forward) 2. PRO-seq (reverse) 3. PRO-cap</p></li>
+<li><p>NET-CAGE. 1. NET-CAGE (forward) 2. NET-CAGE (reverse)</p></li>
+<li><p>STARR-seq. 1. STARR-seq</p></li>
+</ol>
+</section>
+<section id="mouse-data-prediction">
+<h2>Mouse Data Prediction<a class="headerlink" href="#mouse-data-prediction" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Input file preparation.</strong> The initial BAM file, is pre-processed to become the input for EPCOT v2. The name of the generated .bigWig file is formatted as ‘{cell_line_name}_atac’. <strong>Note</strong> The detailed locations (chrom id, start pos, end pos) of each 600kb region is stored in file “input_region_mm10.bed”, which can be found on Github.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## Generate the .bigWig file</span>
+bamCoverage<span class="w"> </span>--bam<span class="w"> </span>input.bam<span class="w"> </span>-o<span class="w"> </span><span class="si">${</span><span class="nv">cell_line</span><span class="si">}</span>_atac.bigWig<span class="w"> </span>--outFileFormat<span class="w"> </span>bigwig<span class="w"> </span>--normalizeUsing<span class="w"> </span>RPGC<span class="w"> </span><span class="se">\</span>
+--effectiveGenomeSize<span class="w"> </span><span class="m">2913022398</span><span class="w"> </span>--Offset<span class="w"> </span><span class="m">1</span><span class="w"> </span>--binSize<span class="w"> </span><span class="m">10</span><span class="w"> </span>--numberOfProcessors<span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="se">\</span>
+--blackListFileName<span class="w"> </span>../data/black_list.bed
+<span class="c1">## Run atac_process.py to generate the .pickle file which is the required input format of EPCOT v2.</span>
+python<span class="w"> </span>atac_process.py<span class="w"> </span><span class="si">${</span><span class="nv">cell_line</span><span class="si">}</span>_atac.bigWig
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Prediction.</strong> Please confirm the directories of input ${cell_line}_atac.pickle file and the output ${cell_line}.pickle file. You can specify which modality you want to predict in file “pred_gw.py” by modifying variable “pred_modalities”.</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## Run the model execution file pred_gw.py to predict desired molecular modalities.</span>
+python<span class="w"> </span>pred_gw.py
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p><strong>Extraction of each predicted modality.</strong> Assume the output file is called ‘mouse.pickle’. Each predicted sample is the central 500kb from 600kb segments, composed of 500 1kb genomic bin.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;mouse.pickle&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">mouse_pickle</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+<span class="c1">## All predicted modalities</span>
+<span class="n">mouse_pickle</span><span class="p">[</span><span class="s1">&#39;epi&#39;</span><span class="p">]</span> <span class="c1"># expected shape: (n, 500, 51)</span>
+<span class="n">mouse_pickle</span><span class="p">[</span><span class="s1">&#39;cage&#39;</span><span class="p">]</span> <span class="c1"># expected shape: (n, 500, 1)</span>
+<span class="n">mouse_pickle</span><span class="p">[</span><span class="s1">&#39;trna&#39;</span><span class="p">]</span> <span class="c1"># expected shape: (n, 500, 1)</span>
+<span class="n">mouse_pickle</span><span class="p">[</span><span class="s1">&#39;prna&#39;</span><span class="p">]</span> <span class="c1"># expected shape: (n, 500, 1)</span>
+<span class="n">mouse_pickle</span><span class="p">[</span><span class="s1">&#39;pro&#39;</span><span class="p">]</span> <span class="c1"># expected shape: (n, 500, 2)</span>
+<span class="n">mouse_pickle</span><span class="p">[</span><span class="s1">&#39;gro&#39;</span><span class="p">]</span> <span class="c1"># expected shape: (n, 500, 2)</span>
+<span class="n">mouse_pickle</span><span class="p">[</span><span class="s1">&#39;microc&#39;</span><span class="p">]</span> <span class="c1"># expected shape: (n, 500, 500, 2)</span>
+<span class="n">mouse_pickle</span><span class="p">[</span><span class="s1">&#39;hic&#39;</span><span class="p">]</span> <span class="c1"># expected shape: (n, 100, 100, 1)</span>
+<span class="n">mouse_pickle</span><span class="p">[</span><span class="s1">&#39;netcage&#39;</span><span class="p">]</span> <span class="c1"># expected shape: (n, 500, 2)</span>
+<span class="n">mouse_pickle</span><span class="p">[</span><span class="s1">&#39;rcmc&#39;</span><span class="p">]</span> <span class="c1"># expected shape: (n, 500, 500, 1)</span>
+<span class="c1"># n is the number of bins user input</span>
+</pre></div>
+</div>
+<p>Here is the explanation of each modality that can be predicted:</p>
+<ol class="arabic simple">
+<li><p>Epigenomic features. The list of epigenomic features can be found on Github in a file named “mouse_tfs.txt”.</p></li>
+<li><p>CAGE-seq.</p></li>
+<li><p>total RNA-seq.</p></li>
+<li><p>PolyA+ RNA-seq.</p></li>
+<li><p>PRO-seq. 1. PRO-seq (forward) 2. PRO-seq (reverse)</p></li>
+<li><p>GRO-seq. 1. GRO-seq (forward) 2. GRO-seq (reverse)</p></li>
+<li><p>Micro-c. 1. O/E normalized Micro-C 2. KR normalized Micro-C</p></li>
+<li><p>O/E Hi-C.</p></li>
+<li><p>NET-CAGE. 1. NET-CAGE (forward) 2. NET-CAGE (reverse)</p></li>
+<li><p>O/E RCMC.</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tutorial_v1.html" class="btn btn-neutral float-left" title="EPCOT: Predicting Human Genomic Modalities from ATAC-seq" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, JingYin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
