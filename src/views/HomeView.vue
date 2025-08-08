@@ -301,7 +301,7 @@ const workflowTabs = [
     title: 'Try EPCOTv2',
     videoSrc: '/videos/workflow-epcotv2.mp4',
     description: 'Explore the newer EPCOTv2 model with its user-friendly web interface. Learn how to upload data and select what you want to predict.',
-    tryLink: 'https://huggingface.co/spaces/epcot-project/epcot-v2-demo'
+    tryLink: 'https://huggingface.co/spaces/luosanj/EPCOTv2'
   },
   {
     title: 'Visualize results',
