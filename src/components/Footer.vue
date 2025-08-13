@@ -24,7 +24,7 @@
           href="https://twitter.com/intent/tweet?text=Check%20out%20EPCOT%20for%20genomics!&url=https://epcot-project.github.io"
           target="_blank"
         >
-          TWEET US!
+          CONTACT US!
         </a>
       </div>
     </div>

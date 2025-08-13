@@ -14,17 +14,24 @@
         <!-- Stats Module -->
         <div class="stats-module">
           <div class="stat-item">
-            <span class="stat-number" data-target="1000">0</span>
+            <span class="stat-number">1000+</span>
             <span class="stat-label">Proteins Predicted</span>
           </div>
           <div class="stat-item">
-            <span class="stat-number" data-target="11">0</span>
+            <span class="stat-number">11</span>
             <span class="stat-label">DNA Marks</span>
           </div>
           <div class="stat-item">
-            <span class="stat-number" data-target="2">0</span>
+            <span class="stat-number">2</span>
             <span class="stat-label">Species</span>
           </div>
+        </div>
+
+        <!-- Try Web Version Button - Below stats -->
+        <div class="hero-primary-action">
+          <a href="https://huggingface.co/spaces/epcot-project/epcot-demo" target="_blank" class="btn-primary" aria-label="Try EPCOT web demo">
+            Try Web Version
+          </a>
         </div>
 
         <!-- Animated Background -->
@@ -93,11 +100,8 @@
           </svg>
         </div>
 
-        <!-- Action Buttons -->
+        <!-- Secondary Action Buttons -->
         <div class="hero-actions">
-          <a href="https://huggingface.co/spaces/epcot-project/epcot-demo" target="_blank" class="btn-primary" aria-label="Try EPCOT web demo">
-            Try Web Version
-          </a>
           <a href="https://colab.research.google.com/github/epcot-project/epcot/blob/main/notebooks/demo.ipynb" target="_blank" class="btn-secondary" aria-label="View Google Colab tutorial">
             View Colab Tutorial
           </a>
@@ -178,7 +182,7 @@
         <h2>Why Choose EPCOT?</h2>
         <div class="challenge-grid">
           <div class="challenge-card">
-            <h3>Traditional Challenges</h3>
+            <h3>Traditional Methods</h3>
             <ul>
               <li>
                 <div class="challenge-icon">
@@ -186,7 +190,7 @@
                     <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                   </svg>
                 </div>
-                <span>Traditional methods require multiple expensive experiments to get complete genomic data</span>
+                <span><strong>Multiple Experiments</strong> – Each data type requires separate assays, increasing time demands.</span>
               </li>
               <li>
                 <div class="challenge-icon">
@@ -195,7 +199,7 @@
                     <path d="M12 6v6l4 2"/>
                   </svg>
                 </div>
-                <span>Limited data for many cell types restricts research possibilities</span>
+                <span><strong>Data Gaps</strong> – Many cell types lack complete genomic profiles.</span>
               </li>
               <li>
                 <div class="challenge-icon">
@@ -203,7 +207,15 @@
                     <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
                   </svg>
                 </div>
-                <span>High costs and technical complexity of multiple experiments</span>
+                <span><strong>High Costs</strong> – Specialized sequencing and protocols are expensive.</span>
+              </li>
+              <li>
+                <div class="challenge-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                  </svg>
+                </div>
+                <span><strong>Complex Workflows</strong> – Procedures are technically demanding and resource-intensive.</span>
               </li>
             </ul>
           </div>
@@ -217,7 +229,7 @@
           </div>
           
           <div class="solution-card">
-            <h3>EPCOT's Solution</h3>
+            <h3>EPCOT Solution</h3>
             <ul>
               <li>
                 <div class="solution-icon">
@@ -225,7 +237,7 @@
                     <path d="M9 12l2 2 4-4M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 9 4.03 9 9z"/>
                   </svg>
                 </div>
-                <span><strong>Universal Mapper:</strong> EPCOT predicts multiple types of genomic data from simple accessibility data, saving time and money</span>
+                <span><strong>Multi-Modal in One</strong> – Single ATAC-seq predicts multiple data types.</span>
               </li>
               <li>
                 <div class="solution-icon">
@@ -236,15 +248,29 @@
                     <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                   </svg>
                 </div>
-                <span><strong>Cross-cell-type Prediction:</strong> Works across different cell types and tissues, making accurate predictions even for new cell types</span>
+                <span><strong>Universal Compatibility</strong> – Works across all cell types automatically.</span>
+              </li>
+              <li>
+                <div class="solution-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                  </svg>
+                </div>
+                <span><strong>Cost-Effective & Efficient</strong> – Replaces expensive assays with accurate predictions.</span>
+              </li>
+              <li>
+                <div class="solution-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 12l2 2 4-4M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 9 9 4.03 9 9z"/>
+                  </svg>
+                </div>
+                <span><strong>Proven Performance</strong> – Outperforms task-specific models in predictions.</span>
               </li>
             </ul>
           </div>
         </div>
       </div>
     </section>
-
-
 
     <!-- Publications Section -->
     <section class="publications-section">
@@ -327,44 +353,7 @@ const nextTab = () => {
   }
 }
 
-// Animate stats numbers
-const animateStats = () => {
-  const statNumbers = document.querySelectorAll('.stat-number')
-  
-  statNumbers.forEach(stat => {
-    const targetAttr = stat.getAttribute('data-target')
-    const target = targetAttr ? parseInt(targetAttr) : 0
-    const duration = 2000 // 2 seconds
-    const increment = target / (duration / 16) // 60fps
-    let current = 0
-    
-    const timer = setInterval(() => {
-      current += increment
-      if (current >= target) {
-        current = target
-        clearInterval(timer)
-      }
-      stat.textContent = Math.floor(current) + (target === 1000 ? '+' : '')
-    }, 16)
-  })
-}
 
-onMounted(() => {
-  // Trigger animation when stats come into view
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateStats()
-        observer.unobserve(entry.target)
-      }
-    })
-  })
-  
-  const statsModule = document.querySelector('.stats-module')
-  if (statsModule) {
-    observer.observe(statsModule)
-  }
-})
 </script>
 
 <style scoped>
@@ -895,67 +884,84 @@ onMounted(() => {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
+/* Primary Action Button */
+.hero-primary-action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0 3rem 0;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Hero Actions */
 .hero-actions {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1.5rem;
+  gap: 2rem;
   flex-wrap: wrap;
-  margin-top: 2rem;
+  margin: 2rem 0 3rem 0;
   max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
   color: white;
   padding: 1rem 2.5rem;
-  border-radius: 1rem;
+  border-radius: 0.75rem;
   text-decoration: none;
-  font-weight: 700;
-  font-size: 1.1rem;
+  font-weight: 600;
+  font-size: 1rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+  box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
   border: none;
   letter-spacing: 0.01em;
   text-align: center;
-  min-width: 200px;
+  min-width: 180px;
+  width: 180px;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(30, 64, 175, 0.4);
-  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+  box-shadow: 0 8px 24px rgba(6, 182, 212, 0.5);
+  background: linear-gradient(135deg, #0e7490 0%, #0891b2 100%);
 }
 
 .btn-primary:active {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
 }
 
 .btn-secondary {
   background: white;
   color: #475569;
-  padding: 0.9rem 2rem;
+  padding: 1rem 2.5rem;
   border-radius: 0.75rem;
   text-decoration: none;
   font-weight: 600;
   font-size: 1rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   transition: all 0.3s ease;
   border: 2px solid #e2e8f0;
   letter-spacing: 0.01em;
   text-align: center;
   min-width: 180px;
+  width: 180px;
 }
 
 .btn-secondary:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-color: #3b82f6;
+  border-color: #06b6d4;
   background: #f8fafc;
-  color: #3b82f6;
+  color: #06b6d4;
 }
 
 .btn-secondary:active {
@@ -987,33 +993,62 @@ onMounted(() => {
 .challenge-grid {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  gap: 2rem;
-  align-items: center;
+  gap: 3rem;
+  align-items: stretch;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.challenge-card, .solution-card {
+.challenge-card {
   background: white;
-  padding: 2.5rem;
+  padding: 2.5rem 2.5rem 0.25rem 2.5rem;
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: none;
   position: relative;
   overflow: hidden;
+  height: 100%;
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
-.challenge-card::before, .solution-card::before {
+.solution-card {
+  background: white;
+  padding: 2.5rem 2.5rem 0.25rem 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.challenge-card::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #ef4444, #f97316);
+  background: linear-gradient(90deg, #0e7490, #0891b2);
 }
 
 .solution-card::before {
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #0891b2, #06b6d4);
 }
 
 .challenge-card:hover, .solution-card:hover {
@@ -1021,10 +1056,18 @@ onMounted(() => {
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
 }
 
-.challenge-card h3, .solution-card h3 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 2rem;
+.challenge-card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #1e293b;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.solution-card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
   color: #1e293b;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
@@ -1035,14 +1078,26 @@ onMounted(() => {
   margin: 0;
 }
 
-.challenge-card li, .solution-card li {
+.challenge-card li {
   display: flex;
   align-items: flex-start;
   gap: 1rem;
-  margin-bottom: 1.5rem;
-  line-height: 1.7;
+  margin-bottom: 1.2rem;
+  line-height: 1.6;
   color: #475569;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.95rem;
+}
+
+.solution-card li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  line-height: 1.6;
+  color: #475569;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.95rem;
 }
 
 .challenge-card li:last-child, .solution-card li:last-child {
@@ -1062,15 +1117,15 @@ onMounted(() => {
 }
 
 .challenge-icon {
-  border-color: #ef4444;
-  color: #ef4444;
-  background: rgba(239, 68, 68, 0.1);
+  border-color: #0e7490;
+  color: #0e7490;
+  background: rgba(14, 116, 144, 0.1);
 }
 
 .solution-icon {
-  border-color: #3b82f6;
-  color: #3b82f6;
-  background: rgba(59, 130, 246, 0.1);
+  border-color: #06b6d4;
+  color: #06b6d4;
+  background: rgba(6, 182, 212, 0.1);
 }
 
 .challenge-icon svg, .solution-icon svg {
@@ -1086,31 +1141,31 @@ onMounted(() => {
 }
 
 .arrow {
-  width: 48px;
-  height: 48px;
-  background: linear-gradient(135deg, #3b82f6, #1e40af);
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #0e7490, #0891b2);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 6px 20px rgba(14, 116, 144, 0.3);
   animation: arrowPulse 2s ease-in-out infinite;
 }
 
 .arrow svg {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
 }
 
 @keyframes arrowPulse {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 4px 12px rgba(14, 116, 144, 0.3);
   }
-  50% {
+  ‌50% {
     transform: scale(1.05);
-    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+    box-shadow: 0 6px 16px rgba(14, 116, 144, 0.4);
   }
 }
 
@@ -1123,6 +1178,7 @@ onMounted(() => {
 /* Publications Section */
 .publications-section {
   margin-bottom: 4rem;
+  margin-top: 9rem;
   padding: 1rem 0 3rem 0;
 }
 
@@ -1184,6 +1240,7 @@ onMounted(() => {
 /* Video Section */
 .video-section {
   margin-bottom: 4rem;
+  margin-top: 2rem;
   padding: 1rem 0 3rem 0;
 }
 
@@ -1221,7 +1278,7 @@ onMounted(() => {
 
 /* Workflow Subsection */
 .workflow-subsection {
-  margin-top: 3rem;
+  margin-top: 0;
   padding: 2.5rem 0;
   border-radius: 16px;
   margin-left: -1rem;
@@ -1290,17 +1347,17 @@ onMounted(() => {
 }
 
 .workflow-tab:hover {
-  border-color: #3b82f6;
-  color: #3b82f6;
+  border-color: #06b6d4;
+  color: #06b6d4;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2);
 }
 
 .workflow-tab.active {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, #0891b2, #06b6d4);
   color: white;
-  border-color: #3b82f6;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+  border-color: #06b6d4;
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.25);
 }
 
 /* Video and Text Layout */
@@ -1313,29 +1370,40 @@ onMounted(() => {
   padding: 1.5rem;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
   overflow: hidden;
+  min-height: 300px;
 }
 
 /* Left: Video Panel */
 .workflow-video-panel {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .workflow-video-panel video {
   width: 100%;
+  height: 100%;
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
 }
 
 /* Right: Text Panel */
 .workflow-text-panel {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100%;
+  position: relative;
 }
 
 .text-content {
   padding: 1rem 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .text-content h4 {
@@ -1344,7 +1412,7 @@ onMounted(() => {
   color: #1e293b;
   margin-bottom: 1.5rem;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, #0891b2, #06b6d4);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1356,13 +1424,14 @@ onMounted(() => {
   color: #475569;
   margin-bottom: 2rem;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  flex: 1;
 }
 
 .try-it-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, #0891b2, #06b6d4);
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 0.75rem;
@@ -1370,22 +1439,25 @@ onMounted(() => {
   font-weight: 600;
   font-size: 0.95rem;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
   border: none;
   letter-spacing: 0.01em;
-  margin-top: 1rem;
+  margin-top: auto;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  min-width: 140px;
+  justify-content: center;
+  align-self: flex-start;
 }
 
 .try-it-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
+  background: linear-gradient(135deg, #0e7490, #0891b2);
 }
 
 .try-it-btn:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 2px 8px rgba(6, 182, 212, 0.3);
 }
 
 .try-it-btn svg {

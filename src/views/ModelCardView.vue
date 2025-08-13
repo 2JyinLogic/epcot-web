@@ -600,29 +600,36 @@ pre {
 }
 
 .back-button {
-  background: linear-gradient(135deg, #3b82f6, #1e40af);
+  background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
   border: none;
   color: white;
   font-weight: 600;
-  padding: 0.875rem 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  padding: 1rem 3rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
   transition: all 0.3s ease;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   font-size: 1rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  letter-spacing: 0.01em;
+  text-align: center;
+  min-width: 200px;
+  width: 200px;
+  position: relative;
+  overflow: hidden;
 }
 
 .back-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(6, 182, 212, 0.5);
+  background: linear-gradient(135deg, #0e7490 0%, #0891b2 100%);
 }
 
 .back-button:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
 }
 
 .back-icon {

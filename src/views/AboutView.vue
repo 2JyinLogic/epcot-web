@@ -54,10 +54,16 @@
         We believe in collaborative development and invite scientists and developers to explore, contribute, and help
         shape the future of genomic prediction. The models, source code, and tutorials are publicly available.
       </p>
-      <div class="button-group left-align">
-        <button>Try Online</button>
-        <button>View Source Code</button>
-        <button>Read the Paper</button>
+      <div class="hero-actions">
+        <a href="https://huggingface.co/spaces/epcot-project/epcot-demo" target="_blank" class="btn-primary" aria-label="Try EPCOT web demo">
+          Try Web Version
+        </a>
+        <a href="https://github.com/epcot-project/epcot" target="_blank" class="btn-secondary" aria-label="Browse source code on GitHub">
+          View Source Code
+        </a>
+        <a href="#" class="btn-secondary" aria-label="Read the paper">
+          Read the Paper
+        </a>
       </div>
     </div>
   </div>
@@ -176,46 +182,73 @@ h3 {
   line-height: 1.6;
 }
 
-.button-group.left-align {
+.hero-actions {
   display: flex;
-  gap: 12px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2rem;
   flex-wrap: wrap;
+  margin: 2rem 0 3rem 0;
 }
 
-.button-group.left-align button {
-  font-size: 0.95em;
-  padding: 12px 24px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+.btn-primary {
+  background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
   color: white;
-  border: none;
-  transition: all 0.3s ease;
-  cursor: pointer;
+  padding: 1rem 2.5rem;
+  border-radius: 0.75rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-weight: 400;
-  box-shadow: 0 2px 4px rgba(30, 64, 175, 0.2);
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
+  border: none;
+  letter-spacing: 0.01em;
+  text-align: center;
+  min-width: 180px;
+  width: 180px;
+  position: relative;
+  overflow: hidden;
 }
 
-.button-group.left-align button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
-  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(6, 182, 212, 0.5);
+  background: linear-gradient(135deg, #0e7490 0%, #0891b2 100%);
 }
 
-.button-group.left-align button:nth-child(2),
-.button-group.left-align button:nth-child(3) {
+.btn-primary:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
+}
+
+.btn-secondary {
   background: white;
   color: #475569;
+  padding: 1rem 2.5rem;
+  border-radius: 0.75rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  transition: all 0.3s ease;
   border: 2px solid #e2e8f0;
-  box-shadow: none;
+  letter-spacing: 0.01em;
+  text-align: center;
+  min-width: 180px;
+  width: 180px;
 }
 
-.button-group.left-align button:nth-child(2):hover,
-.button-group.left-align button:nth-child(3):hover {
-  background: #f8fafc;
-  color: #3b82f6;
-  border-color: #3b82f6;
+.btn-secondary:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #06b6d4;
+  background: #f8fafc;
+  color: #06b6d4;
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 </style>
