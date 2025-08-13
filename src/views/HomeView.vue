@@ -115,12 +115,12 @@
     <!-- Demo Video Section -->
     <section class="video-section">
       <h2>Dynamic Demonstration</h2>
-      <div class="video-container">
-        <video controls aria-label="EPCOT demonstration video">
-          <source src="/videos/demo.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      </div>
+              <div class="video-container">
+          <video controls aria-label="EPCOT presentation video">
+            <source src="/videos/Presentation.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
       
       <!-- Interactive Video Workflow Subsection -->
       <div class="workflow-subsection">
@@ -274,15 +274,15 @@
 
     <!-- Publications Section -->
     <section class="publications-section">
-      <h2>Learn More Scientific Details</h2>
+      <h2>Read Our Publications</h2>
       <div class="publications-grid">
-        <div class="publication-card">
+        <div class="publication-card" @click="openPaper('epcot')">
           <h3>EPCOT (2023)</h3>
           <p>"A framework to predict gene activity, protein binding, and DNA structure from accessibility data."</p>
           <span class="journal">Nucleic Acids Research</span>
         </div>
-        <div class="publication-card">
-          <h3>General AI Model (2025)</h3>
+        <div class="publication-card" @click="openPaper('epcotv2')">
+          <h3>EPCOTv2 (2025)</h3>
           <p>"Developing a general AI model for comprehensive genomic predictions and analysis."</p>
           <span class="journal">bioRxiv</span>
         </div>
@@ -350,6 +350,18 @@ const previousTab = () => {
 const nextTab = () => {
   if (activeTab.value < workflowTabs.length - 1) {
     activeTab.value++
+  }
+}
+
+// Paper links
+const openPaper = (paperType: string) => {
+  const links = {
+    epcot: 'https://academic.oup.com/nar/article/51/12/5931/7177889?login=true',
+    epcotv2: 'https://www.biorxiv.org/content/10.1101/2025.05.08.652986v1.full.pdf'
+  }
+  
+  if (links[paperType]) {
+    window.open(links[paperType], '_blank')
   }
 }
 
@@ -1001,7 +1013,7 @@ const nextTab = () => {
 
 .challenge-card {
   background: white;
-  padding: 2.5rem 2.5rem 0.25rem 2.5rem;
+  padding: 2rem 2.5rem 0.5rem 2.5rem;
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -1009,7 +1021,7 @@ const nextTab = () => {
   position: relative;
   overflow: hidden;
   height: 100%;
-  min-height: 380px;
+  min-height: 320px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -1017,7 +1029,7 @@ const nextTab = () => {
 
 .solution-card {
   background: white;
-  padding: 2.5rem 2.5rem 0.25rem 2.5rem;
+  padding: 2rem 2.5rem 0.5rem 2.5rem;
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -1025,7 +1037,7 @@ const nextTab = () => {
   position: relative;
   overflow: hidden;
   height: 100%;
-  min-height: 380px;
+  min-height: 320px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -1082,8 +1094,8 @@ const nextTab = () => {
   display: flex;
   align-items: flex-start;
   gap: 1rem;
-  margin-bottom: 1.2rem;
-  line-height: 1.6;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
   color: #475569;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 0.95rem;
@@ -1093,8 +1105,8 @@ const nextTab = () => {
   display: flex;
   align-items: flex-start;
   gap: 1rem;
-  margin-bottom: 1.2rem;
-  line-height: 1.6;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
   color: #475569;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 0.95rem;
@@ -1205,6 +1217,7 @@ const nextTab = () => {
   border-radius: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border: 1px solid #e2e8f0;
+  cursor: pointer;
 }
 
 .publication-card h3 {
@@ -1272,8 +1285,10 @@ const nextTab = () => {
 
 .video-container video {
   width: 100%;
+  height: auto;
   border-radius: 1rem;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  object-fit: contain;
 }
 
 /* Workflow Subsection */
