@@ -4,7 +4,7 @@
       <router-link to="/" class="logo">EPCOT</router-link>
       <router-link to="/model">Models</router-link>
       <router-link to="/about">About</router-link>
-      <a href="#" target="_blank" @click="openDocs">Docs</a>
+      <router-link to="/docs">Docs</router-link>
     </div>
     <div class="right">
   <a href="https://biorxiv.org/epcot-paper" target="_blank">
@@ -33,13 +33,6 @@
 
 <script setup lang="ts">
 import { Document } from '@element-plus/icons-vue'
-import { getDocsUrl } from '../config/env'
-
-const openDocs = (event: Event) => {
-  event.preventDefault();
-  const docsUrl = getDocsUrl();
-  window.open(docsUrl, '_blank', 'noopener,noreferrer');
-}
 </script>
 
 
@@ -50,8 +43,8 @@ const openDocs = (event: Event) => {
   justify-content: space-between;
   align-items: center;
   padding: 0 2rem;
-  background-color: #0e3a5f; /* 深蓝背景 */
-  border-bottom: 1px solid #08304c;
+  background-color: #276a8d; /* 深蓝背景 */
+  border-bottom: 1px solid #1e5a7a;
   font-size: 16px;
   height: 64px;
   box-sizing: border-box;
