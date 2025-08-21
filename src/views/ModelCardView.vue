@@ -491,7 +491,7 @@ const goBack = () => {
 
 .model-page {
   padding: 2rem;
-  max-width: 1100px;
+  max-width: 1200px;
   margin: auto;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   line-height: 1.6;
@@ -505,7 +505,7 @@ const goBack = () => {
 .section-block h3 {
   margin-bottom: 0.8rem;
   font-size: 1.25rem;
-  color: #409EFF;
+  color: #06b6d4;
 }
 
 pre {
@@ -580,7 +580,7 @@ pre {
 }
 
 .breadcrumb-link {
-  color: #3b82f6;
+  color: #0891b2;
   cursor: pointer;
   font-weight: 600;
   transition: color 0.3s ease;
@@ -588,7 +588,7 @@ pre {
 }
 
 .breadcrumb-link:hover {
-  color: #1e40af;
+  color: #06b6d4;
   text-decoration: underline;
 }
 

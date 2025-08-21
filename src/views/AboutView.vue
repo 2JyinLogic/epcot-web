@@ -10,24 +10,6 @@
 
     <h2 class="section-title">Key Components of EPCOT</h2>
 
-    <!-- EPCOT Block -->
-    <div class="component-box">
-      <div class="image-container">
-        <img src="../../public/images/graphical_abstract_epcot1.png" alt="EPCOT Framework">
-      </div>
-      <div class="text-container">
-        <h3>EPCOT: A Foundational Framework for Genomic Prediction</h3>
-
-        <p>
-          EPCOT employs a pre-training and fine-tuning framework to systematically learn the complex regulatory code connecting DNA sequence and chromatin accessibility to genome-wide function. By pre-training on hundreds of epigenomic features, the framework learns robust and generalizable sequence representations.
-        </p>
-        
-        <p>
-          This foundational approach establishes a versatile in-silico mapper, capable of translating simple, cost-effective inputs (ATAC-seq and DNA sequence) into accurate, cell-type-specific predictions for a wide range of complex modalities, including transcription, 3D chromatin organization, and enhancer activity, even in previously unseen cell types.
-        </p>
-      </div>
-    </div>
-
     <!-- EPCOTv2 Block -->
     <div class="component-box">
       <div class="image-container">
@@ -42,6 +24,24 @@
         
         <p>
           Unlike traditional solutions that require separate models for each task, EPCOTv2 can jointly predict diverse and advanced modalities—from nascent RNA transcription and functional variant effects to ultra-resolution chromatin contacts—across different tissues and species. This allows it to perform complex applications like cross-species transfer learning (human to mouse) and eQTL prioritization in novel cellular contexts, all without task-specific tuning.
+        </p>
+      </div>
+    </div>
+
+    <!-- EPCOT Block -->
+    <div class="component-box">
+      <div class="image-container">
+        <img src="../../public/images/graphical_abstract_epcot1.png" alt="EPCOT Framework">
+      </div>
+      <div class="text-container">
+        <h3>EPCOT: A Foundational Framework for Genomic Prediction</h3>
+
+        <p>
+          EPCOT employs a pre-training and fine-tuning framework to systematically learn the complex regulatory code connecting DNA sequence and chromatin accessibility to genome-wide function. By pre-training on hundreds of epigenomic features, the framework learns robust and generalizable sequence representations.
+        </p>
+        
+        <p>
+          This foundational approach establishes a versatile in-silico mapper, capable of translating simple, cost-effective inputs (ATAC-seq and DNA sequence) into accurate, cell-type-specific predictions for a wide range of complex modalities, including transcription, 3D chromatin organization, and enhancer activity, even in previously unseen cell types.
         </p>
       </div>
     </div>

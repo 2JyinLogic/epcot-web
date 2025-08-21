@@ -1,0 +1,444 @@
+/* TEST STYLE - If you see this, CSS is working! */
+.wy-nav-side {
+  border: 5px solid #ff0000 !important;
+  background: #ff0000 !important;
+}
+
+/* Custom styles for EPCOT documentation */
+
+/* Navigation sidebar beautification */
+.wy-nav-side {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%) !important;
+  box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Add subtle pattern overlay */
+.wy-nav-side::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(255,255,255,0.02) 1px, transparent 1px),
+    radial-gradient(circle at 75% 75%, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Sidebar header/title area */
+.wy-side-nav-search {
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+  border-bottom: 3px solid #1abc9c !important;
+  padding: 1.8em 1.2em !important;
+  margin-bottom: 1.2em !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Add animated background pattern to header */
+.wy-side-nav-search::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+  animation: shimmer 3s infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.wy-side-nav-search input[type="text"] {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: none !important;
+  border-radius: 25px !important;
+  padding: 12px 18px !important;
+  font-size: 14px !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+  backdrop-filter: blur(10px);
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.wy-side-nav-search input[type="text"]:focus {
+  background: #ffffff !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+  outline: none !important;
+}
+
+.wy-side-nav-search input[type="text"]::placeholder {
+  color: #7f8c8d !important;
+  font-style: italic !important;
+}
+
+/* Navigation menu styling */
+.wy-menu-vertical {
+  background: transparent !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.wy-menu-vertical header,
+.wy-menu-vertical p.caption {
+  color: #ecf0f1 !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+  padding: 18px 24px 12px !important;
+  margin: 0 !important;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1) !important;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.1) 100%) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Add subtle glow effect to headers */
+.wy-menu-vertical header::after,
+.wy-menu-vertical p.caption::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.3), transparent);
+  transition: left 0.6s ease;
+  z-index: 1;
+}
+
+.wy-menu-vertical header:hover::after,
+.wy-menu-vertical p.caption:hover::after {
+  left: 100%;
+}
+
+/* Navigation links */
+.wy-menu-vertical a {
+  color: #bdc3c7 !important;
+  padding: 14px 24px !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  border-left: 4px solid transparent !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  background: linear-gradient(90deg, transparent 0%, transparent 100%) !important;
+  text-decoration: none !important;
+}
+
+/* Add hover background animation */
+.wy-menu-vertical a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.1), transparent);
+  transition: left 0.4s ease;
+  z-index: 0;
+}
+
+.wy-menu-vertical a:hover::before {
+  left: 100%;
+}
+
+.wy-menu-vertical a:hover {
+  background: linear-gradient(90deg, rgba(52, 152, 219, 0.15) 0%, rgba(52, 152, 219, 0.05) 100%) !important;
+  color: #ecf0f1 !important;
+  border-left-color: #3498db !important;
+  transform: translateX(5px) !important;
+  box-shadow: inset 4px 0 0 #3498db, 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  text-decoration: none !important;
+}
+
+/* Current/active navigation items */
+.wy-menu-vertical li.current > a,
+.wy-menu-vertical li.on a {
+  background: linear-gradient(90deg, rgba(52, 152, 219, 0.25) 0%, rgba(52, 152, 219, 0.15) 100%) !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  border-left-color: #3498db !important;
+  box-shadow: inset 4px 0 0 #3498db, 0 4px 12px rgba(52, 152, 219, 0.3) !important;
+  position: relative !important;
+}
+
+/* Add pulsing effect to current items */
+.wy-menu-vertical li.current > a::after,
+.wy-menu-vertical li.on a::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 8px;
+  width: 6px;
+  height: 6px;
+  background: #3498db;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  animation: pulse 2s infinite;
+  z-index: 2;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+  50% { opacity: 0.5; transform: translateY(-50%) scale(1.2); }
+}
+
+.wy-menu-vertical li.current > a:hover,
+.wy-menu-vertical li.on a:hover {
+  background: linear-gradient(90deg, rgba(52, 152, 219, 0.35) 0%, rgba(52, 152, 219, 0.25) 100%) !important;
+  transform: translateX(3px) !important;
+}
+
+/* Nested navigation items with enhanced styling */
+.wy-menu-vertical li.toctree-l2 a {
+  padding-left: 40px !important;
+  font-size: 13px !important;
+  color: #95a5a6 !important;
+  border-left-width: 2px !important;
+  position: relative !important;
+}
+
+.wy-menu-vertical li.toctree-l2 a::before {
+  content: '└─';
+  position: absolute;
+  left: 20px;
+  color: #7f8c8d;
+  font-size: 12px;
+  z-index: 1;
+}
+
+.wy-menu-vertical li.toctree-l3 a {
+  padding-left: 60px !important;
+  font-size: 12px !important;
+  color: #7f8c8d !important;
+  border-left-width: 1px !important;
+}
+
+.wy-menu-vertical li.toctree-l3 a::before {
+  content: '└─';
+  position: absolute;
+  left: 40px;
+  color: #6c7b7d;
+  font-size: 11px;
+  z-index: 1;
+}
+
+.wy-menu-vertical li.toctree-l2 a:hover,
+.wy-menu-vertical li.toctree-l3 a:hover {
+  color: #bdc3c7 !important;
+  transform: translateX(3px) !important;
+}
+
+/* Expand/collapse buttons with enhanced styling */
+.wy-menu-vertical li button.toctree-expand {
+  color: #95a5a6 !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border: none !important;
+  background: none !important;
+  padding: 4px !important;
+  margin: 0 !important;
+  font-size: 12px !important;
+  border-radius: 3px !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.wy-menu-vertical li button.toctree-expand::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(52, 152, 219, 0.1);
+  border-radius: 3px;
+  transform: scale(0);
+  transition: transform 0.3s ease;
+  z-index: 0;
+}
+
+.wy-menu-vertical li button.toctree-expand:hover {
+  color: #3498db !important;
+  transform: scale(1.2) !important;
+}
+
+.wy-menu-vertical li button.toctree-expand:hover::before {
+  transform: scale(1);
+}
+
+/* Current nested items with enhanced styling */
+.wy-menu-vertical li.toctree-l2.current > a {
+  background: linear-gradient(90deg, rgba(52, 152, 219, 0.2) 0%, rgba(52, 152, 219, 0.1) 100%) !important;
+  color: #ecf0f1 !important;
+  border-left-color: #3498db !important;
+  box-shadow: inset 2px 0 0 #3498db !important;
+}
+
+.wy-menu-vertical li.toctree-l3.current > a {
+  background: linear-gradient(90deg, rgba(52, 152, 219, 0.15) 0%, rgba(52, 152, 219, 0.05) 100%) !important;
+  color: #bdc3c7 !important;
+  border-left-color: #3498db !important;
+  box-shadow: inset 1px 0 0 #3498db !important;
+}
+
+/* Enhanced scrollbar styling */
+.wy-side-scroll::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+.wy-side-scroll::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1) !important;
+  border-radius: 4px !important;
+}
+
+.wy-side-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #3498db, #2980b9) !important;
+  border-radius: 4px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.wy-side-scroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #5dade2, #3498db) !important;
+  box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3) !important;
+}
+
+/* Responsive enhancements */
+@media screen and (max-width: 768px) {
+  .wy-nav-side {
+    box-shadow: none !important;
+  }
+  
+  .wy-menu-vertical a {
+    padding: 12px 18px !important;
+  }
+  
+  .wy-menu-vertical li.toctree-l2 a {
+    padding-left: 30px !important;
+  }
+  
+  .wy-menu-vertical li.toctree-l3 a {
+    padding-left: 45px !important;
+  }
+  
+  .wy-menu-vertical li.toctree-l2 a::before {
+    left: 15px;
+  }
+  
+  .wy-menu-vertical li.toctree-l3 a::before {
+    left: 30px;
+  }
+}
+
+/* Enhanced focus states for accessibility */
+.wy-menu-vertical a:focus {
+  outline: 2px solid #3498db !important;
+  outline-offset: -2px !important;
+  box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.2) !important;
+}
+
+/* Enhanced page load animations */
+.wy-menu-vertical li {
+  animation: slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+  opacity: 0 !important;
+  transform: translateX(-20px) !important;
+}
+
+.wy-menu-vertical li:nth-child(1) { animation-delay: 0.1s !important; }
+.wy-menu-vertical li:nth-child(2) { animation-delay: 0.2s !important; }
+.wy-menu-vertical li:nth-child(3) { animation-delay: 0.3s !important; }
+.wy-menu-vertical li:nth-child(4) { animation-delay: 0.4s !important; }
+.wy-menu-vertical li:nth-child(5) { animation-delay: 0.5s !important; }
+.wy-menu-vertical li:nth-child(6) { animation-delay: 0.6s !important; }
+.wy-menu-vertical li:nth-child(7) { animation-delay: 0.7s !important; }
+.wy-menu-vertical li:nth-child(8) { animation-delay: 0.8s !important; }
+
+@keyframes slideInLeft {
+  to {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+  }
+}
+
+/* Add subtle glow effect to the entire sidebar */
+.wy-nav-side::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, rgba(52, 152, 219, 0.3), transparent);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Enhanced typography for better readability */
+.wy-menu-vertical a {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+  line-height: 1.4 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Add subtle depth to navigation items */
+.wy-menu-vertical li {
+  margin-bottom: 2px !important;
+  border-radius: 0 4px 4px 0 !important;
+  overflow: hidden !important;
+}
+
+/* Enhanced hover effects for better interactivity */
+.wy-menu-vertical a:hover {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Add loading state for dynamic content */
+.wy-menu-vertical.loading {
+  opacity: 0.7 !important;
+  pointer-events: none !important;
+}
+
+.wy-menu-vertical.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(52, 152, 219, 0.3);
+  border-top: 2px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Force override any conflicting styles */
+.wy-nav-side * {
+  box-sizing: border-box !important;
+}
+
+/* Ensure the sidebar is visible */
+.wy-nav-side {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+} 

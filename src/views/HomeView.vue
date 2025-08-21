@@ -36,29 +36,11 @@
 
         <!-- Animated Background -->
         <div class="animated-background">
-          <!-- DNA Sequence Flow -->
-          <div class="dna-flow">
-            <div class="dna-label">DNA Code</div>
-            <div class="dna-strand">
-              <div class="base-pair" v-for="i in 8" :key="`base-${i}`" 
-                   :style="{ animationDelay: `${i * 0.1}s` }">
-                <div class="base">{{ ['A', 'T', 'G', 'C'][i % 4] }}</div>
-                <div class="base">{{ ['T', 'A', 'C', 'G'][i % 4] }}</div>
-              </div>
-            </div>
+          <!-- Input Image -->
+          <div class="input-image-container">
+            <img src="/images/input.png" alt="Input Data" class="input-image" />
           </div>
-          
-          <!-- ATAC-seq Peaks -->
-          <div class="atac-peaks">
-            <div class="atac-label">Accessibility Data</div>
-            <div class="peaks-container">
-              <div class="peak" v-for="i in 8" :key="`peak-${i}`" :style="{ 
-                height: `${20 + Math.random() * 60}px`,
-                animationDelay: `${i * 0.2}s`
-              }"></div>
-            </div>
-          </div>
-          
+              
           <!-- AI Core -->
           <div class="ai-core">
             <div class="ai-label">AI Core</div>
@@ -68,22 +50,9 @@
             </div>
           </div>
           
-          <!-- Output Data Streams -->
-          <div class="output-streams">
-            <div class="data-stream" v-for="(stream, index) in dataStreams" :key="`stream-${index}`">
-              <div class="stream-label">{{ stream.name }}</div>
-              <div class="stream-line" :style="{ 
-                animationDelay: `${index * 0.3}s`,
-                background: `linear-gradient(90deg, ${stream.color}, #1e40af)`
-              }"></div>
-              <div class="data-points">
-                <div class="data-point" v-for="i in 5" :key="`point-${index}-${i}`" 
-                     :style="{ 
-                       animationDelay: `${index * 0.3 + i * 0.1}s`,
-                       backgroundColor: stream.color
-                     }"></div>
-              </div>
-            </div>
+          <!-- Picture1 Image -->
+          <div class="picture1-container">
+            <img src="/images/Picture1.png" alt="EPCOT Workflow Diagram" class="picture1-image" />
           </div>
           
           <!-- Connection Lines -->
@@ -299,13 +268,7 @@
 
 import { onMounted, ref } from 'vue'
 
-// Data streams for animation
-const dataStreams = [
-  { name: 'Gene Activity', color: '#3bd4c6' },
-  { name: 'DNA Loops', color: '#1e40af' },
-  { name: 'Protein Binding', color: '#10b981' },
-  { name: 'DNA Marks', color: '#f59e0b' }
-]
+// Picture1 image data
 
 // Workflow tabs data
 const activeTab = ref(0)
@@ -395,95 +358,29 @@ const openPaper = (paperType: string) => {
   border-radius: 1rem;
 }
 
-/* DNA Sequence Flow */
-.dna-flow {
+/* Input Image */
+.input-image-container {
   position: absolute;
-  left: 10%;
+  left: 15%;
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.dna-label {
-  font-size: 12px;
-  color: #64748b;
-  font-weight: 500;
-  text-align: center;
-  white-space: nowrap;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
-
-.dna-strand {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  align-items: center;
-}
-
-.base-pair {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  animation: baseGlow 2s ease-in-out infinite;
-}
-
-.base {
-  width: 20px;
-  height: 20px;
-  background: linear-gradient(135deg, #3b82f6, #1e40af, #8b5cf6);
-  border-radius: 4px;
+  width: 200px;
+  height: 130px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-size: 8px;
-  font-weight: bold;
-  box-shadow: 
-    0 2px 4px rgba(59, 130, 246, 0.3),
-    0 0 8px rgba(59, 130, 246, 0.2);
-  animation: basePulse 1.5s ease-in-out infinite;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* ATAC-seq Peaks */
-.atac-peaks {
-  position: absolute;
-  left: 25%;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  z-index: 2;
+.input-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
 }
 
-.atac-label {
-  font-size: 12px;
-  color: #64748b;
-  font-weight: 500;
-  text-align: center;
-  white-space: nowrap;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
-
-.peaks-container {
-  display: flex;
-  align-items: end;
-  gap: 4px;
-  height: 100px;
-}
-
-.peak {
-  width: 5px;
-  background: linear-gradient(to top, #10b981, #3bd4c6, #06b6d4);
-  border-radius: 2px 2px 0 0;
-  animation: enhancedPeakPulse 2s ease-in-out infinite;
-  box-shadow: 0 0 4px rgba(16, 185, 129, 0.4);
+.input-image:hover {
+  transform: scale(1.05);
 }
 
 /* AI Core */
@@ -564,56 +461,29 @@ const openPaper = (paperType: string) => {
     inset 0 0 4px rgba(255, 255, 255, 0.3);
 }
 
-/* Output Data Streams */
-.output-streams {
+/* Picture1 Container */
+.picture1-container {
   position: absolute;
   right: 5%;
   top: 50%;
   transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
   z-index: 2;
-}
-
-.data-stream {
+  width: 250px;
+  height: 250px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  flex-direction: column;
-  gap: 5px;
+  justify-content: center;
 }
 
-.stream-label {
-  font-size: 10px;
-  color: #64748b;
-  font-weight: 500;
-  text-align: center;
-  white-space: nowrap;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+.picture1-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
 }
 
-.stream-line {
-  width: 50px;
-  height: 2px;
-  background: linear-gradient(90deg, #3bd4c6, #1e40af);
-  animation: streamFlow 2s ease-in-out infinite;
-  box-shadow: 0 0 6px rgba(59, 212, 198, 0.5);
-  border-radius: 1px;
-}
-
-.data-points {
-  display: flex;
-  gap: 4px;
-}
-
-.data-point {
-  width: 6px;
-  height: 6px;
-  background: radial-gradient(circle, #3bd4c6, #1e40af);
-  border-radius: 50%;
-  animation: dataPointPulse 1.5s ease-in-out infinite;
-  box-shadow: 0 0 4px rgba(59, 212, 198, 0.6);
+.picture1-image:hover {
+  transform: scale(1.05);
 }
 
 /* Connection Lines */
@@ -672,10 +542,7 @@ const openPaper = (paperType: string) => {
   50% { transform: translateY(-10px); }
 }
 
-@keyframes baseGlow {
-  0%, 100% { box-shadow: 0 0 5px rgba(59, 212, 198, 0.5); }
-  50% { box-shadow: 0 0 15px rgba(59, 212, 198, 0.8); }
-}
+
 
 @keyframes peakPulse {
   0%, 100% { opacity: 0.6; }
@@ -777,6 +644,8 @@ const openPaper = (paperType: string) => {
   }
 }
 
+
+
 /* Enhanced animations for better visual flow */
 @keyframes baseGlow {
   0%, 100% {
@@ -789,25 +658,9 @@ const openPaper = (paperType: string) => {
   }
 }
 
-@keyframes basePulse {
-  0%, 100% {
-    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
-  }
-  50% {
-    box-shadow: 0 4px 8px rgba(59, 130, 246, 0.6);
-  }
-}
 
-@keyframes enhancedPeakPulse {
-  0%, 100% { 
-    opacity: 0.6;
-    transform: scaleY(1);
-  }
-  50% { 
-    opacity: 1;
-    transform: scaleY(1.1);
-  }
-}
+
+
 
 .hero-content {
   max-width: 1000px;
@@ -1494,31 +1347,27 @@ const openPaper = (paperType: string) => {
     margin: 1.5rem 0 3rem 0;
   }
   
-  .dna-flow {
+  .input-image-container {
     left: 5%;
-    transform: translateY(-50%) scale(0.5);
-  }
-  
-  .atac-peaks {
-    left: 25%;
     transform: translateY(-50%) scale(0.6);
+    width: 160px;
+    height: 100px;
   }
   
   .ai-core {
     transform: translate(-50%, -50%) scale(0.6);
   }
   
-  .output-streams {
+  .picture1-container {
     right: 3%;
     transform: translateY(-50%) scale(0.6);
+    width: 150px;
+    height: 150px;
   }
   
-  .dna-label,
-  .atac-label,
-  .ai-label,
-  .stream-label {
+  .ai-label {
     font-size: 9px;
-  }
+}
   
   .hero-title {
     font-size: 2.5rem;

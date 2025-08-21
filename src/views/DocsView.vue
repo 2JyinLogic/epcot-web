@@ -8,84 +8,98 @@
       </div>
       
       <nav class="sidebar-nav">
-        <ul class="nav-list">
-          <li class="nav-item has-submenu" :class="{ 'expanded': expandedItems.installation }">
-            <a href="#" class="nav-link" @click="toggleSubmenu('installation', $event); navigateToSection('installation')">
-              <span class="nav-text">Installation</span>
-            </a>
-            <ul class="submenu" v-show="expandedItems.installation">
-              <li class="nav-item has-submenu" :class="{ 'expanded': expandedItems.epcotv2Installation }">
-                <a href="#" class="nav-link sub-nav-link" @click="toggleSubmenu('epcotv2Installation', $event); navigateToSection('epcotv2-installation')">
-                  <span class="nav-text">EPCOTv2 Installation</span>
-                </a>
-                <ul class="submenu sub-submenu" v-show="expandedItems.epcotv2Installation">
-                  <li><a href="#dependencies" @click="scrollToSection('dependencies')">Dependencies</a></li>
-                  <li><a href="#installation-steps" @click="scrollToSection('installation-steps')">Installation Steps</a></li>
-                  <li><a href="#running-locally" @click="scrollToSection('running-locally')">Running Locally or in Colab</a></li>
-                  <li><a href="#usage-steps" @click="scrollToSection('usage-steps')">Usage Steps</a></li>
-                  <li><a href="#notes" @click="scrollToSection('notes')">Notes</a></li>
-                  <li><a href="#references" @click="scrollToSection('references')">References</a></li>
-                </ul>
-              </li>
-              <li class="nav-item has-submenu" :class="{ 'expanded': expandedItems.epcotInstallation }">
-                <a href="#" class="nav-link sub-nav-link" @click="toggleSubmenu('epcotInstallation', $event); navigateToSection('epcot-installation')">
-                  <span class="nav-text">EPCOT Installation</span>
-                </a>
-                <ul class="submenu sub-submenu" v-show="expandedItems.epcotInstallation">
-                  <li><a href="#epcot-environment-setup" @click="scrollToSection('epcot-environment-setup')">Environment Setup</a></li>
-                  <li><a href="#epcot-dependencies" @click="scrollToSection('epcot-dependencies')">Dependencies</a></li>
-                  <li><a href="#epcot-pretrained-models" @click="scrollToSection('epcot-pretrained-models')">Pretrained Models</a></li>
-                  <li><a href="#epcot-input-preparation" @click="scrollToSection('epcot-input-preparation')">Input Preparation</a></li>
-                  <li><a href="#epcot-colab-tutorial" @click="scrollToSection('epcot-colab-tutorial')">Colab Tutorial</a></li>
-                  <li><a href="#epcot-tf-motif-analysis" @click="scrollToSection('epcot-tf-motif-analysis')">TF Motif Analysis</a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item has-submenu" :class="{ 'expanded': expandedItems.tutorials }">
-            <a href="#" class="nav-link" @click="toggleSubmenu('tutorials', $event); navigateToSection('tutorials')">
-              <span class="nav-text">Tutorials</span>
-            </a>
-            <ul class="submenu" v-show="expandedItems.tutorials">
-              <li class="nav-item has-submenu" :class="{ 'expanded': expandedItems.epcotv2Tutorial }">
-                <a href="#" class="nav-link sub-nav-link" @click="toggleSubmenu('epcotv2Tutorial', $event); navigateToSection('epcotv2-tutorial')">
-                  <span class="nav-text">EPCOTv2: Predicting Human and Mouse Genomic Modalities from ATAC-seq</span>
-                </a>
-                <ul class="submenu sub-submenu" v-show="expandedItems.epcotv2Tutorial">
-                  <li><a href="#epcotv2-introduction" @click="scrollToSection('epcotv2-introduction')">Introduction</a></li>
-                  <li><a href="#human-data-prediction" @click="scrollToSection('human-data-prediction')">Human Data Prediction</a></li>
-                  <li><a href="#mouse-data-prediction" @click="scrollToSection('mouse-data-prediction')">Mouse Data Prediction</a></li>
-                  <li><a href="#cross-species-analysis" @click="scrollToSection('cross-species-analysis')">Cross-species Analysis</a></li>
-                </ul>
-              </li>
-              <li class="nav-item has-submenu" :class="{ 'expanded': expandedItems.epcotTutorial }">
-                <a href="#" class="nav-link sub-nav-link" @click="toggleSubmenu('epcotTutorial', $event); navigateToSection('epcot-tutorial')">
-                  <span class="nav-text">EPCOT: Predicting Human Genomic Modalities from ATAC-seq</span>
-                </a>
-                <ul class="submenu sub-submenu" v-show="expandedItems.epcotTutorial">
-                  <li><a href="#epcot-introduction" @click="scrollToSection('epcot-introduction')">Introduction</a></li>
-                  <li><a href="#epcot-prerequisites" @click="scrollToSection('epcot-prerequisites')">Prerequisites</a></li>
-                  <li><a href="#epcot-quickstart" @click="scrollToSection('epcot-quickstart')">Quickstart</a></li>
-                  <li><a href="#epcot-inputs-outputs" @click="scrollToSection('epcot-inputs-outputs')">Inputs & Outputs</a></li>
-                  <li><a href="#epcot-predicted-modalities" @click="scrollToSection('epcot-predicted-modalities')">Predicted Modalities</a></li>
-                  <li><a href="#epcot-notes" @click="scrollToSection('epcot-notes')">Notes</a></li>
-                  <li><a href="#epcot-reference" @click="scrollToSection('epcot-reference')">Reference</a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
+        <div class="nav-section">
+          <div class="nav-section-header">
+            <h4>Getting Started</h4>
+          </div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="#" class="nav-link" @click="navigateToSection('welcome')">
+                <span class="nav-text">Overview</span>
+              </a>
+            </li>
+
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <div class="nav-section-header">
+            <h4>Installation</h4>
+          </div>
+          <ul class="nav-list">
+            <li class="nav-item has-submenu" :class="{ 'expanded': expandedItems.epcotv2Installation }">
+              <a href="#" class="nav-link" @click="toggleSubmenu('epcotv2Installation', $event); navigateToSection('epcotv2-installation')">
+                <span class="nav-text">EPCOTv2</span>
+                <span class="nav-arrow" :class="{ 'rotated': expandedItems.epcotv2Installation }">›</span>
+              </a>
+              <ul class="submenu" v-show="expandedItems.epcotv2Installation">
+                <li><a href="#dependencies" @click="scrollToSection('dependencies')" class="submenu-link">Dependencies</a></li>
+                <li><a href="#installation-steps" @click="scrollToSection('installation-steps')" class="submenu-link">Installation Steps</a></li>
+                <li><a href="#running-locally" @click="scrollToSection('running-locally')" class="submenu-link">Running Locally</a></li>
+                <li><a href="#usage-steps" @click="scrollToSection('usage-steps')" class="submenu-link">Usage Steps</a></li>
+                <li><a href="#notes" @click="scrollToSection('notes')" class="submenu-link">Notes</a></li>
+                <li><a href="#references" @click="scrollToSection('references')" class="submenu-link">References</a></li>
+              </ul>
+            </li>
+            <li class="nav-item has-submenu" :class="{ 'expanded': expandedItems.epcotInstallation }">
+              <a href="#" class="nav-link" @click="toggleSubmenu('epcotInstallation', $event); navigateToSection('epcot-installation')">
+                <span class="nav-text">EPCOT</span>
+                <span class="nav-arrow" :class="{ 'rotated': expandedItems.epcotInstallation }">›</span>
+              </a>
+              <ul class="submenu" v-show="expandedItems.epcotInstallation">
+                <li><a href="#epcot-environment-setup" @click="scrollToSection('epcot-environment-setup')" class="submenu-link">Environment Setup</a></li>
+                <li><a href="#epcot-dependencies" @click="scrollToSection('epcot-dependencies')" class="submenu-link">Dependencies</a></li>
+                <li><a href="#epcot-pretrained-models" @click="scrollToSection('epcot-pretrained-models')" class="submenu-link">Pretrained Models</a></li>
+                <li><a href="#epcot-input-preparation" @click="scrollToSection('epcot-input-preparation')" class="submenu-link">Input Preparation</a></li>
+                <li><a href="#epcot-colab-tutorial" @click="scrollToSection('epcot-colab-tutorial')" class="submenu-link">Colab Tutorial</a></li>
+                <li><a href="#epcot-tf-motif-analysis" @click="scrollToSection('epcot-tf-motif-analysis')" class="submenu-link">TF Motif Analysis</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <div class="nav-section-header">
+            <h4>Tutorials</h4>
+          </div>
+          <ul class="nav-list">
+            <li class="nav-item has-submenu" :class="{ 'expanded': expandedItems.epcotv2Tutorial }">
+              <a href="#" class="nav-link" @click="toggleSubmenu('epcotv2Tutorial', $event); navigateToSection('epcotv2-tutorial')">
+                <span class="nav-text">EPCOTv2 Tutorial</span>
+                <span class="nav-arrow" :class="{ 'rotated': expandedItems.epcotv2Tutorial }">›</span>
+              </a>
+              <ul class="submenu" v-show="expandedItems.epcotv2Tutorial">
+                <li><a href="#epcotv2-introduction" @click="scrollToSection('epcotv2-introduction')" class="submenu-link">Introduction</a></li>
+                <li><a href="#human-data-prediction" @click="scrollToSection('human-data-prediction')" class="submenu-link">Human Data</a></li>
+                <li><a href="#mouse-data-prediction" @click="scrollToSection('mouse-data-prediction')" class="submenu-link">Mouse Data</a></li>
+                <li><a href="#cross-species-analysis" @click="scrollToSection('cross-species-analysis')" class="submenu-link">Cross-species</a></li>
+              </ul>
+            </li>
+            <li class="nav-item has-submenu" :class="{ 'expanded': expandedItems.epcotTutorial }">
+              <a href="#" class="nav-link" @click="toggleSubmenu('epcotTutorial', $event); navigateToSection('epcot-tutorial')">
+                <span class="nav-text">EPCOT Tutorial</span>
+                <span class="nav-arrow" :class="{ 'rotated': expandedItems.epcotTutorial }">›</span>
+              </a>
+              <ul class="submenu" v-show="expandedItems.epcotTutorial">
+                <li><a href="#epcot-introduction" @click="scrollToSection('epcot-introduction')" class="submenu-link">Introduction</a></li>
+                <li><a href="#epcot-prerequisites" @click="scrollToSection('epcot-prerequisites')" class="submenu-link">Prerequisites</a></li>
+                <li><a href="#epcot-quickstart" @click="scrollToSection('epcot-quickstart')" class="submenu-link">Quickstart</a></li>
+                <li><a href="#epcot-inputs-outputs" @click="scrollToSection('epcot-inputs-outputs')" class="submenu-link">Inputs & Outputs</a></li>
+                <li><a href="#epcot-predicted-modalities" @click="scrollToSection('epcot-predicted-modalities')" class="submenu-link">Modalities</a></li>
+                <li><a href="#epcot-notes" @click="scrollToSection('epcot-notes')" class="submenu-link">Notes</a></li>
+                <li><a href="#epcot-reference" @click="scrollToSection('epcot-reference')" class="submenu-link">Reference</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+
       </nav>
     </aside>
 
     <!-- Main Content Area -->
     <main class="docs-main">
       <div class="content-header">
-        <div class="breadcrumbs">
-          <span>Documentation</span>
-          <span class="separator">></span>
-          <span>EPCOT Documentation</span>
-        </div>
         
 
         
@@ -594,10 +608,8 @@ import { ref, reactive } from 'vue'
 
 // Reactive state to track which menu items are expanded
 const expandedItems = reactive({
-  installation: true,
   epcotv2Installation: false,
   epcotInstallation: false,
-  tutorials: true,
   epcotTutorial: false,
   epcotv2Tutorial: false
 })
@@ -658,37 +670,110 @@ const getBreadcrumbTitle = () => {
 
 /* Left Sidebar Navigation */
 .docs-sidebar {
-  background-color: #fff;
-  border-right: 1px solid #e1e4e8;
+  background: #fff;
+  border-right: 1px solid #ced4da;
   overflow-y: visible;
   position: sticky;
   top: 0;
   height: auto;
   min-height: calc(100vh - 64px - 180px);
+  position: relative;
+}
+
+/* Add subtle pattern overlay */
+.docs-sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(108, 117, 125, 0.03) 1px, transparent 1px),
+    radial-gradient(circle at 75% 75%, rgba(108, 117, 125, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .sidebar-header {
-  padding: 20px;
-  border-bottom: 1px solid #e1e4e8;
+  padding: 24px 20px;
+  border-bottom: 3px solid #e5e7eb;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* Add animated background pattern to header */
+.sidebar-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent 30%, rgba(31, 41, 55, 0.02) 50%, transparent 70%);
+  animation: shimmer 3s infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
 }
 
 .sidebar-header h2 {
-  margin: 0 0 5px 0;
-  font-size: 18px;
-  font-weight: 600;
-  color: #24292f;
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1f2937;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .sidebar-header p {
   margin: 0;
   font-size: 14px;
-  color: #656d76;
+  color: #4b5563;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  position: relative;
+  z-index: 1;
 }
 
 .sidebar-nav {
-  padding: 16px 0;
+  padding: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.nav-section {
+  margin-bottom: 0;
+  border-bottom: 1px solid rgba(108, 117, 125, 0.1);
+}
+
+.nav-section:last-child {
+  border-bottom: none;
+}
+
+.nav-section-header {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px 12px;
+  background: #fff;
+  border-bottom: 1px solid rgba(108, 117, 125, 0.08);
+}
+
+.nav-section-header h4 {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #6c757d;
 }
 
 .nav-list {
@@ -699,40 +784,101 @@ const getBreadcrumbTitle = () => {
 
 .nav-item {
   margin: 0;
+  position: relative;
+  overflow: hidden;
 }
 
 .nav-link {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 20px;
-  color: #24292f;
+  justify-content: space-between;
+  padding: 12px 20px;
+  color: #495057;
   text-decoration: none;
   font-size: 14px;
+  font-weight: 500;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  transition: background-color 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-left: 3px solid transparent;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+}
+
+.nav-text {
+  flex: 1;
+}
+
+/* Add hover background animation */
+.nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(108, 117, 125, 0.1), transparent);
+  transition: left 0.4s ease;
+  z-index: 0;
+}
+
+.nav-link:hover::before {
+  left: 100%;
 }
 
 .nav-link:hover {
-  background-color: #f6f8fa;
-  color: #0969da;
+  background: rgba(108, 117, 125, 0.05);
+  color: #212529;
+  border-left-color: #6c757d;
+  transform: translateX(3px);
 }
 
+
+
 .nav-item.active .nav-link {
-  background-color: #0969da;
-  color: #fff;
+  background: rgba(108, 117, 125, 0.08);
+  color: #212529;
+  border-left-color: #495057;
+  font-weight: 600;
+  position: relative;
+}
+
+
+
+/* Add pulsing effect to active items */
+.nav-item.active .nav-link::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 8px;
+  width: 6px;
+  height: 6px;
+  background: #495057;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  animation: pulse 2s infinite;
+  z-index: 2;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+  50% { opacity: 0.5; transform: translateY(-50%) scale(1.2); }
 }
 
 /* Active navigation item styling */
 .nav-link.active {
-  background-color: #f6f8fa;
-  color: #0969da;
-  font-weight: 500;
+  background: linear-gradient(90deg, rgba(108, 117, 125, 0.1) 0%, rgba(173, 181, 189, 0.15) 100%);
+  color: #212529;
+  font-weight: 600;
+  border-left-color: #495057;
 }
 
 .nav-arrow {
-  font-size: 12px;
-  transition: transform 0.2s;
+  font-size: 14px;
+  font-weight: bold;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #6c757d;
+  opacity: 0.7;
 }
 
 /* Arrow rotation for expanded state */
@@ -743,31 +889,37 @@ const getBreadcrumbTitle = () => {
 /* 箭头悬停效果 */
 .nav-link:hover .nav-arrow {
   transform: rotate(90deg);
+  color: #495057;
 }
 
 /* 二级目录箭头悬停效果 */
 .sub-nav-link:hover .nav-arrow {
   transform: rotate(90deg);
+  color: #495057;
 }
 
 /* Expanded state styling */
 .nav-item.expanded > .nav-link {
-  background-color: #f6f8fa;
-  color: #0969da;
+  background: linear-gradient(90deg, rgba(108, 117, 125, 0.1) 0%, rgba(173, 181, 189, 0.08) 100%);
+  color: #212529;
+  border-left-color: #6c757d;
 }
 
 .nav-item.expanded > .nav-link .nav-arrow {
   transform: rotate(90deg) !important;
+  color: #495057;
 }
 
 /* 二级目录展开状态样式 */
 .nav-item.expanded > .sub-nav-link {
-  background-color: #f1f3f4;
-  color: #0969da;
+  background: linear-gradient(90deg, rgba(108, 117, 125, 0.08) 0%, rgba(173, 181, 189, 0.05) 100%);
+  color: #495057;
+  border-left-color: #6c757d;
 }
 
 .nav-item.expanded > .sub-nav-link .nav-arrow {
   transform: rotate(90deg) !important;
+  color: #495057;
 }
 
 /* 强制所有旋转的箭头 */
@@ -775,55 +927,105 @@ const getBreadcrumbTitle = () => {
 .nav-item.expanded .nav-arrow.rotated,
 .nav-item.expanded .sub-nav-link .nav-arrow.rotated {
   transform: rotate(90deg) !important;
+  color: #495057;
 }
-
 
 /* Submenu Styles */
 .submenu {
   list-style: none;
   margin: 0;
   padding: 0;
-  background-color: #f6f8fa;
+  background: #fff;
+  border-left: 2px solid rgba(108, 117, 125, 0.15);
+  animation: slideDown 0.3s ease-out;
 }
 
-.submenu li a {
+.submenu-link {
   display: block;
-  padding: 6px 20px 6px 40px;
-  color: #656d76;
+  padding: 8px 20px 8px 50px;
+  color: #6c757d;
   text-decoration: none;
   font-size: 13px;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  transition: all 0.3s ease;
+  border-left: 2px solid transparent;
+  position: relative;
 }
 
-.submenu li a:hover {
-  color: #0969da;
-  background-color: #f1f3f4;
-}
-
-/* Sub-submenu Styles */
-.sub-submenu {
-  background-color: #f1f3f4;
-  border-left: 2px solid #d0d7de;
-}
-
-.sub-submenu li a {
-  padding: 6px 20px 6px 60px;
+.submenu-link::before {
+  content: '└─';
+  position: absolute;
+  left: 30px;
+  color: #adb5bd;
   font-size: 12px;
+  z-index: 1;
 }
 
-.sub-submenu li a:hover {
-  background-color: #e1e4e8;
+.submenu-link:hover {
+  color: #212529;
+  background: rgba(108, 117, 125, 0.05);
+  border-left-color: #6c757d;
+  transform: translateX(2px);
 }
 
-/* Sub-nav-link Styles */
-.sub-nav-link {
-  background-color: #f6f8fa;
-  border-bottom: 1px solid #e1e4e8;
-  font-weight: 500;
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.sub-nav-link:hover {
-  background-color: #f1f3f4;
+
+
+
+
+
+
+/* Enhanced scrollbar styling */
+.docs-sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.docs-sidebar::-webkit-scrollbar-track {
+  background: rgba(108, 117, 125, 0.1);
+  border-radius: 4px;
+}
+
+.docs-sidebar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #adb5bd, #6c757d);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.docs-sidebar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #6c757d, #495057);
+}
+
+
+
+/* Enhanced page load animations */
+.nav-item {
+  animation: slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.nav-item:nth-child(1) { animation-delay: 0.1s; }
+.nav-item:nth-child(2) { animation-delay: 0.2s; }
+.nav-item:nth-child(3) { animation-delay: 0.3s; }
+.nav-item:nth-child(4) { animation-delay: 0.4s; }
+.nav-item:nth-child(5) { animation-delay: 0.5s; }
+.nav-item:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes slideInLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* Main Content Styles */
@@ -835,7 +1037,6 @@ const getBreadcrumbTitle = () => {
 
 .content-header {
   padding: 24px 32px;
-  border-bottom: 1px solid #e1e4e8;
   background-color: #fff;
 }
 
