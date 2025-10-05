@@ -505,7 +505,8 @@ const goBack = () => {
 .section-block h3 {
   margin-bottom: 0.8rem;
   font-size: 1.25rem;
-  color: #06b6d4;
+  color: #000000;
+  font-weight: 900;
 }
 
 pre {
@@ -580,15 +581,15 @@ pre {
 }
 
 .breadcrumb-link {
-  color: #0891b2;
+  color: #000000;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 900;
   transition: color 0.3s ease;
   text-decoration: none;
 }
 
 .breadcrumb-link:hover {
-  color: #06b6d4;
+  color: #000000;
   text-decoration: underline;
 }
 

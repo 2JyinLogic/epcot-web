@@ -670,17 +670,19 @@ const getBreadcrumbTitle = () => {
 
 /* Left Sidebar Navigation */
 .docs-sidebar {
-  background: #fff;
-  border-right: 1px solid #ced4da;
+  background: #ffffff;
+  border-right: 1px solid #d1d5db;
   overflow-y: visible;
   position: sticky;
   top: 0;
   height: auto;
   min-height: calc(100vh - 64px - 180px);
   position: relative;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  width: 300px;
 }
 
-/* Add subtle pattern overlay */
+/* Add subtle AWS-style pattern overlay */
 .docs-sidebar::before {
   content: '';
   position: absolute;
@@ -689,59 +691,46 @@ const getBreadcrumbTitle = () => {
   right: 0;
   bottom: 0;
   background-image: 
-    radial-gradient(circle at 25% 25%, rgba(108, 117, 125, 0.03) 1px, transparent 1px),
-    radial-gradient(circle at 75% 75%, rgba(108, 117, 125, 0.03) 1px, transparent 1px);
+    linear-gradient(90deg, transparent 98%, rgba(232, 117, 0, 0.02) 100%);
   background-size: 20px 20px;
   pointer-events: none;
   z-index: 1;
 }
 
 .sidebar-header {
-  padding: 24px 20px;
-  border-bottom: 3px solid #e5e7eb;
-  background: #fff;
+  padding: 24px 20px 20px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #ffffff;
   position: relative;
   overflow: hidden;
   z-index: 2;
 }
 
-/* Add animated background pattern to header */
+/* Remove AWS-style header background */
 .sidebar-header::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(45deg, transparent 30%, rgba(31, 41, 55, 0.02) 50%, transparent 70%);
-  animation: shimmer 3s infinite;
-  pointer-events: none;
-  z-index: 0;
-}
-
-@keyframes shimmer {
-  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+  display: none;
 }
 
 .sidebar-header h2 {
   margin: 0 0 8px 0;
   font-size: 20px;
   font-weight: 700;
-  color: #1f2937;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: #16191f;
+  font-family: 'Amazon Ember', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   position: relative;
   z-index: 1;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  line-height: 1.2;
 }
 
 .sidebar-header p {
   margin: 0;
   font-size: 14px;
-  color: #4b5563;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: #545b64;
+  font-family: 'Amazon Ember', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   position: relative;
   z-index: 1;
+  font-weight: 400;
+  line-height: 1.4;
 }
 
 .sidebar-nav {
@@ -752,7 +741,7 @@ const getBreadcrumbTitle = () => {
 
 .nav-section {
   margin-bottom: 0;
-  border-bottom: 1px solid rgba(108, 117, 125, 0.1);
+  border-bottom: 1px solid #f3f4f6;
 }
 
 .nav-section:last-child {
@@ -763,17 +752,19 @@ const getBreadcrumbTitle = () => {
   display: flex;
   align-items: center;
   padding: 16px 20px 12px;
-  background: #fff;
-  border-bottom: 1px solid rgba(108, 117, 125, 0.08);
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .nav-section-header h4 {
   margin: 0;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #6c757d;
+  color: #374151;
+  font-family: 'Amazon Ember', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1;
 }
 
 .nav-list {
@@ -793,141 +784,93 @@ const getBreadcrumbTitle = () => {
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px;
-  color: #495057;
+  color: #374151;
   text-decoration: none;
   font-size: 14px;
-  font-weight: 500;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 400;
+  font-family: 'Amazon Ember', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  transition: all 0.15s ease;
   border-left: 3px solid transparent;
   position: relative;
   overflow: hidden;
   background: transparent;
+  line-height: 1.4;
 }
 
 .nav-text {
   flex: 1;
+  font-weight: 400;
 }
 
-/* Add hover background animation */
-.nav-link::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(108, 117, 125, 0.1), transparent);
-  transition: left 0.4s ease;
-  z-index: 0;
-}
-
-.nav-link:hover::before {
-  left: 100%;
-}
-
+/* AWS-style hover effect */
 .nav-link:hover {
-  background: rgba(108, 117, 125, 0.05);
-  color: #212529;
-  border-left-color: #6c757d;
-  transform: translateX(3px);
+  background: #f3f4f6;
+  color: #16191f;
+  border-left-color: #0d9488;
+  font-weight: 500;
 }
-
-
 
 .nav-item.active .nav-link {
-  background: rgba(108, 117, 125, 0.08);
-  color: #212529;
-  border-left-color: #495057;
+  background: #f0f9ff;
+  color: #1e40af;
+  border-left-color: #3b82f6;
   font-weight: 600;
   position: relative;
 }
 
-
-
-/* Add pulsing effect to active items */
+/* AWS-style active indicator */
 .nav-item.active .nav-link::after {
   content: '';
   position: absolute;
   top: 50%;
   left: 8px;
-  width: 6px;
-  height: 6px;
-  background: #495057;
+  width: 4px;
+  height: 4px;
+  background: #3b82f6;
   border-radius: 50%;
   transform: translateY(-50%);
-  animation: pulse 2s infinite;
   z-index: 2;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
-  50% { opacity: 0.5; transform: translateY(-50%) scale(1.2); }
 }
 
 /* Active navigation item styling */
 .nav-link.active {
-  background: linear-gradient(90deg, rgba(108, 117, 125, 0.1) 0%, rgba(173, 181, 189, 0.15) 100%);
-  color: #212529;
+  background: #f0f9ff;
+  color: #1e40af;
   font-weight: 600;
-  border-left-color: #495057;
+  border-left-color: #3b82f6;
 }
 
 .nav-arrow {
-  font-size: 14px;
-  font-weight: bold;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  color: #6c757d;
-  opacity: 0.7;
+  font-size: 12px;
+  font-weight: 600;
+  transition: transform 0.15s ease;
+  color: #6b7280;
+  margin-left: 8px;
+  font-family: 'Amazon Ember', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 /* Arrow rotation for expanded state */
 .nav-arrow.rotated {
   transform: rotate(90deg) !important;
+  color: #374151;
 }
 
-/* 箭头悬停效果 */
+/* Arrow hover effect */
 .nav-link:hover .nav-arrow {
-  transform: rotate(90deg);
-  color: #495057;
-}
-
-/* 二级目录箭头悬停效果 */
-.sub-nav-link:hover .nav-arrow {
-  transform: rotate(90deg);
-  color: #495057;
+  color: #374151;
 }
 
 /* Expanded state styling */
 .nav-item.expanded > .nav-link {
-  background: linear-gradient(90deg, rgba(108, 117, 125, 0.1) 0%, rgba(173, 181, 189, 0.08) 100%);
-  color: #212529;
-  border-left-color: #6c757d;
+  background: #f9fafb;
+  color: #16191f;
+  border-left-color: #d1d5db;
+  font-weight: 500;
 }
 
 .nav-item.expanded > .nav-link .nav-arrow {
   transform: rotate(90deg) !important;
-  color: #495057;
-}
-
-/* 二级目录展开状态样式 */
-.nav-item.expanded > .sub-nav-link {
-  background: linear-gradient(90deg, rgba(108, 117, 125, 0.08) 0%, rgba(173, 181, 189, 0.05) 100%);
-  color: #495057;
-  border-left-color: #6c757d;
-}
-
-.nav-item.expanded > .sub-nav-link .nav-arrow {
-  transform: rotate(90deg) !important;
-  color: #495057;
-}
-
-/* 强制所有旋转的箭头 */
-.nav-arrow.rotated,
-.nav-item.expanded .nav-arrow.rotated,
-.nav-item.expanded .sub-nav-link .nav-arrow.rotated {
-  transform: rotate(90deg) !important;
-  color: #495057;
+  color: #374151;
 }
 
 /* Submenu Styles */
@@ -935,43 +878,46 @@ const getBreadcrumbTitle = () => {
   list-style: none;
   margin: 0;
   padding: 0;
-  background: #fff;
-  border-left: 2px solid rgba(108, 117, 125, 0.15);
-  animation: slideDown 0.3s ease-out;
+  background: #ffffff;
+  border-left: 1px solid #e5e7eb;
+  animation: slideDown 0.2s ease-out;
 }
 
 .submenu-link {
   display: block;
-  padding: 8px 20px 8px 50px;
-  color: #6c757d;
+  padding: 8px 20px 8px 48px;
+  color: #6b7280;
   text-decoration: none;
   font-size: 13px;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  transition: all 0.3s ease;
-  border-left: 2px solid transparent;
+  font-family: 'Amazon Ember', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  transition: all 0.15s ease;
+  border-left: 1px solid transparent;
   position: relative;
+  font-weight: 400;
+  line-height: 1.4;
 }
 
 .submenu-link::before {
-  content: '└─';
+  content: '•';
   position: absolute;
-  left: 30px;
-  color: #adb5bd;
-  font-size: 12px;
+  left: 32px;
+  color: #9ca3af;
+  font-size: 14px;
   z-index: 1;
+  font-weight: bold;
 }
 
 .submenu-link:hover {
-  color: #212529;
-  background: rgba(108, 117, 125, 0.05);
-  border-left-color: #6c757d;
-  transform: translateX(2px);
+  color: #374151;
+  background: #f9fafb;
+  border-left-color: #d1d5db;
+  font-weight: 500;
 }
 
 @keyframes slideDown {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-4px);
   }
   to {
     opacity: 1;
@@ -979,47 +925,39 @@ const getBreadcrumbTitle = () => {
   }
 }
 
-
-
-
-
-
-
-/* Enhanced scrollbar styling */
+/* Enhanced scrollbar styling - AWS style */
 .docs-sidebar::-webkit-scrollbar {
   width: 8px;
 }
 
 .docs-sidebar::-webkit-scrollbar-track {
-  background: rgba(108, 117, 125, 0.1);
-  border-radius: 4px;
+  background: #f9fafb;
+  border-radius: 0;
 }
 
 .docs-sidebar::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #adb5bd, #6c757d);
+  background: #d1d5db;
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 2px solid #f9fafb;
 }
 
 .docs-sidebar::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #6c757d, #495057);
+  background: #9ca3af;
 }
-
-
 
 /* Enhanced page load animations */
 .nav-item {
-  animation: slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: slideInLeft 0.4s ease-out forwards;
   opacity: 0;
-  transform: translateX(-20px);
+  transform: translateX(-10px);
 }
 
-.nav-item:nth-child(1) { animation-delay: 0.1s; }
-.nav-item:nth-child(2) { animation-delay: 0.2s; }
-.nav-item:nth-child(3) { animation-delay: 0.3s; }
-.nav-item:nth-child(4) { animation-delay: 0.4s; }
-.nav-item:nth-child(5) { animation-delay: 0.5s; }
-.nav-item:nth-child(6) { animation-delay: 0.6s; }
+.nav-item:nth-child(1) { animation-delay: 0.05s; }
+.nav-item:nth-child(2) { animation-delay: 0.1s; }
+.nav-item:nth-child(3) { animation-delay: 0.15s; }
+.nav-item:nth-child(4) { animation-delay: 0.2s; }
+.nav-item:nth-child(5) { animation-delay: 0.25s; }
+.nav-item:nth-child(6) { animation-delay: 0.3s; }
 
 @keyframes slideInLeft {
   to {

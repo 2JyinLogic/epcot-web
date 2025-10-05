@@ -58,56 +58,169 @@ const goToModel = (id: string) => {
 
 <style scoped>
 .model-table {
-  padding: 2rem;
+  padding: 1rem;
+  padding-top: 8rem;
   max-width: 1200px;
-  margin: auto;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  min-height: auto;
 }
 
-/* Model name link styling with solid color */
+/* ===== 强化表格网格线显示 ===== */
+.model-table :deep(.el-table) {
+  background: var(--panel);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 2px solid var(--line);
+}
+
+.model-table :deep(.el-table__header-wrapper) {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+/* ===== 表头网格线 ===== */
+.model-table :deep(.el-table th) {
+  background: transparent;
+  color: #1e293b;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-bottom: 2px solid var(--line) !important;
+  border-right: 2px solid var(--line) !important;
+  border-top: 1px solid var(--line) !important;
+  border-left: 1px solid var(--line) !important;
+  padding: 1rem 0.75rem;
+}
+
+.model-table :deep(.el-table th:first-child) {
+  border-left: 2px solid var(--line) !important;
+}
+
+.model-table :deep(.el-table th:last-child) {
+  border-right: 2px solid var(--line) !important;
+}
+
+/* ===== 表格主体网格线 ===== */
+.model-table :deep(.el-table td) {
+  padding: 1rem 0.75rem;
+  border-bottom: 1px solid var(--line) !important;
+  border-right: 1px solid var(--line) !important;
+  border-left: 1px solid var(--line) !important;
+  transition: background-color 0.3s ease;
+}
+
+.model-table :deep(.el-table td:first-child) {
+  border-left: 2px solid var(--line) !important;
+}
+
+.model-table :deep(.el-table td:last-child) {
+  border-right: 2px solid var(--line) !important;
+}
+
+/* ===== 最后一行底部边框 ===== */
+.model-table :deep(.el-table tbody tr:last-child td) {
+  border-bottom: 2px solid var(--line) !important;
+}
+
+/* ===== 悬停效果 ===== */
+.model-table :deep(.el-table tbody tr:hover td) {
+  background-color: #f8fafc;
+}
+
+.model-table :deep(.el-table tbody tr:nth-child(even)) {
+  background-color: #fafbfc;
+}
+
+.model-table :deep(.el-table tbody tr:nth-child(even):hover) {
+  background-color: #f0f9ff;
+}
+
+/* ===== 使用 Element Plus 内部类强化边框 ===== */
+.model-table :deep(.el-table--border .el-table__cell) {
+  border-right: 1px solid var(--line) !important;
+  border-bottom: 1px solid var(--line) !important;
+  border-left: 1px solid var(--line) !important;
+}
+
+.model-table :deep(.el-table--border .el-table__cell:first-child) {
+  border-left: 2px solid var(--line) !important;
+}
+
+.model-table :deep(.el-table--border .el-table__cell:last-child) {
+  border-right: 2px solid var(--line) !important;
+}
+
+.model-table :deep(.el-table--border .el-table__header .el-table__cell) {
+  border-bottom: 2px solid var(--line) !important;
+  border-top: 1px solid var(--line) !important;
+}
+
+.model-table :deep(.el-table--border .el-table__header .el-table__cell:first-child) {
+  border-left: 2px solid var(--line) !important;
+}
+
+.model-table :deep(.el-table--border .el-table__header .el-table__cell:last-child) {
+  border-right: 2px solid var(--line) !important;
+}
+
+.model-table :deep(.el-table--border .el-table__row:last-child .el-table__cell) {
+  border-bottom: 2px solid var(--line) !important;
+}
+
+/* ===== 移除模型名称的按钮样式 ===== */
 .model-table :deep(.el-link--primary) {
-  color: #0891b2;
+  color: var(--accent);
   font-weight: 600;
   text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  transition: color 0.3s ease;
 }
 
 .model-table :deep(.el-link--primary:hover) {
-  color: #06b6d4;
-}
-
-.model-table :deep(.el-link--primary:focus) {
-  color: #06b6d4;
-}
-
-.model-table :deep(.el-link--primary:active) {
-  color: #06b6d4;
-}
-
-/* Override Element Plus link underline color */
-.model-table :deep(.el-link--primary) {
   color: #0891b2;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.model-table :deep(.el-link--primary:hover) {
-  color: #06b6d4;
+  background: none;
+  transform: none;
+  box-shadow: none;
+  text-decoration: underline;
 }
 
 .model-table :deep(.el-link--primary:focus) {
-  color: #06b6d4;
+  color: var(--accent);
+  background: none;
 }
 
 .model-table :deep(.el-link--primary:active) {
-  color: #06b6d4;
+  color: var(--accent);
+  background: none;
 }
 
-/* Override the underline color for all states */
-.model-table :deep(.el-link--primary::after),
-.model-table :deep(.el-link--primary:hover::after),
-.model-table :deep(.el-link--primary:focus::after),
-.model-table :deep(.el-link--primary:active::after) {
-  background-color: #06b6d4 !important;
-  border-bottom-color: #06b6d4 !important;
+/* ===== 版本标签样式 ===== */
+.model-table :deep(.el-table td:nth-child(2)) {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* ===== 特性列样式 ===== */
+.model-table :deep(.el-table td:nth-child(3)) {
+  color: var(--muted);
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+/* ===== 响应式设计 ===== */
+@media (max-width: 768px) {
+  .model-table {
+    padding: 0.5rem;
+    padding-top: 3rem;
+  }
+  
+  .model-table :deep(.el-table th),
+  .model-table :deep(.el-table td) {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.85rem;
+  }
 }
 </style>

@@ -3,1497 +3,1392 @@
     <!-- Hero Section -->
     <section class="hero-section">
       <div class="hero-content">
-        <h1 class="hero-title">
-          <span class="title-primary">EPCOT</span><span class="title-secondary">Decoding Data's Gene Regulatory Code</span>
-        </h1>
-        <p class="hero-subtitle">
-          Transform your genomic research with AI. Get comprehensive predictions of gene activity, protein binding, and DNA structure 
-          from simple accessibility data. Save months of experiments and thousands in costs.
-        </p>
+        <!-- Left Column: Text -->
+        <div class="hero-text">
+          <h1>EPCOT</h1>
+          <p>EPCOT is a deep learning framework designed to comprehensively predict multiple genomic modalities—including the epigenome, chromatin organization, transcriptome, and enhancer activity—within a single architecture. By leveraging a pre-training and fine-tuning strategy, EPCOT achieves strong performance in individual prediction tasks while maintaining generalizability across diverse cell and tissue types.</p>
+          <p class="call-to-action">Try EPCOT and experience differently.</p>
+          <button class="btn" @click="tryNow">Try it now</button>
+        </div>
         
-        <!-- Stats Module -->
-        <div class="stats-module">
-          <div class="stat-item">
-            <span class="stat-number">1000+</span>
-            <span class="stat-label">Proteins Predicted</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number">11</span>
-            <span class="stat-label">DNA Marks</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number">2</span>
-            <span class="stat-label">Species</span>
-          </div>
-        </div>
-
-        <!-- Try Web Version Button - Below stats -->
-        <div class="hero-primary-action">
-          <a href="https://huggingface.co/spaces/epcot-project/epcot-demo" target="_blank" class="btn-primary" aria-label="Try EPCOT web demo">
-            Try Web Version
-          </a>
-        </div>
-
-        <!-- Animated Background -->
-        <div class="animated-background">
-          <!-- Input Image -->
-          <div class="input-image-container">
-            <img src="/images/input.png" alt="Input Data" class="input-image" />
-          </div>
-              
-          <!-- AI Core -->
-          <div class="ai-core">
-            <div class="ai-label">AI Core</div>
-            <div class="core-pulse"></div>
-            <div class="core-inner">
-              <div class="neural-node" v-for="i in 6" :key="`node-${i}`" :style="{ animationDelay: `${i * 0.1}s` }"></div>
-            </div>
-          </div>
-          
-          <!-- Picture1 Image -->
-          <div class="picture1-container">
-            <img src="/images/Picture1.png" alt="EPCOT Workflow Diagram" class="picture1-image" />
-          </div>
-          
-          <!-- Connection Lines -->
-          <svg class="connection-lines" viewBox="0 0 1000 400" preserveAspectRatio="none">
-            <defs>
-              <linearGradient id="flowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" style="stop-color:#3bd4c6;stop-opacity:0.3" />
-                <stop offset="50%" style="stop-color:#1e40af;stop-opacity:0.8" />
-                <stop offset="100%" style="stop-color:#3bd4c6;stop-opacity:0.3" />
-              </linearGradient>
-            </defs>
-            <path class="flow-path" d="M 200 200 Q 500 100 800 200" stroke="url(#flowGradient)" stroke-width="2" fill="none" opacity="0.6"/>
-            <path class="flow-path" d="M 200 200 Q 500 300 800 200" stroke="url(#flowGradient)" stroke-width="2" fill="none" opacity="0.4"/>
-          </svg>
-        </div>
-
-        <!-- Secondary Action Buttons -->
-        <div class="hero-actions">
-          <a href="https://colab.research.google.com/github/epcot-project/epcot/blob/main/notebooks/demo.ipynb" target="_blank" class="btn-secondary" aria-label="View Google Colab tutorial">
-            View Colab Tutorial
-          </a>
-          <a href="https://github.com/epcot-project/epcot" target="_blank" class="btn-secondary" aria-label="Browse source code on GitHub">
-            Browse Source Code
-          </a>
+        <!-- Right Column: Image -->
+        <div class="hero-image">
+          <img src="/images/epcot-overview.png" alt="EPCOT Overview" class="epcot-hero-image" />
         </div>
       </div>
     </section>
 
-    <!-- Demo Video Section -->
-    <section class="video-section">
-      <h2>Dynamic Demonstration</h2>
-              <div class="video-container">
-          <video controls aria-label="EPCOT presentation video">
-            <source src="/videos/Presentation.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      
-      <!-- Interactive Video Workflow Subsection -->
-      <div class="workflow-subsection">
-        <div class="workflow-container">
-          <!-- Tab Navigation -->
-          <div class="workflow-tabs">
-            <div class="arrow-left-outer" @click="previousTab">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M15 18l-6-6 6-6"/>
-              </svg>
-            </div>
-            <button 
-              v-for="(tab, index) in workflowTabs" 
-              :key="index"
-              class="workflow-tab"
-              :class="{ active: activeTab === index }"
-              @click="switchTab(index)"
-            >
-              {{ tab.title }}
-            </button>
-            <div class="arrow-right-outer" @click="nextTab">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M9 18l6-6-6-6"/>
-              </svg>
-            </div>
-          </div>
-          
-          <!-- Video and Text Layout -->
-          <div class="workflow-content">
-            <!-- Left: Video Player -->
-            <div class="workflow-video-panel">
-              <video controls :key="activeTab">
-                <source :src="workflowTabs[activeTab].videoSrc" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </div>
-            
-            <!-- Right: Text Description -->
-            <div class="workflow-text-panel">
-              <div class="text-content">
-                <h4>{{ workflowTabs[activeTab].title }}</h4>
-                <p>{{ workflowTabs[activeTab].description }}</p>
-                <a :href="workflowTabs[activeTab].tryLink" target="_blank" class="try-it-btn">
-                  Try it now
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M7 17L17 7M17 7H7M17 7V17"/>
-                  </svg>
-                </a>
+    <!-- Divider -->
+    <div class="divider"></div>
+
+    <!-- Interactive Use Cases Section -->
+    <section class="use-cases-section">
+      <!-- Use Cases Header -->
+      <div class="use-cases-header">
+        <h2>Interactive Use Cases Explorer</h2>
+        <p>Explore genomic prediction scenarios with EPCOT</p>
+      </div>
+
+      <!-- Controls -->
+      <div class="controls-section">
+        <div class="controls-row">
+          <div class="control-group category-group">
+            <label>Category:</label>
+            <div class="hierarchical-menu">
+              <!-- Main Category Button -->
+              <div class="main-category-button" @click="toggleMainMenu" :class="{ active: isMainMenuOpen }">
+                <div class="button-content">
+                  <span class="category-text">{{ getMainCategoryLabel(selectedMainCategory) }}</span>
+                  <span class="selected-subcategory">{{ getCurrentSubCategoryLabel() }}</span>
+                </div>
+                <div class="expand-arrow" :class="{ rotated: isMainMenuOpen }">▼</div>
+              </div>
+              
+              <!-- Expanded Menu -->
+              <div class="expanded-menu" :class="{ open: isMainMenuOpen }">
+                <div class="menu-content">
+                  <!-- Main Categories (Left Side) -->
+                  <div class="main-categories">
+                    <div 
+                      v-for="(subs, mainKey) in subCategories" 
+                      :key="mainKey"
+                      class="main-category-item"
+                      :class="{ active: selectedMainCategory === mainKey }"
+                      @click="selectMainCategory(mainKey)"
+                    >
+                      <div class="main-category-header">
+                        <span class="category-label">{{ getMainCategoryLabel(mainKey) }}</span>
+                        <span class="subcategory-count">({{ subs.length }})</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Sub Categories (Right Side) -->
+                  <div class="sub-categories" v-if="isMainMenuOpen">
+                    <div 
+                      v-for="sub in currentSubCategories" 
+                      :key="sub.value"
+                      class="sub-category-item"
+                      :class="{ active: selectedSubCategory === sub.value }"
+                      @click="selectSubCategory(sub.value)"
+                    >
+                      <span class="sub-category-label">{{ sub.label }}</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Challenge & Solution Section -->
-    <section class="challenge-section">
-      <div class="challenge-container">
-        <h2>Why Choose EPCOT?</h2>
-        <div class="challenge-grid">
-          <div class="challenge-card">
-            <h3>Traditional Methods</h3>
-            <ul>
-              <li>
-                <div class="challenge-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                  </svg>
-                </div>
-                <span><strong>Multiple Experiments</strong> – Each data type requires separate assays, increasing time demands.</span>
-              </li>
-              <li>
-                <div class="challenge-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"/>
-                    <path d="M12 6v6l4 2"/>
-                  </svg>
-                </div>
-                <span><strong>Data Gaps</strong> – Many cell types lack complete genomic profiles.</span>
-              </li>
-              <li>
-                <div class="challenge-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                  </svg>
-                </div>
-                <span><strong>High Costs</strong> – Specialized sequencing and protocols are expensive.</span>
-              </li>
-              <li>
-                <div class="challenge-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                  </svg>
-                </div>
-                <span><strong>Complex Workflows</strong> – Procedures are technically demanding and resource-intensive.</span>
-              </li>
-            </ul>
+          
+          <div class="control-group">
+            <label>Locus:</label>
+            <input v-model="locus" type="text" class="control-input" placeholder="e.g., chr4:403.6‑404.1Mb" />
           </div>
           
-          <div class="arrow-container">
-            <div class="arrow">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
+          <div class="control-group">
+            <label>Cell type:</label>
+            <div class="select-wrapper">
+              <select 
+                v-model="selectedCell" 
+                @change="onCellChange" 
+                @focus="isCellMenuOpen = true"
+                @blur="isCellMenuOpen = false"
+                class="control-select"
+              >
+                <option v-for="cell in cellTypes" :key="cell" :value="cell">{{ cell }}</option>
+              </select>
+              <div class="select-arrow" :class="{ rotated: isCellMenuOpen }">▼</div>
             </div>
           </div>
-          
-          <div class="solution-card">
-            <h3>EPCOT Solution</h3>
-            <ul>
-              <li>
-                <div class="solution-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M9 12l2 2 4-4M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 9 4.03 9 9z"/>
-                  </svg>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <div class="content-layout">
+          <!-- Left Panel: Description -->
+          <div class="description-panel">
+            <h3>{{ currentCategory.name }}</h3>
+            <div class="definition">
+              <h4>Definition</h4>
+              <p>{{ currentCategory.definition }}</p>
+            </div>
+            
+            <div class="outputs">
+              <h4>Outputs</h4>
+              <div class="output-tags">
+                <span v-for="output in currentCategory.outputs" :key="output" class="output-tag">
+                  {{ output }}
+                </span>
+              </div>
+            </div>
+
+            <div class="examples">
+              <h4>Examples</h4>
+              <div class="example-cards">
+                <div v-for="(example, index) in currentCategory.examples" :key="index" class="example-card">
+                  <div class="example-title">Example {{ index + 1 }}</div>
+                  <div class="example-content" v-html="example"></div>
                 </div>
-                <span><strong>Multi-Modal in One</strong> – Single ATAC-seq predicts multiple data types.</span>
-              </li>
-              <li>
-                <div class="solution-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                    <circle cx="9" cy="7" r="4"/>
-                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                  </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Panel: Visualization -->
+          <div class="visualization-panel">
+            <h3>Visualization · {{ currentCategory.name }} · {{ selectedCell }}</h3>
+            <div class="genome-viewer" :class="{ flash: isFlashing }">
+              <div class="viewer-placeholder">
+                <div class="placeholder-content">
+                  <!-- <div class="placeholder-icon">🧬</div> -->
+                  <div class="placeholder-text">Genome Viewer</div>
+                  <div class="placeholder-mode">{{ currentCategory.name }}</div>
                 </div>
-                <span><strong>Universal Compatibility</strong> – Works across all cell types automatically.</span>
-              </li>
-              <li>
-                <div class="solution-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                  </svg>
-                </div>
-                <span><strong>Cost-Effective & Efficient</strong> – Replaces expensive assays with accurate predictions.</span>
-              </li>
-              <li>
-                <div class="solution-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M9 12l2 2 4-4M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 9 9 4.03 9 9z"/>
-                  </svg>
-                </div>
-                <span><strong>Proven Performance</strong> – Outperforms task-specific models in predictions.</span>
-              </li>
-            </ul>
+              </div>
+            </div>
+            <div class="viewer-controls">
+              <button 
+                class="control-btn" 
+                @click="toggleOverlay" 
+                :class="{ active: overlay }"
+              >
+                Overlay Inputs
+              </button>
+              <button 
+                class="control-btn" 
+                @click="toggleCompare" 
+                :class="{ active: compare }"
+              >
+                Prediction vs Experiment
+              </button>
+            </div>
+            <div class="legend">
+              <span v-for="item in currentCategory.legend" :key="item" class="legend-item">
+                <i class="legend-dot"></i>{{ item }}
+              </span>
+            </div>
           </div>
         </div>
       </div>
     </section>
-
-    <!-- Publications Section -->
-    <section class="publications-section">
-      <h2>Read Our Publications</h2>
-      <div class="publications-grid">
-        <div class="publication-card" @click="openPaper('epcot')">
-          <h3>EPCOT (2023)</h3>
-          <p>"A framework to predict gene activity, protein binding, and DNA structure from accessibility data."</p>
-          <span class="journal">Nucleic Acids Research</span>
-        </div>
-        <div class="publication-card" @click="openPaper('epcotv2')">
-          <h3>EPCOTv2 (2025)</h3>
-          <p>"Developing a general AI model for comprehensive genomic predictions and analysis."</p>
-          <span class="journal">bioRxiv</span>
-        </div>
-      </div>
-
-    </section>
-
-
-
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 
-import { onMounted, ref } from 'vue'
+// Type definitions
+type MainCategory = 'tf-binding' | 'epigenomic' | 'gene-expression' | 'enhancer-activity' | '3d-chromatin' | 'nascent-rna'
+type SubCategory = '1000-tfs' | 'h3k27ac' | 'h3k4me3' | 'h3k27me3' | 'h3k9me3' | 'h3k36me3' | 'h3k4me1' | 'h3k9ac' | 'h3k14ac' | 'h3k18ac' | 'h3k23ac' | 'h3k122ac' | 'rna-seq' | 'cage-seq' | 'net-cage' | 'starr-seq' | 'micro-c' | 'rcmc' | 'intact-hic' | 'chia-pet' | 'bru-seq' | 'tt-seq' | 'gro-seq' | 'bruuv-seq' | 'bruchase' | 'pro-seq' | 'pro-cap' | 'gro-cap'
 
-// Picture1 image data
+interface SubCategoryItem {
+  value: SubCategory
+  label: string
+}
 
-// Workflow tabs data
-const activeTab = ref(0)
+interface CategoryData {
+  name: string
+  definition: string
+  outputs: string[]
+  examples: string[]
+  legend: string[]
+}
 
-const workflowTabs = [
-  {
-    title: 'Process accessibility data',
-    videoSrc: '/videos/workflow-atac.mp4',
-    description: 'Learn how to prepare your data for analysis. This tutorial shows you how to convert raw accessibility data into the format needed for EPCOT predictions.',
-    tryLink: 'https://colab.research.google.com/github/epcot-project/epcot/blob/main/notebooks/data_preparation.ipynb'
+// Reactive state
+const selectedMainCategory = ref<MainCategory>('tf-binding')
+const selectedSubCategory = ref<SubCategory>('1000-tfs')
+const selectedCell = ref('MCF10A')
+const locus = ref('chr4:403.6‑404.1Mb')
+const overlay = ref(false)
+const compare = ref(false)
+const isFlashing = ref(false)
+const isMainMenuOpen = ref(false)
+const isCellMenuOpen = ref(false)
+
+// Data
+const cellTypes = ['MCF10A', 'K562', 'HepG2', 'GBM', '293T']
+
+// Category labels mapping
+const categoryLabels: Record<MainCategory, string> = {
+  'tf-binding': 'TF-binding',
+  'epigenomic': 'Epigenomic Features (Histones)',
+  'gene-expression': 'Gene Expression',
+  'enhancer-activity': 'Enhancer Activity',
+  '3d-chromatin': '3D Chromatin Interaction',
+  'nascent-rna': 'Nascent RNA Prediction'
+}
+
+// 二级菜单数据
+const subCategories: Record<MainCategory, SubCategoryItem[]> = {
+  'tf-binding': [
+    { value: '1000-tfs', label: '1000 TFs' }
+  ],
+  'epigenomic': [
+    { value: 'h3k27ac', label: 'H3K27ac' },
+    { value: 'h3k4me3', label: 'H3K4me3' },
+    { value: 'h3k27me3', label: 'H3K27me3' },
+    { value: 'h3k9me3', label: 'H3K9me3' },
+    { value: 'h3k36me3', label: 'H3K36me3' },
+    { value: 'h3k4me1', label: 'H3K4me1' },
+    { value: 'h3k9ac', label: 'H3K9ac' },
+    { value: 'h3k14ac', label: 'H3K14ac' },
+    { value: 'h3k18ac', label: 'H3K18ac' },
+    { value: 'h3k23ac', label: 'H3K23ac' },
+    { value: 'h3k122ac', label: 'H3K122ac' }
+  ],
+  'gene-expression': [
+    { value: 'rna-seq', label: 'RNA-seq' },
+    { value: 'cage-seq', label: 'CAGE-seq' },
+    { value: 'net-cage', label: 'NET-CAGE' }
+  ],
+  'enhancer-activity': [
+    { value: 'starr-seq', label: 'STARR-seq' }
+  ],
+  '3d-chromatin': [
+    { value: 'micro-c', label: 'Micro-C' },
+    { value: 'rcmc', label: 'RCMC' },
+    { value: 'intact-hic', label: 'Intact Hi-C' },
+    { value: 'chia-pet', label: 'ChIA-PET' }
+  ],
+  'nascent-rna': [
+    { value: 'bru-seq', label: 'Bru-seq' },
+    { value: 'tt-seq', label: 'TT-seq' },
+    { value: 'gro-seq', label: 'GRO-seq' },
+    { value: 'bruuv-seq', label: 'BruUV-seq' },
+    { value: 'bruchase', label: 'BruChase' },
+    { value: 'pro-seq', label: 'PRO-seq' },
+    { value: 'pro-cap', label: 'PRO-cap' },
+    { value: 'gro-cap', label: 'GRO-cap' }
+  ]
+}
+
+const categories: Record<SubCategory, CategoryData> = {
+  '1000-tfs': {
+    name: 'TF-binding: 1000 TFs',
+    definition: 'Predict transcription factor binding profiles across 1000+ transcription factors from ATAC-seq and DNA sequence.',
+    outputs: ['TF occupancy scores', 'Binding site predictions', 'Cell-type specific TF activity'],
+    examples: [
+      'MCF10A: predicted <strong>CHRNA9</strong> locus TF binding changes in response to TGF-β1.',
+      'K562: identified key regulatory TFs including <strong>CUX1</strong> driving cell-specific activity.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: TF binding']
   },
-  {
-    title: 'Try EPCOT',
-    videoSrc: '/videos/workflow-epcot.mp4',
-    description: 'See how to run predictions with the original EPCOT model. This video walks you through loading the model, uploading your data, and generating results.',
-    tryLink: 'https://huggingface.co/spaces/epcot-project/epcot-demo'
+  'h3k27ac': {
+    name: 'Epigenomic features: H3K27ac',
+    definition: 'Predict H3K27ac histone modification patterns associated with active enhancers and promoters.',
+    outputs: ['H3K27ac signals', 'Enhancer activity predictions', 'Promoter identification'],
+    examples: [
+      'GBM: predicted H3K27ac patterns consistent with enhancer activity.',
+      'MCF10A: captured dynamic H3K27ac modifications at <strong>CHRNA9</strong> locus.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: H3K27ac']
   },
-  {
-    title: 'Try EPCOTv2',
-    videoSrc: '/videos/workflow-epcotv2.mp4',
-    description: 'Explore the newer EPCOTv2 model with its user-friendly web interface. Learn how to upload data and select what you want to predict.',
-    tryLink: 'https://huggingface.co/spaces/luosanj/EPCOTv2'
+  'h3k4me3': {
+    name: 'Epigenomic features: H3K4me3',
+    definition: 'Predict H3K4me3 histone modification patterns associated with active promoters.',
+    outputs: ['H3K4me3 signals', 'Promoter activity predictions', 'TSS identification'],
+    examples: [
+      'K562: predicted H3K4me3 patterns at active promoters.',
+      'MCF10A: identified promoter regions with high H3K4me3 signals.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: H3K4me3']
   },
-  {
-    title: 'Visualize results',
-    videoSrc: '/videos/workflow-visualize.mp4',
-    description: 'Learn how to view and understand your prediction results. This tutorial shows you how to visualize the output data in genome browsers and other tools.',
-    tryLink: 'https://colab.research.google.com/github/epcot-project/epcot/blob/main/notebooks/visualization.ipynb'
+  'rna-seq': {
+    name: 'Gene expression: RNA-seq',
+    definition: 'Predict gene expression levels from chromatin accessibility data using RNA-seq measurements.',
+    outputs: ['RNA-seq expression levels', 'Gene activity scores', 'Transcriptional state'],
+    examples: [
+      'MCF10A: predicted transcriptional changes at <strong>CHRNA9</strong> locus match experimental RNA-seq.',
+      'Cross-cell validation: predictions consistent across multiple cell types.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: RNA-seq']
+  },
+  'cage-seq': {
+    name: 'Gene expression: CAGE-seq',
+    definition: 'Predict transcription start site activity from chromatin accessibility data using CAGE-seq.',
+    outputs: ['CAGE-seq TSS activity', 'Promoter strength', 'TSS identification'],
+    examples: [
+      'K562: predicted CAGE-seq signals at active promoters.',
+      'MCF10A: identified novel TSSs with high CAGE-seq activity.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: CAGE-seq']
+  },
+  'starr-seq': {
+    name: 'Enhancer activity: STARR-seq',
+    definition: 'Predict enhancer regulatory activity and functional validation scores using STARR-seq.',
+    outputs: ['STARR-seq activity scores', 'Enhancer strength predictions', 'Regulatory element validation'],
+    examples: [
+      'Predicted enhancer activity for thousands of regulatory elements.',
+      'Cross-validation with experimental STARR-seq measurements.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: Enhancer activity']
+  },
+  'micro-c': {
+    name: '3D chromatin interaction: Micro-C',
+    definition: 'Predict 3D chromatin organization and long-range interactions from 1D accessibility data using Micro-C.',
+    outputs: ['Micro-C contact maps', 'Chromatin loops', 'Long-range interactions'],
+    examples: [
+      'Predicted enhancer-promoter loops validated by <strong>Micro-C</strong>.',
+      'Detected chromatin contacts consistent with experimental measurements.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: Micro-C contacts']
+  },
+  'bru-seq': {
+    name: 'Nascent RNA prediction: Bru-seq',
+    definition: 'Predict nascent RNA transcription profiles and transcriptional dynamics using Bru-seq.',
+    outputs: ['Bru-seq profiles', 'Transcription rates', 'Nascent RNA levels'],
+    examples: [
+      'MCF10A: captured TGF-β1-induced transcriptional changes at <strong>CHRNA9</strong>.',
+      'GBM: predicted novel eRNAs later validated by H3K27ac HiChIP.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: Bru-seq']
+  },
+  // Add default entries for all other subcategories
+  'h3k27me3': {
+    name: 'Epigenomic features: H3K27me3',
+    definition: 'Predict H3K27me3 histone modification patterns associated with repressed regions.',
+    outputs: ['H3K27me3 signals', 'Repressed region predictions', 'Polycomb targets'],
+    examples: [
+      'K562: predicted H3K27me3 patterns at repressed regions.',
+      'MCF10A: identified polycomb target regions.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: H3K27me3']
+  },
+  'h3k9me3': {
+    name: 'Epigenomic features: H3K9me3',
+    definition: 'Predict H3K9me3 histone modification patterns associated with heterochromatin.',
+    outputs: ['H3K9me3 signals', 'Heterochromatin predictions', 'Repressed domains'],
+    examples: [
+      'K562: predicted H3K9me3 patterns at heterochromatin regions.',
+      'MCF10A: identified repressed chromatin domains.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: H3K9me3']
+  },
+  'h3k36me3': {
+    name: 'Epigenomic features: H3K36me3',
+    definition: 'Predict H3K36me3 histone modification patterns associated with transcribed regions.',
+    outputs: ['H3K36me3 signals', 'Transcription elongation predictions', 'Gene body activity'],
+    examples: [
+      'K562: predicted H3K36me3 patterns at actively transcribed genes.',
+      'MCF10A: identified gene body transcription activity.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: H3K36me3']
+  },
+  'h3k4me1': {
+    name: 'Epigenomic features: H3K4me1',
+    definition: 'Predict H3K4me1 histone modification patterns associated with enhancers.',
+    outputs: ['H3K4me1 signals', 'Enhancer predictions', 'Regulatory element identification'],
+    examples: [
+      'K562: predicted H3K4me1 patterns at enhancer regions.',
+      'MCF10A: identified active enhancer elements.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: H3K4me1']
+  },
+  'h3k9ac': {
+    name: 'Epigenomic features: H3K9ac',
+    definition: 'Predict H3K9ac histone modification patterns associated with active chromatin.',
+    outputs: ['H3K9ac signals', 'Active chromatin predictions', 'Regulatory activity'],
+    examples: [
+      'K562: predicted H3K9ac patterns at active regulatory regions.',
+      'MCF10A: identified active chromatin domains.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: H3K9ac']
+  },
+  'h3k14ac': {
+    name: 'Epigenomic features: H3K14ac',
+    definition: 'Predict H3K14ac histone modification patterns associated with active chromatin.',
+    outputs: ['H3K14ac signals', 'Active chromatin predictions', 'Regulatory activity'],
+    examples: [
+      'K562: predicted H3K14ac patterns at active regulatory regions.',
+      'MCF10A: identified active chromatin domains.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: H3K14ac']
+  },
+  'h3k18ac': {
+    name: 'Epigenomic features: H3K18ac',
+    definition: 'Predict H3K18ac histone modification patterns associated with active chromatin.',
+    outputs: ['H3K18ac signals', 'Active chromatin predictions', 'Regulatory activity'],
+    examples: [
+      'K562: predicted H3K18ac patterns at active regulatory regions.',
+      'MCF10A: identified active chromatin domains.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: H3K18ac']
+  },
+  'h3k23ac': {
+    name: 'Epigenomic features: H3K23ac',
+    definition: 'Predict H3K23ac histone modification patterns associated with active chromatin.',
+    outputs: ['H3K23ac signals', 'Active chromatin predictions', 'Regulatory activity'],
+    examples: [
+      'K562: predicted H3K23ac patterns at active regulatory regions.',
+      'MCF10A: identified active chromatin domains.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: H3K23ac']
+  },
+  'h3k122ac': {
+    name: 'Epigenomic features: H3K122ac',
+    definition: 'Predict H3K122ac histone modification patterns associated with active chromatin.',
+    outputs: ['H3K122ac signals', 'Active chromatin predictions', 'Regulatory activity'],
+    examples: [
+      'K562: predicted H3K122ac patterns at active regulatory regions.',
+      'MCF10A: identified active chromatin domains.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: H3K122ac']
+  },
+  'net-cage': {
+    name: 'Gene expression: NET-CAGE',
+    definition: 'Predict nascent transcription start site activity using NET-CAGE.',
+    outputs: ['NET-CAGE TSS activity', 'Nascent transcription predictions', 'TSS identification'],
+    examples: [
+      'K562: predicted NET-CAGE signals at active TSSs.',
+      'MCF10A: identified nascent transcription start sites.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: NET-CAGE']
+  },
+  'rcmc': {
+    name: '3D chromatin interaction: RCMC',
+    definition: 'Predict 3D chromatin organization using RCMC.',
+    outputs: ['RCMC contact maps', 'Chromatin interactions', 'Long-range contacts'],
+    examples: [
+      'Predicted chromatin interactions using RCMC data.',
+      'Detected long-range chromatin contacts.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: RCMC contacts']
+  },
+  'intact-hic': {
+    name: '3D chromatin interaction: Intact Hi-C',
+    definition: 'Predict 3D chromatin organization using intact Hi-C.',
+    outputs: ['Hi-C contact maps', 'Chromatin loops', 'TAD boundaries'],
+    examples: [
+      'Predicted chromatin loops using intact Hi-C.',
+      'Detected topologically associating domains.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: Hi-C contacts']
+  },
+  'chia-pet': {
+    name: '3D chromatin interaction: ChIA-PET',
+    definition: 'Predict protein-mediated chromatin interactions using ChIA-PET.',
+    outputs: ['ChIA-PET interactions', 'Protein-mediated loops', 'Regulatory contacts'],
+    examples: [
+      'Predicted protein-mediated chromatin interactions.',
+      'Detected regulatory element contacts.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: ChIA-PET contacts']
+  },
+  'tt-seq': {
+    name: 'Nascent RNA prediction: TT-seq',
+    definition: 'Predict nascent RNA transcription using TT-seq.',
+    outputs: ['TT-seq profiles', 'Transcription rates', 'Nascent RNA levels'],
+    examples: [
+      'MCF10A: predicted TT-seq transcription profiles.',
+      'GBM: identified nascent transcription patterns.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: TT-seq']
+  },
+  'gro-seq': {
+    name: 'Nascent RNA prediction: GRO-seq',
+    definition: 'Predict nascent RNA transcription using GRO-seq.',
+    outputs: ['GRO-seq profiles', 'Transcription rates', 'Nascent RNA levels'],
+    examples: [
+      'MCF10A: predicted GRO-seq transcription profiles.',
+      'GBM: identified nascent transcription patterns.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: GRO-seq']
+  },
+  'bruuv-seq': {
+    name: 'Nascent RNA prediction: BruUV-seq',
+    definition: 'Predict nascent RNA transcription using BruUV-seq.',
+    outputs: ['BruUV-seq profiles', 'Transcription rates', 'Nascent RNA levels'],
+    examples: [
+      'MCF10A: predicted BruUV-seq transcription profiles.',
+      'GBM: identified nascent transcription patterns.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: BruUV-seq']
+  },
+  'bruchase': {
+    name: 'Nascent RNA prediction: BruChase',
+    definition: 'Predict nascent RNA transcription using BruChase.',
+    outputs: ['BruChase profiles', 'Transcription rates', 'Nascent RNA levels'],
+    examples: [
+      'MCF10A: predicted BruChase transcription profiles.',
+      'GBM: identified nascent transcription patterns.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: BruChase']
+  },
+  'pro-seq': {
+    name: 'Nascent RNA prediction: PRO-seq',
+    definition: 'Predict nascent RNA transcription using PRO-seq.',
+    outputs: ['PRO-seq profiles', 'Transcription rates', 'Nascent RNA levels'],
+    examples: [
+      'MCF10A: predicted PRO-seq transcription profiles.',
+      'GBM: identified nascent transcription patterns.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: PRO-seq']
+  },
+  'pro-cap': {
+    name: 'Nascent RNA prediction: PRO-cap',
+    definition: 'Predict nascent RNA transcription using PRO-cap.',
+    outputs: ['PRO-cap profiles', 'Transcription rates', 'Nascent RNA levels'],
+    examples: [
+      'MCF10A: predicted PRO-cap transcription profiles.',
+      'GBM: identified nascent transcription patterns.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: PRO-cap']
+  },
+  'gro-cap': {
+    name: 'Nascent RNA prediction: GRO-cap',
+    definition: 'Predict nascent RNA transcription using GRO-cap.',
+    outputs: ['GRO-cap profiles', 'Transcription rates', 'Nascent RNA levels'],
+    examples: [
+      'MCF10A: predicted GRO-cap transcription profiles.',
+      'GBM: identified nascent transcription patterns.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: GRO-cap']
   }
-]
-
-const switchTab = (index: number) => {
-  activeTab.value = index
 }
 
-const previousTab = () => {
-  if (activeTab.value > 0) {
-    activeTab.value--
+// Computed
+const currentSubCategories = computed(() => subCategories[selectedMainCategory.value] || [])
+const currentCategory = computed(() => categories[selectedSubCategory.value] || categories['1000-tfs'])
+
+// Methods
+const toggleMainMenu = () => {
+  isMainMenuOpen.value = !isMainMenuOpen.value
+}
+
+const selectMainCategory = (mainKey: MainCategory) => {
+  selectedMainCategory.value = mainKey
+  // Auto-select first subcategory
+  if (currentSubCategories.value.length > 0) {
+    selectedSubCategory.value = currentSubCategories.value[0].value
+  }
+  flashViz()
+}
+
+const selectSubCategory = (subKey: SubCategory) => {
+  selectedSubCategory.value = subKey
+  isMainMenuOpen.value = false // Close menu after selection
+  flashViz()
+}
+
+const getMainCategoryLabel = (category: MainCategory): string => {
+  return categoryLabels[category] || category
+}
+
+const getCurrentSubCategoryLabel = (): string => {
+  const currentSub = currentSubCategories.value.find(sub => sub.value === selectedSubCategory.value)
+  return currentSub ? currentSub.label : ''
+}
+
+const getSubCategoryDescription = (subKey: SubCategory): string => {
+  const category = categories[subKey]
+  return category ? category.definition.substring(0, 60) + '...' : ''
+}
+
+// Close menu when clicking outside
+const handleClickOutside = (event: Event) => {
+  const target = event.target as HTMLElement
+  if (!target.closest('.hierarchical-menu')) {
+    isMainMenuOpen.value = false
   }
 }
 
-const nextTab = () => {
-  if (activeTab.value < workflowTabs.length - 1) {
-    activeTab.value++
+// Add event listener for outside clicks
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside)
+})
+
+const onMainCategoryChange = () => {
+  // 当主类别改变时，自动选择第一个子类别
+  if (currentSubCategories.value.length > 0) {
+    selectedSubCategory.value = currentSubCategories.value[0].value
   }
+  flashViz()
 }
 
-// Paper links
-const openPaper = (paperType: string) => {
-  const links = {
-    epcot: 'https://academic.oup.com/nar/article/51/12/5931/7177889?login=true',
-    epcotv2: 'https://www.biorxiv.org/content/10.1101/2025.05.08.652986v1.full.pdf'
-  }
-  
-  if (links[paperType]) {
-    window.open(links[paperType], '_blank')
-  }
+const onSubCategoryChange = () => {
+  flashViz()
 }
 
+const onCellChange = () => {
+  flashViz()
+}
 
+const tryNow = () => {
+  alert('This button would open the EPCOT demo interface.')
+}
+
+const toggleOverlay = () => {
+  overlay.value = !overlay.value
+  flashViz()
+}
+
+const toggleCompare = () => {
+  compare.value = !compare.value
+  flashViz()
+}
+
+const flashViz = () => {
+  isFlashing.value = true
+  setTimeout(() => {
+    isFlashing.value = false
+  }, 250)
+}
 </script>
 
 <style scoped>
+/* ===== Original base styles ===== */
 .home-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
 }
 
 /* Hero Section */
 .hero-section {
-  text-align: center;
-  padding: 3rem 0 4rem 0;
-  margin-bottom: 2rem;
-  position: relative;
+  background: transparent;
+  padding: 1rem 2rem;
+  margin: 2rem 3rem;
 }
-
-/* Animated Background */
-.animated-background {
-  position: relative;
-  width: 100%;
-  height: 300px;
-  margin: 2rem 0 4rem 0;
-  pointer-events: none;
-  overflow: hidden;
-  background: linear-gradient(135deg, rgba(59, 212, 198, 0.05) 0%, rgba(30, 64, 175, 0.05) 100%);
-  border-radius: 1rem;
-}
-
-/* Input Image */
-.input-image-container {
-  position: absolute;
-  left: 15%;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
-  width: 200px;
-  height: 130px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.input-image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  transition: transform 0.3s ease;
-}
-
-.input-image:hover {
-  transform: scale(1.05);
-}
-
-/* AI Core */
-.ai-core {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.3));
-}
-
-.ai-label {
-  font-size: 12px;
-  color: #64748b;
-  font-weight: 500;
-  text-align: center;
-  white-space: nowrap;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
-
-.ai-core::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 140px;
-  height: 140px;
-  border: 1px solid rgba(59, 212, 198, 0.2);
-  border-radius: 50%;
-  animation: outerPulse 3s ease-in-out infinite;
-}
-
-.core-pulse {
-  width: 100px;
-  height: 100px;
-  border: 3px solid rgba(59, 212, 198, 0.3);
-  border-radius: 50%;
-  animation: corePulse 2s ease-in-out infinite;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, rgba(16, 185, 129, 0.1) 70%, transparent 100%);
-  box-shadow: 
-    0 0 30px rgba(59, 130, 246, 0.4),
-    inset 0 0 20px rgba(59, 130, 246, 0.2);
-}
-
-.core-inner {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 70px;
-  height: 70px;
-  background: radial-gradient(circle, #1e40af, #3bd4c6, #8b5cf6);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 6px;
-  box-shadow: 
-    0 0 20px rgba(59, 130, 246, 0.6),
-    inset 0 0 15px rgba(255, 255, 255, 0.1);
-}
-
-.neural-node {
-  width: 12px;
-  height: 12px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6));
-  border-radius: 50%;
-  animation: nodePulse 1.5s ease-in-out infinite;
-  box-shadow: 
-    0 0 8px rgba(255, 255, 255, 0.8),
-    inset 0 0 4px rgba(255, 255, 255, 0.3);
-}
-
-/* Picture1 Container */
-.picture1-container {
-  position: absolute;
-  right: 5%;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
-  width: 250px;
-  height: 250px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.picture1-image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  transition: transform 0.3s ease;
-}
-
-.picture1-image:hover {
-  transform: scale(1.05);
-}
-
-/* Connection Lines */
-.connection-lines {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-
-/* Floating Particles */
-.animated-background::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    radial-gradient(circle at 20% 30%, rgba(59, 212, 198, 0.15) 1px, transparent 1px),
-    radial-gradient(circle at 80% 70%, rgba(30, 64, 175, 0.12) 1px, transparent 1px),
-    radial-gradient(circle at 40% 80%, rgba(16, 185, 129, 0.1) 1px, transparent 1px),
-    radial-gradient(circle at 60% 20%, rgba(245, 158, 11, 0.08) 1px, transparent 1px),
-    radial-gradient(circle at 90% 40%, rgba(139, 92, 246, 0.1) 1px, transparent 1px);
-  background-size: 100px 100px, 150px 150px, 80px 80px, 120px 120px, 90px 90px;
-  animation: particleFloat 25s linear infinite;
-}
-
-/* Data Flow Arrows */
-.animated-background::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 15%;
-  width: 70%;
-  height: 2px;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    rgba(59, 212, 198, 0.3) 15%, 
-    rgba(30, 64, 175, 0.6) 50%, 
-    rgba(59, 212, 198, 0.3) 85%, 
-    transparent 100%);
-  transform: translateY(-50%);
-  animation: dataFlow 4s ease-in-out infinite;
-}
-
-.flow-path {
-  animation: pathFlow 3s ease-in-out infinite;
-}
-
-/* Animations */
-@keyframes dnaFlow {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-
-
-@keyframes peakPulse {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
-}
-
-@keyframes corePulse {
-  0%, 100% { 
-    transform: scale(1);
-    opacity: 0.3;
-    box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
-  }
-  50% { 
-    transform: scale(1.1);
-    opacity: 0.6;
-    box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
-  }
-}
-
-@keyframes nodePulse {
-  0%, 100% { 
-    transform: scale(1);
-    opacity: 0.8;
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-  }
-  50% { 
-    transform: scale(1.2);
-    opacity: 1;
-    box-shadow: 0 0 12px rgba(255, 255, 255, 1);
-  }
-}
-
-@keyframes streamFlow {
-  0%, 100% { 
-    width: 60px;
-    opacity: 0.6;
-  }
-  50% { 
-    width: 80px;
-    opacity: 1;
-  }
-}
-
-@keyframes dataPointPulse {
-  0%, 100% { 
-    transform: scale(1);
-    opacity: 0.6;
-  }
-  50% { 
-    transform: scale(1.3);
-    opacity: 1;
-  }
-}
-
-@keyframes pathFlow {
-  0%, 100% { 
-    stroke-dasharray: 0 1000;
-    stroke-dashoffset: 0;
-  }
-  50% { 
-    stroke-dasharray: 1000 0;
-    stroke-dashoffset: -1000;
-  }
-}
-
-@keyframes particleFloat {
-  0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
-  25% { transform: translateY(-15px) translateX(8px) rotate(90deg); }
-  50% { transform: translateY(-8px) translateX(-8px) rotate(180deg); }
-  75% { transform: translateY(12px) translateX(5px) rotate(270deg); }
-  100% { transform: translateY(0px) translateX(0px) rotate(360deg); }
-}
-
-@keyframes outerPulse {
-  0%, 100% { 
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0.2;
-  }
-  50% { 
-    transform: translate(-50%, -50%) scale(1.2);
-    opacity: 0.4;
-  }
-}
-
-@keyframes dataFlow {
-  0% { 
-    transform: translateY(-50%) translateX(-100%);
-    opacity: 0;
-    filter: blur(0px);
-  }
-  50% { 
-    opacity: 1;
-    filter: blur(0.5px);
-  }
-  100% { 
-    transform: translateY(-50%) translateX(100%);
-    opacity: 0;
-    filter: blur(0px);
-  }
-}
-
-
-
-/* Enhanced animations for better visual flow */
-@keyframes baseGlow {
-  0%, 100% {
-    opacity: 0.7;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.05);
-  }
-}
-
-
-
-
 
 .hero-content {
-  max-width: 1000px;
-  margin: 0 auto;
-  position: relative;
-}
-
-.hero-title {
-  font-size: 3.5rem;
-  font-weight: 800;
-  margin-bottom: 3rem;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  white-space: nowrap;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.title-primary {
-  background: linear-gradient(135deg, #1e40af 0%, #3bd4c6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.title-secondary {
-  color: #1e293b;
-  font-weight: 600;
-}
-
-.hero-subtitle {
-  font-size: 1.1rem;
-  font-weight: 400;
-  margin-bottom: 3rem;
-  color: #475569;
-  line-height: 1.7;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-  letter-spacing: 0.01em;
-  text-align: center;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
-
-/* Stats Module */
-.stats-module {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 4rem;
-  margin-bottom: 4rem;
-  flex-wrap: wrap;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.stat-item {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.stat-number {
-  font-size: 2rem;
-  font-weight: 800;
-  color: #3bd4c6;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  line-height: 1;
-  text-align: center;
-}
-
-.stat-label {
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: #64748b;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  text-align: center;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
-
-/* Primary Action Button */
-.hero-primary-action {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 2rem 0 3rem 0;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Hero Actions */
-.hero-actions {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-  margin: 2rem 0 3rem 0;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
-  color: white;
-  padding: 1rem 2.5rem;
-  border-radius: 0.75rem;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1rem;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  transition: all 0.3s ease;
-  box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
-  border: none;
-  letter-spacing: 0.01em;
-  text-align: center;
-  min-width: 180px;
-  width: 180px;
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(6, 182, 212, 0.5);
-  background: linear-gradient(135deg, #0e7490 0%, #0891b2 100%);
-}
-
-.btn-primary:active {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
-}
-
-.btn-secondary {
-  background: white;
-  color: #475569;
-  padding: 1rem 2.5rem;
-  border-radius: 0.75rem;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1rem;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  transition: all 0.3s ease;
-  border: 2px solid #e2e8f0;
-  letter-spacing: 0.01em;
-  text-align: center;
-  min-width: 180px;
-  width: 180px;
-}
-
-.btn-secondary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-color: #06b6d4;
-  background: #f8fafc;
-  color: #06b6d4;
-}
-
-.btn-secondary:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Challenge Section */
-.challenge-section {
-  margin-bottom: 4rem;
-  padding: 1rem 0 3rem 0;
-}
-
-.challenge-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.challenge-section h2 {
-  text-align: center;
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 3rem;
-  color: #1e293b;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
-
-.challenge-grid {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 3rem;
-  align-items: stretch;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.challenge-card {
-  background: white;
-  padding: 2rem 2.5rem 0.5rem 2.5rem;
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: none;
-  position: relative;
-  overflow: hidden;
-  height: 100%;
-  min-height: 320px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.solution-card {
-  background: white;
-  padding: 2rem 2.5rem 0.5rem 2.5rem;
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: none;
-  position: relative;
-  overflow: hidden;
-  height: 100%;
-  min-height: 320px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.challenge-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #0e7490, #0891b2);
-}
-
-.solution-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #0891b2, #06b6d4);
-}
-
-.challenge-card:hover, .solution-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
-}
-
-.challenge-card h3 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  color: #1e293b;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
-
-.solution-card h3 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  color: #1e293b;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
-
-.challenge-card ul, .solution-card ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.challenge-card li {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  margin-bottom: 0.8rem;
-  line-height: 1.5;
-  color: #475569;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 0.95rem;
-}
-
-.solution-card li {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  margin-bottom: 0.8rem;
-  line-height: 1.5;
-  color: #475569;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 0.95rem;
-}
-
-.challenge-card li:last-child, .solution-card li:last-child {
-  margin-bottom: 0;
-}
-
-.challenge-icon, .solution-icon {
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  border: 2px solid;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 2px;
-}
-
-.challenge-icon {
-  border-color: #0e7490;
-  color: #0e7490;
-  background: rgba(14, 116, 144, 0.1);
-}
-
-.solution-icon {
-  border-color: #06b6d4;
-  color: #06b6d4;
-  background: rgba(6, 182, 212, 0.1);
-}
-
-.challenge-icon svg, .solution-icon svg {
-  width: 14px;
-  height: 14px;
-}
-
-.arrow-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-}
-
-.arrow {
-  width: 56px;
-  height: 56px;
-  background: linear-gradient(135deg, #0e7490, #0891b2);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  box-shadow: 0 6px 20px rgba(14, 116, 144, 0.3);
-  animation: arrowPulse 2s ease-in-out infinite;
-}
-
-.arrow svg {
-  width: 24px;
-  height: 24px;
-}
-
-@keyframes arrowPulse {
-  0%, 100% {
-    transform: scale(1);
-    box-shadow: 0 4px 12px rgba(14, 116, 144, 0.3);
-  }
-  ‌50% {
-    transform: scale(1.05);
-    box-shadow: 0 6px 16px rgba(14, 116, 144, 0.4);
-  }
-}
-
-
-
-
-
-
-
-/* Publications Section */
-.publications-section {
-  margin-bottom: 4rem;
-  margin-top: 9rem;
-  padding: 1rem 0 3rem 0;
-}
-
-.publications-section h2 {
-  text-align: center;
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 3rem;
-  color: #1e293b;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
-
-.publications-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  max-width: 1000px;
-  margin: 0 auto;
+  gap: 2.5rem;
+  align-items: start;
 }
 
-.publication-card {
-  background: white;
-  padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e2e8f0;
-  cursor: pointer;
+.hero-text {
+  text-align: left;
 }
 
-.publication-card h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: #1e293b;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
-
-.publication-card p {
-  color: #475569;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
-
-.journal {
-  display: inline-block;
-  background: #f1f5f9;
-  color: #64748b;
-  padding: 0.25rem 0.75rem;
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
-
-
-
-
-
-/* Video Section */
-.video-section {
-  margin-bottom: 4rem;
-  margin-top: 2rem;
-  padding: 1rem 0 3rem 0;
-}
-
-.video-section h2 {
-  text-align: center;
+.hero-text h1 {
   font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 3rem;
-  color: #1e293b;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: bold;
+  color: #000000;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.2;
 }
 
-.video-description {
-  text-align: center;
+.hero-text p {
   font-size: 1.1rem;
-  color: #64748b;
-  margin-bottom: 2rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  color: #374151;
   line-height: 1.6;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  margin: 0 0 2rem 0;
 }
 
-.video-container {
-  max-width: 1000px;
-  margin: 0 auto;
+.hero-text .call-to-action {
+  font-size: 1.2rem;
+  color: #374151;
+  line-height: 1.6;
+  margin: 0 0 2rem 0;
 }
 
-.video-container video {
+.hero-text .btn {
+  background: #1c84cd;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.hero-text .btn:hover {
+  background: #0891b2;
+  transform: translateY(-1px);
+}
+
+.hero-image {
+  display: flex;
+  justify-content: flex-start;
+  align-items: start;
+  height: 100%;
+  padding-top: 4.5rem;
+}
+
+.epcot-hero-image {
   width: 100%;
   height: auto;
-  border-radius: 1rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  object-fit: contain;
-}
-
-/* Workflow Subsection */
-.workflow-subsection {
-  margin-top: 0;
-  padding: 2.5rem 0;
-  border-radius: 16px;
-  margin-left: -1rem;
-  margin-right: -1rem;
-  position: relative;
-}
-
-
-
-.workflow-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-/* Tab Navigation */
-.workflow-tabs {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-}
-
-.workflow-tab {
-  padding: 0.6rem 1.2rem;
-  background: white;
-  border: 1px solid #e2e8f0;
+  max-height: 600px;
+  object-fit: cover;
   border-radius: 8px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #64748b;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  min-width: 140px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
+}
+
+/* Divider */
+.divider {
+  max-width: 1200px;
+  margin: 4px auto;
+  border-top: 1px dashed #cbd5e1;
+}
+
+/* Use Cases Section */
+.use-cases-section {
+  background: #ffffff;
+  border: 2px solid #045f9d;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin: 1.5rem auto 4rem;
+  max-width: 1200px;
+  overflow: hidden;
+}
+
+.use-cases-header {
+  background: #045f9d;
+  color: #fff;
+  padding: 1rem 2rem 0.8rem;
   text-align: center;
 }
 
-.arrow-left-outer, .arrow-right-outer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #64748b;
-  opacity: 0.6;
-  transition: all 0.3s ease;
-  width: 32px;
-  height: 32px;
-  cursor: pointer;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid #e2e8f0;
-}
-
-.arrow-left-outer:hover, .arrow-right-outer:hover {
-  opacity: 1;
-  background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transform: scale(1.05);
-}
-
-.arrow-left-outer svg, .arrow-right-outer svg {
-  width: 16px;
-  height: 16px;
-}
-
-.workflow-tab:hover {
-  border-color: #06b6d4;
-  color: #06b6d4;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2);
-}
-
-.workflow-tab.active {
-  background: linear-gradient(135deg, #0891b2, #06b6d4);
-  color: white;
-  border-color: #06b6d4;
-  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.25);
-}
-
-/* Video and Text Layout */
-.workflow-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  background: white;
-  border-radius: 16px;
-  padding: 1.5rem;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-  overflow: hidden;
-  min-height: 300px;
-}
-
-/* Left: Video Panel */
-.workflow-video-panel {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.workflow-video-panel video {
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  object-fit: cover;
-}
-
-/* Right: Text Panel */
-.workflow-text-panel {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  height: 100%;
-  position: relative;
-}
-
-.text-content {
-  padding: 1rem 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.text-content h4 {
+.use-cases-header h2 {
+  margin: 0 0 0.5rem 0;
   font-size: 1.5rem;
-  font-weight: 700;
-  color: #1e293b;
-  margin-bottom: 1.5rem;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background: linear-gradient(135deg, #0891b2, #06b6d4);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-weight: 600;
 }
 
-.text-content p {
-  font-size: 1rem;
-  line-height: 1.7;
-  color: #475569;
-  margin-bottom: 2rem;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+.use-cases-header p {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+/* Controls Section */
+.controls-section {
+  padding: 1.5rem 2rem;
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.controls-row {
+  display: flex;
+  gap: 1rem;
+  align-items: end;
+  flex-wrap: nowrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 0.6;
+}
+
+.control-group:first-child {
+  flex: 1.2;
+  min-width: 0;
+}
+
+.control-group:nth-child(2) {
+  flex: 0.5;
+  min-width: 0;
+}
+
+.control-group:nth-child(3) {
+  flex: 0.6;
+  min-width: 0;
+}
+
+.control-group label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* 二级菜单样式 */
+.dropdown-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.main-category, .sub-category {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  background: white;
+  transition: border-color 0.3s ease;
+  min-width: 0;
   flex: 1;
 }
 
-.try-it-btn {
-  display: inline-flex;
+.main-category:focus, .sub-category:focus {
+  outline: none;
+  border-color: #007acc;
+  box-shadow: 0 0 0 3px rgba(0, 122, 204, 0.1);
+}
+
+.select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.control-select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  background: white;
+  transition: border-color 0.3s ease;
+  min-width: 0;
+  flex: 1;
+  appearance: none;
+  padding-right: 2.5rem;
+}
+
+.control-select:focus {
+  outline: none;
+  border-color: #007acc;
+  box-shadow: 0 0 0 3px rgba(0, 122, 204, 0.1);
+}
+
+.select-arrow {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+  color: #6b7280;
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+
+.select-arrow.rotated {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.control-input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  background: white;
+  transition: border-color 0.3s ease;
+  min-width: 0;
+  flex: 1;
+}
+
+.control-input:focus {
+  outline: none;
+  border-color: #007acc;
+  box-shadow: 0 0 0 3px rgba(0, 122, 204, 0.1);
+}
+
+/* Hierarchical Menu Styling */
+.category-group {
+  flex: 1.4;
+  min-width: 0;
+  position: relative;
+}
+
+.hierarchical-menu {
+  position: relative;
+  width: 100%;
+}
+
+.main-category-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  background: white;
+  border: 1px solid #d1d5db;
+  border-bottom: 1px solid #d1d5db;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+  min-height: auto;
+  font-size: 0.9rem;
+}
+
+.main-category-button:hover {
+  background: white;
+  border-color: #007acc;
+  border-bottom: 1px solid #007acc;
+  transform: none;
+  box-shadow: none;
+}
+
+.main-category-button.active {
+  background: white;
+  border-color: #007acc;
+  border-bottom: 1px solid #007acc;
+  box-shadow: 0 0 0 3px rgba(0, 122, 204, 0.1);
+}
+
+.button-content {
+  display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: linear-gradient(135deg, #0891b2, #06b6d4);
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.75rem;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
-  border: none;
-  letter-spacing: 0.01em;
-  margin-top: auto;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  min-width: 140px;
-  justify-content: center;
-  align-self: flex-start;
+  flex: 1;
 }
 
-.try-it-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
-  background: linear-gradient(135deg, #0e7490, #0891b2);
+.category-text {
+  font-weight: 500;
+  color: #374151;
+  font-size: 0.9rem;
 }
 
-.try-it-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(6, 182, 212, 0.3);
+.selected-subcategory {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 400;
 }
 
-.try-it-btn svg {
-  width: 16px;
-  height: 16px;
+.expand-arrow {
+  font-size: 0.8rem;
+  color: #6b7280;
   transition: transform 0.3s ease;
+  margin-left: 0.5rem;
 }
 
-.try-it-btn:hover svg {
-  transform: translateX(2px) translateY(-2px);
+.expand-arrow.rotated {
+  transform: rotate(180deg);
 }
 
+.expanded-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  margin-top: 4px;
+}
 
+.menu-content {
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  min-height: 300px;
+}
+
+.expanded-menu.open {
+  max-height: 500px;
+}
+
+.menu-content {
+  padding: 0.75rem;
+  display: flex;
+  gap: 1rem;
+  min-height: 280px;
+}
+
+.main-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.main-category-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.main-category-item:hover {
+  border-color: #007acc;
+  box-shadow: 0 1px 4px rgba(0, 122, 204, 0.1);
+}
+
+.main-category-item.active {
+  border-color: #007acc;
+  background: #f0f9ff;
+}
+
+.main-category-header {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.main-category-header:hover {
+  background: #f8fafc;
+}
+
+.main-category-item.active .main-category-header {
+  background: #e0f2fe;
+}
+
+.category-label {
+  font-weight: 500;
+  color: #374151;
+  flex: 1;
+}
+
+.subcategory-count {
+  font-size: 0.75rem;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 0.2rem 0.4rem;
+  border-radius: 8px;
+}
+
+.sub-categories {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-left: 0.5rem;
+}
+
+.sub-category-item {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.sub-category-item:hover {
+  background: #f0f9ff;
+  border-color: #007acc;
+}
+
+.sub-category-item.active {
+  background: #e0f2fe;
+  border-color: #007acc;
+  border-left: 3px solid #007acc;
+}
+
+.sub-category-label {
+  font-weight: 500;
+  color: #374151;
+  font-size: 0.85rem;
+}
+
+.sub-category-desc {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-top: 0.2rem;
+  line-height: 1.3;
+}
+
+/* Main Content */
+.main-content {
+  padding: 2rem 2rem 0rem 0;
+}
+
+.content-layout {
+  display: grid;
+  grid-template-columns: 4fr 6fr;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Description Panel */
+.description-panel {
+  padding-left: 2rem;
+}
+
+.description-panel h3 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.definition, .outputs, .examples {
+  margin-bottom: 2rem;
+}
+
+.definition h4, .outputs h4, .examples h4 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.definition p {
+  margin: 0;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.output-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.output-tag {
+  background: #f0f9ff;
+  color: #007acc;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid #bae6fd;
+}
+
+.example-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.example-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
+  transition: all 0.3s ease;
+}
+
+.example-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.example-title {
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.example-content {
+  color: #64748b;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Visualization Panel */
+.visualization-panel h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 0.5rem;
+}
+
+.genome-viewer {
+  height: 350px;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.genome-viewer.flash {
+  border-color: #007acc;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+}
+
+.placeholder-content {
+  text-align: center;
+  color: #64748b;
+}
+
+.placeholder-icon {
+  font-size: 3rem;
+  margin-bottom: 0.75rem;
+}
+
+.placeholder-text {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.placeholder-mode {
+  font-size: 1rem;
+  color: #9ca3af;
+}
+
+.viewer-controls {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.control-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;
+  background: white;
+  color: #374151;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+  background: #f9fafb;
+  border-color: #007acc;
+}
+
+.control-btn.active {
+  background: #007acc;
+  color: white;
+  border-color: #007acc;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #007acc;
+  display: inline-block;
+}
 
 /* Responsive Design */
-@media (max-width: 768px) {
-  .animated-background {
-    height: 250px;
-    margin: 1.5rem 0 3rem 0;
+@media (max-width: 1024px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
   }
   
-  .input-image-container {
-    left: 5%;
-    transform: translateY(-50%) scale(0.6);
-    width: 160px;
-    height: 100px;
+  .hero-text h1 {
+    font-size: 2rem;
   }
   
-  .ai-core {
-    transform: translate(-50%, -50%) scale(0.6);
+  .use-cases-section {
+    margin: 2rem 4rem;
   }
   
-  .picture1-container {
-    right: 3%;
-    transform: translateY(-50%) scale(0.6);
-    width: 150px;
-    height: 150px;
+  .content-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
   
-  .ai-label {
-    font-size: 9px;
-}
-  
-  .hero-title {
-    font-size: 2.5rem;
-    white-space: normal;
+  .controls-row {
     flex-direction: column;
-  }
-  
-  .hero-subtitle {
-    font-size: 1rem;
-  }
-  
-  .stats-module {
-    gap: 1.5rem;
-  }
-  
-  .stat-number {
-    font-size: 1.8rem;
-  }
-  
-  .hero-actions {
-    flex-direction: column;
-    align-items: center;
     gap: 1rem;
   }
   
-  .btn-primary,
-  .btn-secondary {
+  .control-group {
+    min-width: auto;
     width: 100%;
-    max-width: 300px;
-    text-align: center;
   }
-  
-  .video-description {
-    font-size: 1rem;
-    padding: 0 1rem;
-  }
-  
-  .challenge-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  
-  .arrow-container {
-    order: -1;
-    margin: 1rem 0;
-  }
-  
-  .arrow {
-    transform: rotate(90deg);
-  }
-  
-  .challenge-card, .solution-card {
-    padding: 2rem;
-  }
-  
-  .challenge-card li, .solution-card li {
-    gap: 0.75rem;
-  }
-  
-  .challenge-icon, .solution-icon {
-    width: 20px;
-    height: 20px;
-  }
-  
-  .challenge-icon svg, .solution-icon svg {
-    width: 12px;
-    height: 12px;
-  }
-  
-  .publications-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
+}
 
-  
-  .workflow-subsection {
-    margin-left: -0.5rem;
-    margin-right: -0.5rem;
-    padding: 2rem 0;
+@media (max-width: 768px) {
+  .hero-section {
+    margin: 1rem 1rem;
+    padding: 3rem 1.5rem;
   }
   
-  .workflow-tabs {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
+  .hero-text h1 {
+    font-size: 1.8rem;
   }
   
-  .workflow-tab {
-    min-width: 200px;
-    padding: 0.6rem 1rem;
+  .hero-text p {
+    font-size: 1.1rem;
+  }
+  
+  .use-cases-section {
+    margin: 1rem 2rem;
+  }
+  
+  .use-cases-header {
+    padding: 1rem;
+  }
+  
+  .controls-section {
+    padding: 1rem;
+  }
+  
+  .main-content {
+    padding: 1rem;
+  }
+  
+  .genome-viewer {
+    height: 250px;
+  }
+  
+  .placeholder-icon {
+    font-size: 2.5rem;
+  }
+  
+  .placeholder-text {
+    font-size: 1rem;
+  }
+  
+  .placeholder-mode {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    margin: 0.5rem 0.5rem;
+    padding: 2rem 1rem;
+  }
+  
+  .hero-text h1 {
+    font-size: 1.5rem;
+  }
+  
+  .hero-text p {
+    font-size: 1rem;
+  }
+  
+  .use-cases-section {
+    margin: 0.5rem 1rem;
+  }
+  
+  .genome-viewer {
+    height: 200px;
+  }
+  
+  .placeholder-icon {
+    font-size: 2rem;
+  }
+  
+  .placeholder-text {
+    font-size: 0.9rem;
+  }
+  
+  .placeholder-mode {
     font-size: 0.8rem;
-  }
-  
-  .arrow-left-outer, .arrow-right-outer {
-    width: 28px;
-    height: 28px;
-  }
-  
-  .arrow-left-outer svg, .arrow-right-outer svg {
-    width: 14px;
-    height: 14px;
-  }
-  
-  .workflow-content {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    padding: 1.5rem;
-  }
-  
-  .workflow-text-panel {
-    order: -1;
-  }
-  
-  .text-content h4 {
-    font-size: 1.3rem;
-  }
-  
-  .text-content p {
-    font-size: 1rem;
-  }
-  
-
-  
-  .home-container {
-    padding: 0 0.5rem;
   }
 }
 </style>

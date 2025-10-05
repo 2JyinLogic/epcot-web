@@ -36,14 +36,13 @@ const isDocsPage = computed(() => route.path === '/docs')
   flex: 1;
   padding: 0;
   background-color: transparent;
-  min-height: calc(100vh - 64px - 180px);
 }
 
 .main-content.docs-page {
   padding: 0;
   background-color: transparent;
   margin: 0;
-  min-height: calc(100vh - 64px - 180px);
+  flex: 1;
   position: relative;
 }
 </style>
