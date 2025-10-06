@@ -8,6 +8,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    ChartViewer: typeof import('./src/components/ChartViewer.vue')['default']
     CodeBlock: typeof import('./src/components/CodeBlock.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
@@ -19,6 +20,7 @@ declare module 'vue' {
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
     Footer: typeof import('./src/components/Footer.vue')['default']
+    GenomeChart: typeof import('./src/components/GenomeChart.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     ModelCharts: typeof import('./src/components/ModelCharts.vue')['default']
     Navbar: typeof import('./src/components/Navbar.vue')['default']
