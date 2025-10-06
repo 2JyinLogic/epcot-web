@@ -806,7 +806,7 @@ const getBreadcrumbTitle = () => {
 .nav-link:hover {
   background: #f3f4f6;
   color: #16191f;
-  border-left-color: #0d9488;
+  border-left-color: #236ec8;
   font-weight: 500;
 }
 

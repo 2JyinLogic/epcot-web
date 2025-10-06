@@ -38,14 +38,15 @@
               <!-- Main Category Button -->
               <div class="main-category-button" @click="toggleMainMenu" :class="{ active: isMainMenuOpen }">
                 <div class="button-content">
-                  <span class="category-text">{{ getMainCategoryLabel(selectedMainCategory) }}</span>
-                  <span class="selected-subcategory">{{ getCurrentSubCategoryLabel() }}</span>
+                  <span class="category-text">
+                    {{ getMainCategoryLabel(selectedMainCategory) }}: {{ getCurrentSubCategoryLabel() }}
+                  </span>
                 </div>
                 <div class="expand-arrow" :class="{ rotated: isMainMenuOpen }">▼</div>
               </div>
               
               <!-- Expanded Menu -->
-              <div class="expanded-menu" :class="{ open: isMainMenuOpen }">
+              <div class="expanded-menu" v-if="isMainMenuOpen" :class="{ open: isMainMenuOpen }">
                 <div class="menu-content">
                   <!-- Main Categories (Left Side) -->
                   <div class="main-categories">
@@ -82,22 +83,15 @@
           
           <div class="control-group">
             <label>Locus:</label>
-            <input v-model="locus" type="text" class="control-input" placeholder="e.g., chr4:403.6‑404.1Mb" />
+            <div class="fixed-display">
+              <span class="fixed-value">{{ currentLocus }}</span>
+            </div>
           </div>
           
           <div class="control-group">
             <label>Cell type:</label>
-            <div class="select-wrapper">
-              <select 
-                v-model="selectedCell" 
-                @change="onCellChange" 
-                @focus="isCellMenuOpen = true"
-                @blur="isCellMenuOpen = false"
-                class="control-select"
-              >
-                <option v-for="cell in cellTypes" :key="cell" :value="cell">{{ cell }}</option>
-              </select>
-              <div class="select-arrow" :class="{ rotated: isCellMenuOpen }">▼</div>
+            <div class="fixed-display">
+              <span class="fixed-value">{{ currentCellType }}</span>
             </div>
           </div>
         </div>
@@ -136,37 +130,15 @@
 
           <!-- Right Panel: Visualization -->
           <div class="visualization-panel">
-            <h3>Visualization · {{ currentCategory.name }} · {{ selectedCell }}</h3>
-            <div class="genome-viewer" :class="{ flash: isFlashing }">
-              <div class="viewer-placeholder">
-                <div class="placeholder-content">
-                  <!-- <div class="placeholder-icon">🧬</div> -->
-                  <div class="placeholder-text">Genome Viewer</div>
-                  <div class="placeholder-mode">{{ currentCategory.name }}</div>
-                </div>
-              </div>
-            </div>
-            <div class="viewer-controls">
-              <button 
-                class="control-btn" 
-                @click="toggleOverlay" 
-                :class="{ active: overlay }"
-              >
-                Overlay Inputs
-              </button>
-              <button 
-                class="control-btn" 
-                @click="toggleCompare" 
-                :class="{ active: compare }"
-              >
-                Prediction vs Experiment
-              </button>
-            </div>
-            <div class="legend">
-              <span v-for="item in currentCategory.legend" :key="item" class="legend-item">
-                <i class="legend-dot"></i>{{ item }}
-              </span>
-            </div>
+            <h3>Visualization · {{ currentCategory.name }}</h3>
+            <GenomeChart 
+              :category="selectedMainCategory"
+              :sub-category="selectedSubCategory"
+              :cell-type="currentCellType"
+              :is-flashing="isFlashing"
+              @overlay-toggle="onOverlayToggle"
+              @compare-toggle="onCompareToggle"
+            />
           </div>
         </div>
       </div>
@@ -176,10 +148,11 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import GenomeChart from '@/components/GenomeChart.vue'
 
 // Type definitions
-type MainCategory = 'tf-binding' | 'epigenomic' | 'gene-expression' | 'enhancer-activity' | '3d-chromatin' | 'nascent-rna'
-type SubCategory = '1000-tfs' | 'h3k27ac' | 'h3k4me3' | 'h3k27me3' | 'h3k9me3' | 'h3k36me3' | 'h3k4me1' | 'h3k9ac' | 'h3k14ac' | 'h3k18ac' | 'h3k23ac' | 'h3k122ac' | 'rna-seq' | 'cage-seq' | 'net-cage' | 'starr-seq' | 'micro-c' | 'rcmc' | 'intact-hic' | 'chia-pet' | 'bru-seq' | 'tt-seq' | 'gro-seq' | 'bruuv-seq' | 'bruchase' | 'pro-seq' | 'pro-cap' | 'gro-cap'
+type MainCategory = 'tf-binding' | 'epigenomic' | 'gene-expression' | 'enhancer-activity' | '3d-chromatin' | 'nascent-rna' | 'rna-strand'
+type SubCategory = '1000-tfs' | 'h3k27ac' | 'rna-seq' | 'starr-seq' | 'micro-c' | 'hic' | 'intact-hic' | 'bru-seq' | 'tt-seq' | 'gro-seq' | 'gro-cap' | 'pro-seq' | 'net-cage' | 'rna-strand-forward' | 'rna-strand-reverse'
 
 interface SubCategoryItem {
   value: SubCategory
@@ -197,16 +170,29 @@ interface CategoryData {
 // Reactive state
 const selectedMainCategory = ref<MainCategory>('tf-binding')
 const selectedSubCategory = ref<SubCategory>('1000-tfs')
-const selectedCell = ref('MCF10A')
-const locus = ref('chr4:403.6‑404.1Mb')
 const overlay = ref(false)
 const compare = ref(false)
 const isFlashing = ref(false)
 const isMainMenuOpen = ref(false)
-const isCellMenuOpen = ref(false)
 
-// Data
-const cellTypes = ['MCF10A', 'K562', 'HepG2', 'GBM', '293T']
+// Data - Based on runbook examples
+const runbookExamples: Record<SubCategory, { locus: string, cellType: string }> = {
+  '1000-tfs': { locus: 'chr6:191752-691752', cellType: 'MCF10A' }, // Additional TFs example - CBX2
+  'h3k27ac': { locus: 'chr8:116638207-117138207', cellType: 'MCF10A' }, // Epigenomic features - CTCF around AARD
+  'rna-seq': { locus: 'chr3:15000000-15500000', cellType: 'MCF10A' }, // RNA example - Total RNA around CAPN7
+  'starr-seq': { locus: 'chr16:28731965-29231965', cellType: 'MCF10A' }, // STARR-seq around CD19
+  'micro-c': { locus: 'chr9:36834268-37334268', cellType: 'MCF10A' }, // Micro-C around PAX5
+  'hic': { locus: 'chr8:127535434-128035434', cellType: 'MCF10A' }, // HiC around MYC
+  'intact-hic': { locus: 'chr2:135914349-136414349', cellType: 'MCF10A' }, // Intact Hi-C around CXCR4
+  'bru-seq': { locus: 'chr14:106428615-106928615', cellType: 'MCF10A' }, // Bru-seq around IGH
+  'tt-seq': { locus: 'chr3:187521377-188021377', cellType: 'MCF10A' }, // TT-seq around BCL6
+  'gro-seq': { locus: 'chr3:8302155-8802155', cellType: 'MCF10A' }, // GRO-seq around AID
+  'gro-cap': { locus: 'chr3:8302155-8802155', cellType: 'MCF10A' }, // GRO-cap around AID
+  'pro-seq': { locus: 'chr2:135914349-136414349', cellType: 'MCF10A' }, // Pro-seq around CXCR4
+  'net-cage': { locus: 'chr19:41677279-42177279', cellType: 'MCF10A' }, // NET-CAGE around CD79A
+  'rna-strand-forward': { locus: 'chr3:187521377-188021377', cellType: 'MCF10A' }, // RNA Strand around BCL6
+  'rna-strand-reverse': { locus: 'chr3:187521377-188021377', cellType: 'MCF10A' } // RNA Strand around BCL6
+}
 
 // Category labels mapping
 const categoryLabels: Record<MainCategory, string> = {
@@ -215,340 +201,201 @@ const categoryLabels: Record<MainCategory, string> = {
   'gene-expression': 'Gene Expression',
   'enhancer-activity': 'Enhancer Activity',
   '3d-chromatin': '3D Chromatin Interaction',
-  'nascent-rna': 'Nascent RNA Prediction'
+  'nascent-rna': 'Nascent RNA Prediction',
+  'rna-strand': 'RNA Strand-specific'
 }
 
-// 二级菜单数据
+// 二级菜单数据 - 基于runbook的14个主要模态
 const subCategories: Record<MainCategory, SubCategoryItem[]> = {
   'tf-binding': [
-    { value: '1000-tfs', label: '1000 TFs' }
+    { value: '1000-tfs', label: 'CBX2' }
   ],
   'epigenomic': [
-    { value: 'h3k27ac', label: 'H3K27ac' },
-    { value: 'h3k4me3', label: 'H3K4me3' },
-    { value: 'h3k27me3', label: 'H3K27me3' },
-    { value: 'h3k9me3', label: 'H3K9me3' },
-    { value: 'h3k36me3', label: 'H3K36me3' },
-    { value: 'h3k4me1', label: 'H3K4me1' },
-    { value: 'h3k9ac', label: 'H3K9ac' },
-    { value: 'h3k14ac', label: 'H3K14ac' },
-    { value: 'h3k18ac', label: 'H3K18ac' },
-    { value: 'h3k23ac', label: 'H3K23ac' },
-    { value: 'h3k122ac', label: 'H3K122ac' }
+    { value: 'h3k27ac', label: 'H3K27ac' }
   ],
   'gene-expression': [
-    { value: 'rna-seq', label: 'RNA-seq' },
-    { value: 'cage-seq', label: 'CAGE-seq' },
-    { value: 'net-cage', label: 'NET-CAGE' }
+    { value: 'rna-seq', label: 'RNA-seq' }
   ],
   'enhancer-activity': [
     { value: 'starr-seq', label: 'STARR-seq' }
   ],
   '3d-chromatin': [
     { value: 'micro-c', label: 'Micro-C' },
-    { value: 'rcmc', label: 'RCMC' },
-    { value: 'intact-hic', label: 'Intact Hi-C' },
-    { value: 'chia-pet', label: 'ChIA-PET' }
+    { value: 'hic', label: 'Hi-C' },
+    { value: 'intact-hic', label: 'Intact Hi-C' }
   ],
   'nascent-rna': [
     { value: 'bru-seq', label: 'Bru-seq' },
     { value: 'tt-seq', label: 'TT-seq' },
     { value: 'gro-seq', label: 'GRO-seq' },
-    { value: 'bruuv-seq', label: 'BruUV-seq' },
-    { value: 'bruchase', label: 'BruChase' },
+    { value: 'gro-cap', label: 'GRO-cap' },
     { value: 'pro-seq', label: 'PRO-seq' },
-    { value: 'pro-cap', label: 'PRO-cap' },
-    { value: 'gro-cap', label: 'GRO-cap' }
+    { value: 'net-cage', label: 'NET-CAGE' }
+  ],
+  'rna-strand': [
+    { value: 'rna-strand-forward', label: 'RNA Forward Strand' },
+    { value: 'rna-strand-reverse', label: 'RNA Reverse Strand' }
   ]
 }
 
 const categories: Record<SubCategory, CategoryData> = {
   '1000-tfs': {
-    name: 'TF-binding: 1000 TFs',
-    definition: 'Predict transcription factor binding profiles across 1000+ transcription factors from ATAC-seq and DNA sequence.',
-    outputs: ['TF occupancy scores', 'Binding site predictions', 'Cell-type specific TF activity'],
+    name: 'TF-binding: CBX2',
+    definition: 'Predict binding profiles for 708 additional transcription factors from ATAC-seq and DNA sequence. This comprehensive prediction covers a wide range of TFs including transcriptional regulators, chromatin remodelers, and developmental factors.',
+    outputs: ['TF binding scores', 'Transcription factor occupancy', 'Cell-type specific TF activity'],
     examples: [
-      'MCF10A: predicted <strong>CHRNA9</strong> locus TF binding changes in response to TGF-β1.',
-      'K562: identified key regulatory TFs including <strong>CUX1</strong> driving cell-specific activity.'
+      'MCF10A: predicted <strong>CBX2</strong> binding at chr6:191752-691752 (around IRF4 gene). CBX2 shows strong binding signal in this regulatory region.',
+      'K562: identified <strong>GATA1</strong> binding sites across erythroid-specific enhancers with high confidence scores.'
     ],
     legend: ['Input: ATAC', 'Input: DNA', 'Prediction: TF binding']
   },
   'h3k27ac': {
-    name: 'Epigenomic features: H3K27ac',
-    definition: 'Predict H3K27ac histone modification patterns associated with active enhancers and promoters.',
-    outputs: ['H3K27ac signals', 'Enhancer activity predictions', 'Promoter identification'],
+    name: 'Epigenomic Features: H3K27ac',
+    definition: 'Predict 247 epigenomic features including histone modifications from ATAC-seq and DNA sequence. This includes active enhancers (H3K27ac), active promoters (H3K4me3), and repressive marks (H3K27me3, H3K9me3).',
+    outputs: ['Histone modification signals', 'Epigenomic feature predictions', 'Regulatory element identification'],
     examples: [
-      'GBM: predicted H3K27ac patterns consistent with enhancer activity.',
-      'MCF10A: captured dynamic H3K27ac modifications at <strong>CHRNA9</strong> locus.'
+      'MCF10A: predicted <strong>H3K27ac</strong> signal at chr8:116638207-117138207 (around AARD gene). Strong active enhancer signal detected.',
+      'K562: identified <strong>H3K4me3</strong> peaks at erythroid gene promoters with high confidence.'
     ],
-    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: H3K27ac']
-  },
-  'h3k4me3': {
-    name: 'Epigenomic features: H3K4me3',
-    definition: 'Predict H3K4me3 histone modification patterns associated with active promoters.',
-    outputs: ['H3K4me3 signals', 'Promoter activity predictions', 'TSS identification'],
-    examples: [
-      'K562: predicted H3K4me3 patterns at active promoters.',
-      'MCF10A: identified promoter regions with high H3K4me3 signals.'
-    ],
-    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: H3K4me3']
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: Epigenomic features']
   },
   'rna-seq': {
-    name: 'Gene expression: RNA-seq',
-    definition: 'Predict gene expression levels from chromatin accessibility data using RNA-seq measurements.',
+    name: 'Gene Expression: RNA-seq',
+    definition: 'Predict RNA-seq expression including CAGE-seq, Total RNA-seq, and PolyA+ RNA-seq. This captures both steady-state mRNA levels and nascent transcription activity.',
     outputs: ['RNA-seq expression levels', 'Gene activity scores', 'Transcriptional state'],
     examples: [
-      'MCF10A: predicted transcriptional changes at <strong>CHRNA9</strong> locus match experimental RNA-seq.',
-      'Cross-cell validation: predictions consistent across multiple cell types.'
+      'MCF10A: predicted Total RNA expression at chr3:15000000-15500000 (around CAPN7 gene). High expression signal detected in epithelial cells.',
+      'K562: identified upregulated genes in erythroid differentiation pathway with strong RNA-seq signals.'
     ],
     legend: ['Input: ATAC', 'Input: DNA', 'Prediction: RNA-seq']
   },
-  'cage-seq': {
-    name: 'Gene expression: CAGE-seq',
-    definition: 'Predict transcription start site activity from chromatin accessibility data using CAGE-seq.',
-    outputs: ['CAGE-seq TSS activity', 'Promoter strength', 'TSS identification'],
-    examples: [
-      'K562: predicted CAGE-seq signals at active promoters.',
-      'MCF10A: identified novel TSSs with high CAGE-seq activity.'
-    ],
-    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: CAGE-seq']
-  },
   'starr-seq': {
-    name: 'Enhancer activity: STARR-seq',
+    name: 'Enhancer Activity: STARR-seq',
     definition: 'Predict enhancer regulatory activity and functional validation scores using STARR-seq.',
     outputs: ['STARR-seq activity scores', 'Enhancer strength predictions', 'Regulatory element validation'],
     examples: [
-      'Predicted enhancer activity for thousands of regulatory elements.',
-      'Cross-validation with experimental STARR-seq measurements.'
+      'MCF10A: predicted enhancer activity at chr16:28731965-29231965 (around CD19).',
+      'Example from runbook: STARR-seq prediction for enhancer activity.'
     ],
     legend: ['Input: ATAC', 'Input: DNA', 'Prediction: Enhancer activity']
   },
   'micro-c': {
-    name: '3D chromatin interaction: Micro-C',
-    definition: 'Predict 3D chromatin organization and long-range interactions from 1D accessibility data using Micro-C.',
+    name: '3D Chromatin: Micro-C',
+    definition: 'Predict Micro-C contact maps including O/E normalized and KR normalized interactions.',
     outputs: ['Micro-C contact maps', 'Chromatin loops', 'Long-range interactions'],
     examples: [
-      'Predicted enhancer-promoter loops validated by <strong>Micro-C</strong>.',
-      'Detected chromatin contacts consistent with experimental measurements.'
+      'MCF10A: predicted O/E normalized Micro-C at chr9:36834268-37334268 (around PAX5).',
+      'Example from runbook: Micro-C prediction with O/E normalization at index 0.'
     ],
     legend: ['Input: ATAC', 'Input: DNA', 'Prediction: Micro-C contacts']
   },
-  'bru-seq': {
-    name: 'Nascent RNA prediction: Bru-seq',
-    definition: 'Predict nascent RNA transcription profiles and transcriptional dynamics using Bru-seq.',
-    outputs: ['Bru-seq profiles', 'Transcription rates', 'Nascent RNA levels'],
+  'hic': {
+    name: '3D Chromatin: Hi-C',
+    definition: 'Predict Hi-C interactions including CTCF ChIA-PET, RNApol2 ChIA-PET, and Hi-C.',
+    outputs: ['Hi-C contact maps', 'ChIA-PET interactions', '3D structure predictions'],
     examples: [
-      'MCF10A: captured TGF-β1-induced transcriptional changes at <strong>CHRNA9</strong>.',
-      'GBM: predicted novel eRNAs later validated by H3K27ac HiChIP.'
-    ],
-    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: Bru-seq']
-  },
-  // Add default entries for all other subcategories
-  'h3k27me3': {
-    name: 'Epigenomic features: H3K27me3',
-    definition: 'Predict H3K27me3 histone modification patterns associated with repressed regions.',
-    outputs: ['H3K27me3 signals', 'Repressed region predictions', 'Polycomb targets'],
-    examples: [
-      'K562: predicted H3K27me3 patterns at repressed regions.',
-      'MCF10A: identified polycomb target regions.'
-    ],
-    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: H3K27me3']
-  },
-  'h3k9me3': {
-    name: 'Epigenomic features: H3K9me3',
-    definition: 'Predict H3K9me3 histone modification patterns associated with heterochromatin.',
-    outputs: ['H3K9me3 signals', 'Heterochromatin predictions', 'Repressed domains'],
-    examples: [
-      'K562: predicted H3K9me3 patterns at heterochromatin regions.',
-      'MCF10A: identified repressed chromatin domains.'
-    ],
-    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: H3K9me3']
-  },
-  'h3k36me3': {
-    name: 'Epigenomic features: H3K36me3',
-    definition: 'Predict H3K36me3 histone modification patterns associated with transcribed regions.',
-    outputs: ['H3K36me3 signals', 'Transcription elongation predictions', 'Gene body activity'],
-    examples: [
-      'K562: predicted H3K36me3 patterns at actively transcribed genes.',
-      'MCF10A: identified gene body transcription activity.'
-    ],
-    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: H3K36me3']
-  },
-  'h3k4me1': {
-    name: 'Epigenomic features: H3K4me1',
-    definition: 'Predict H3K4me1 histone modification patterns associated with enhancers.',
-    outputs: ['H3K4me1 signals', 'Enhancer predictions', 'Regulatory element identification'],
-    examples: [
-      'K562: predicted H3K4me1 patterns at enhancer regions.',
-      'MCF10A: identified active enhancer elements.'
-    ],
-    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: H3K4me1']
-  },
-  'h3k9ac': {
-    name: 'Epigenomic features: H3K9ac',
-    definition: 'Predict H3K9ac histone modification patterns associated with active chromatin.',
-    outputs: ['H3K9ac signals', 'Active chromatin predictions', 'Regulatory activity'],
-    examples: [
-      'K562: predicted H3K9ac patterns at active regulatory regions.',
-      'MCF10A: identified active chromatin domains.'
-    ],
-    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: H3K9ac']
-  },
-  'h3k14ac': {
-    name: 'Epigenomic features: H3K14ac',
-    definition: 'Predict H3K14ac histone modification patterns associated with active chromatin.',
-    outputs: ['H3K14ac signals', 'Active chromatin predictions', 'Regulatory activity'],
-    examples: [
-      'K562: predicted H3K14ac patterns at active regulatory regions.',
-      'MCF10A: identified active chromatin domains.'
-    ],
-    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: H3K14ac']
-  },
-  'h3k18ac': {
-    name: 'Epigenomic features: H3K18ac',
-    definition: 'Predict H3K18ac histone modification patterns associated with active chromatin.',
-    outputs: ['H3K18ac signals', 'Active chromatin predictions', 'Regulatory activity'],
-    examples: [
-      'K562: predicted H3K18ac patterns at active regulatory regions.',
-      'MCF10A: identified active chromatin domains.'
-    ],
-    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: H3K18ac']
-  },
-  'h3k23ac': {
-    name: 'Epigenomic features: H3K23ac',
-    definition: 'Predict H3K23ac histone modification patterns associated with active chromatin.',
-    outputs: ['H3K23ac signals', 'Active chromatin predictions', 'Regulatory activity'],
-    examples: [
-      'K562: predicted H3K23ac patterns at active regulatory regions.',
-      'MCF10A: identified active chromatin domains.'
-    ],
-    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: H3K23ac']
-  },
-  'h3k122ac': {
-    name: 'Epigenomic features: H3K122ac',
-    definition: 'Predict H3K122ac histone modification patterns associated with active chromatin.',
-    outputs: ['H3K122ac signals', 'Active chromatin predictions', 'Regulatory activity'],
-    examples: [
-      'K562: predicted H3K122ac patterns at active regulatory regions.',
-      'MCF10A: identified active chromatin domains.'
-    ],
-    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: H3K122ac']
-  },
-  'net-cage': {
-    name: 'Gene expression: NET-CAGE',
-    definition: 'Predict nascent transcription start site activity using NET-CAGE.',
-    outputs: ['NET-CAGE TSS activity', 'Nascent transcription predictions', 'TSS identification'],
-    examples: [
-      'K562: predicted NET-CAGE signals at active TSSs.',
-      'MCF10A: identified nascent transcription start sites.'
-    ],
-    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: NET-CAGE']
-  },
-  'rcmc': {
-    name: '3D chromatin interaction: RCMC',
-    definition: 'Predict 3D chromatin organization using RCMC.',
-    outputs: ['RCMC contact maps', 'Chromatin interactions', 'Long-range contacts'],
-    examples: [
-      'Predicted chromatin interactions using RCMC data.',
-      'Detected long-range chromatin contacts.'
-    ],
-    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: RCMC contacts']
-  },
-  'intact-hic': {
-    name: '3D chromatin interaction: Intact Hi-C',
-    definition: 'Predict 3D chromatin organization using intact Hi-C.',
-    outputs: ['Hi-C contact maps', 'Chromatin loops', 'TAD boundaries'],
-    examples: [
-      'Predicted chromatin loops using intact Hi-C.',
-      'Detected topologically associating domains.'
+      'MCF10A: predicted Hi-C interactions at chr8:127535434-128035434 (around MYC).',
+      'Example from runbook: Hi-C prediction with Hi-C at index 2.'
     ],
     legend: ['Input: ATAC', 'Input: DNA', 'Prediction: Hi-C contacts']
   },
-  'chia-pet': {
-    name: '3D chromatin interaction: ChIA-PET',
-    definition: 'Predict protein-mediated chromatin interactions using ChIA-PET.',
-    outputs: ['ChIA-PET interactions', 'Protein-mediated loops', 'Regulatory contacts'],
+  'intact-hic': {
+    name: '3D Chromatin: Intact Hi-C',
+    definition: 'Predict Intact Hi-C contact maps including O/E normalized and KR normalized interactions.',
+    outputs: ['Intact Hi-C contact maps', 'Chromatin loops', 'Long-range interactions'],
     examples: [
-      'Predicted protein-mediated chromatin interactions.',
-      'Detected regulatory element contacts.'
+      'MCF10A: predicted O/E normalized Intact Hi-C at chr2:135914349-136414349 (around CXCR4).',
+      'Example from runbook: Intact Hi-C prediction with O/E normalization at index 0.'
     ],
-    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: ChIA-PET contacts']
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: Intact Hi-C contacts']
+  },
+  'bru-seq': {
+    name: 'Nascent RNA: Bru-seq',
+    definition: 'Predict Bru-seq profiles including Bru-seq, BruUV-seq, and BruChase-seq.',
+    outputs: ['Bru-seq profiles', 'Transcription rates', 'Nascent RNA levels'],
+    examples: [
+      'MCF10A: predicted Bru-seq at chr14:106428615-106928615 (around IGH).',
+      'Example from runbook: Bru-seq prediction with Bru-seq at index 0.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: Bru-seq']
   },
   'tt-seq': {
-    name: 'Nascent RNA prediction: TT-seq',
-    definition: 'Predict nascent RNA transcription using TT-seq.',
+    name: 'Nascent RNA: TT-seq',
+    definition: 'Predict TT-seq profiles including forward and reverse strand transcription.',
     outputs: ['TT-seq profiles', 'Transcription rates', 'Nascent RNA levels'],
     examples: [
-      'MCF10A: predicted TT-seq transcription profiles.',
-      'GBM: identified nascent transcription patterns.'
+      'MCF10A: predicted TT-seq at chr3:187521377-188021377 (around BCL6).',
+      'Example from runbook: TT-seq prediction with forward and reverse strands.'
     ],
     legend: ['Input: ATAC', 'Input: DNA', 'Prediction: TT-seq']
   },
   'gro-seq': {
-    name: 'Nascent RNA prediction: GRO-seq',
-    definition: 'Predict nascent RNA transcription using GRO-seq.',
+    name: 'Nascent RNA: GRO-seq',
+    definition: 'Predict GRO-seq profiles including forward and reverse strand transcription.',
     outputs: ['GRO-seq profiles', 'Transcription rates', 'Nascent RNA levels'],
     examples: [
-      'MCF10A: predicted GRO-seq transcription profiles.',
-      'GBM: identified nascent transcription patterns.'
+      'MCF10A: predicted GRO-seq at chr3:8302155-8802155 (around AID).',
+      'Example from runbook: GRO-seq prediction with forward and reverse strands.'
     ],
     legend: ['Input: ATAC', 'Input: DNA', 'Prediction: GRO-seq']
   },
-  'bruuv-seq': {
-    name: 'Nascent RNA prediction: BruUV-seq',
-    definition: 'Predict nascent RNA transcription using BruUV-seq.',
-    outputs: ['BruUV-seq profiles', 'Transcription rates', 'Nascent RNA levels'],
+  'gro-cap': {
+    name: 'Nascent RNA: GRO-cap',
+    definition: 'Predict GRO-cap profiles including forward, reverse, and GRO-cap_wTAP variants.',
+    outputs: ['GRO-cap profiles', 'Transcription rates', 'Nascent RNA levels'],
     examples: [
-      'MCF10A: predicted BruUV-seq transcription profiles.',
-      'GBM: identified nascent transcription patterns.'
+      'MCF10A: predicted GRO-cap at chr3:8302155-8802155 (around AID).',
+      'Example from runbook: GRO-cap prediction with forward and reverse strands.'
     ],
-    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: BruUV-seq']
-  },
-  'bruchase': {
-    name: 'Nascent RNA prediction: BruChase',
-    definition: 'Predict nascent RNA transcription using BruChase.',
-    outputs: ['BruChase profiles', 'Transcription rates', 'Nascent RNA levels'],
-    examples: [
-      'MCF10A: predicted BruChase transcription profiles.',
-      'GBM: identified nascent transcription patterns.'
-    ],
-    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: BruChase']
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: GRO-cap']
   },
   'pro-seq': {
-    name: 'Nascent RNA prediction: PRO-seq',
-    definition: 'Predict nascent RNA transcription using PRO-seq.',
+    name: 'Nascent RNA: PRO-seq',
+    definition: 'Predict PRO-seq profiles including forward, reverse, and PRO-cap variants.',
     outputs: ['PRO-seq profiles', 'Transcription rates', 'Nascent RNA levels'],
     examples: [
-      'MCF10A: predicted PRO-seq transcription profiles.',
-      'GBM: identified nascent transcription patterns.'
+      'MCF10A: predicted PRO-seq at chr2:135914349-136414349 (around CXCR4).',
+      'Example from runbook: PRO-seq prediction with forward and reverse strands.'
     ],
     legend: ['Input: ATAC', 'Input: DNA', 'Prediction: PRO-seq']
   },
-  'pro-cap': {
-    name: 'Nascent RNA prediction: PRO-cap',
-    definition: 'Predict nascent RNA transcription using PRO-cap.',
-    outputs: ['PRO-cap profiles', 'Transcription rates', 'Nascent RNA levels'],
+  'net-cage': {
+    name: 'Nascent RNA: NET-CAGE',
+    definition: 'Predict NET-CAGE profiles including forward and reverse strand transcription.',
+    outputs: ['NET-CAGE profiles', 'Transcription rates', 'Nascent RNA levels'],
     examples: [
-      'MCF10A: predicted PRO-cap transcription profiles.',
-      'GBM: identified nascent transcription patterns.'
+      'MCF10A: predicted NET-CAGE at chr19:41677279-42177279 (around CD79A).',
+      'Example from runbook: NET-CAGE prediction with forward and reverse strands.'
     ],
-    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: PRO-cap']
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: NET-CAGE']
   },
-  'gro-cap': {
-    name: 'Nascent RNA prediction: GRO-cap',
-    definition: 'Predict nascent RNA transcription using GRO-cap.',
-    outputs: ['GRO-cap profiles', 'Transcription rates', 'Nascent RNA levels'],
+  'rna-strand-forward': {
+    name: 'RNA Strand: Forward',
+    definition: 'Predict forward strand Total RNA-seq profiles from ATAC-seq and DNA sequence.',
+    outputs: ['Forward strand RNA', 'Sense transcription', 'Gene expression patterns'],
     examples: [
-      'MCF10A: predicted GRO-cap transcription profiles.',
-      'GBM: identified nascent transcription patterns.'
+      'MCF10A: predicted forward strand RNA at chr3:187521377-188021377 (around BCL6).',
+      'Example from runbook: RNA Strand prediction with forward strand at index 0.'
     ],
-    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: GRO-cap']
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: Forward RNA']
+  },
+  'rna-strand-reverse': {
+    name: 'RNA Strand: Reverse',
+    definition: 'Predict reverse strand Total RNA-seq profiles from ATAC-seq and DNA sequence.',
+    outputs: ['Reverse strand RNA', 'Antisense transcription', 'Non-coding RNA patterns'],
+    examples: [
+      'MCF10A: predicted reverse strand RNA at chr3:187521377-188021377 (around BCL6).',
+      'Example from runbook: RNA Strand prediction with reverse strand at index 1.'
+    ],
+    legend: ['Input: ATAC', 'Input: DNA', 'Prediction: Reverse RNA']
   }
 }
 
 // Computed
 const currentSubCategories = computed(() => subCategories[selectedMainCategory.value] || [])
 const currentCategory = computed(() => categories[selectedSubCategory.value] || categories['1000-tfs'])
+const currentLocus = computed(() => runbookExamples[selectedSubCategory.value]?.locus || 'chr4:403.6‑404.1Mb')
+const currentCellType = computed(() => runbookExamples[selectedSubCategory.value]?.cellType || 'MCF10A')
 
 // Methods
 const toggleMainMenu = () => {
@@ -579,11 +426,6 @@ const getCurrentSubCategoryLabel = (): string => {
   return currentSub ? currentSub.label : ''
 }
 
-const getSubCategoryDescription = (subKey: SubCategory): string => {
-  const category = categories[subKey]
-  return category ? category.definition.substring(0, 60) + '...' : ''
-}
-
 // Close menu when clicking outside
 const handleClickOutside = (event: Event) => {
   const target = event.target as HTMLElement
@@ -601,34 +443,8 @@ onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside)
 })
 
-const onMainCategoryChange = () => {
-  // 当主类别改变时，自动选择第一个子类别
-  if (currentSubCategories.value.length > 0) {
-    selectedSubCategory.value = currentSubCategories.value[0].value
-  }
-  flashViz()
-}
-
-const onSubCategoryChange = () => {
-  flashViz()
-}
-
-const onCellChange = () => {
-  flashViz()
-}
-
 const tryNow = () => {
   alert('This button would open the EPCOT demo interface.')
-}
-
-const toggleOverlay = () => {
-  overlay.value = !overlay.value
-  flashViz()
-}
-
-const toggleCompare = () => {
-  compare.value = !compare.value
-  flashViz()
 }
 
 const flashViz = () => {
@@ -636,6 +452,14 @@ const flashViz = () => {
   setTimeout(() => {
     isFlashing.value = false
   }, 250)
+}
+
+const onOverlayToggle = (value: boolean) => {
+  overlay.value = value
+}
+
+const onCompareToggle = (value: boolean) => {
+  compare.value = value
 }
 </script>
 
@@ -887,6 +711,23 @@ const flashViz = () => {
   box-shadow: 0 0 0 3px rgba(0, 122, 204, 0.1);
 }
 
+.fixed-display {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #f9fafb;
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.fixed-value {
+  font-size: 0.9rem;
+  color: #374151;
+  font-weight: 500;
+}
+
 /* Hierarchical Menu Styling */
 .category-group {
   flex: 1.4;
@@ -929,13 +770,6 @@ const flashViz = () => {
   box-shadow: 0 0 0 3px rgba(0, 122, 204, 0.1);
 }
 
-.button-content {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex: 1;
-}
-
 .category-text {
   font-weight: 500;
   color: #374151;
@@ -946,17 +780,6 @@ const flashViz = () => {
   font-size: 0.8rem;
   color: #64748b;
   font-weight: 400;
-}
-
-.expand-arrow {
-  font-size: 0.8rem;
-  color: #6b7280;
-  transition: transform 0.3s ease;
-  margin-left: 0.5rem;
-}
-
-.expand-arrow.rotated {
-  transform: rotate(180deg);
 }
 
 .expanded-menu {
@@ -973,6 +796,24 @@ const flashViz = () => {
   overflow: hidden;
   transition: max-height 0.3s ease;
   margin-top: 4px;
+}
+
+.expand-arrow {
+  font-size: 0.8rem;
+  color: #6b7280;
+  transition: transform 0.3s ease;
+  margin-left: 0.5rem;
+}
+
+.expand-arrow.rotated {
+  transform: rotate(180deg);
+}
+
+.button-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
 }
 
 .menu-content {
@@ -1090,46 +931,66 @@ const flashViz = () => {
   line-height: 1.3;
 }
 
+
 /* Main Content */
 .main-content {
-  padding: 2rem 2rem 0rem 0;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .content-layout {
   display: grid;
-  grid-template-columns: 4fr 6fr;
+  grid-template-columns: 5fr 5fr;
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Description Panel */
 .description-panel {
-  padding-left: 2rem;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
 }
 
 .description-panel h3 {
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 1rem 0;
   font-size: 1.3rem;
+  color: #1f2937;
   font-weight: 600;
-  color: #1e293b;
 }
 
-.definition, .outputs, .examples {
-  margin-bottom: 2rem;
+.definition {
+  margin-bottom: 1.5rem;
 }
 
-.definition h4, .outputs h4, .examples h4 {
-  margin: 0 0 0.75rem 0;
+.definition h4 {
+  margin: 0 0 0.5rem 0;
   font-size: 1rem;
-  font-weight: 600;
   color: #374151;
+  font-weight: 600;
 }
 
 .definition p {
   margin: 0;
-  color: #64748b;
-  line-height: 1.6;
+  font-size: 0.9rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.outputs {
+  margin-bottom: 1.5rem;
+}
+
+.outputs h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  color: #374151;
+  font-weight: 600;
 }
 
 .output-tags {
@@ -1139,256 +1000,90 @@ const flashViz = () => {
 }
 
 .output-tag {
-  background: #f0f9ff;
-  color: #007acc;
-  padding: 0.25rem 0.75rem;
-  border-radius: 999px;
-  font-size: 0.85rem;
+  background: #eff6ff;
+  color: #1d4ed8;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
   font-weight: 500;
-  border: 1px solid #bae6fd;
+}
+
+.examples {
+  margin-bottom: 1.5rem;
+}
+
+.examples h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  color: #374151;
+  font-weight: 600;
 }
 
 .example-cards {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .example-card {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 1rem;
-  transition: all 0.3s ease;
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-size: 0.85rem;
+  color: #475569;
+  line-height: 1.4;
 }
 
-.example-card:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+.visualization-panel {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
 }
 
-.example-title {
-  font-weight: 600;
-  color: #374151;
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
-}
-
-.example-content {
-  color: #64748b;
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-/* Visualization Panel */
 .visualization-panel h3 {
   margin: 0 0 1rem 0;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
+  color: #1f2937;
   font-weight: 600;
-  color: #374151;
-  border-bottom: 1px solid #e2e8f0;
-  padding-bottom: 0.5rem;
-}
-
-.genome-viewer {
-  height: 350px;
-  border: 2px dashed #d1d5db;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  transition: all 0.3s ease;
-  margin-bottom: 1rem;
-}
-
-.genome-viewer.flash {
-  border-color: #007acc;
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-}
-
-.placeholder-content {
-  text-align: center;
-  color: #64748b;
-}
-
-.placeholder-icon {
-  font-size: 3rem;
-  margin-bottom: 0.75rem;
-}
-
-.placeholder-text {
-  font-size: 1.2rem;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-}
-
-.placeholder-mode {
-  font-size: 1rem;
-  color: #9ca3af;
-}
-
-.viewer-controls {
-  display: flex;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-}
-
-.control-btn {
-  padding: 0.5rem 1rem;
-  border: 1px solid #d1d5db;
-  background: white;
-  color: #374151;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  transition: all 0.3s ease;
-}
-
-.control-btn:hover {
-  background: #f9fafb;
-  border-color: #007acc;
-}
-
-.control-btn.active {
-  background: #007acc;
-  color: white;
-  border-color: #007acc;
-}
-
-.legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.85rem;
-  color: #64748b;
-}
-
-.legend-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #007acc;
-  display: inline-block;
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   .hero-content {
     grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-  
-  .hero-text h1 {
-    font-size: 2rem;
-  }
-  
-  .use-cases-section {
-    margin: 2rem 4rem;
+    gap: 1.5rem;
   }
   
   .content-layout {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
   }
   
   .controls-row {
     flex-direction: column;
     gap: 1rem;
+    align-items: stretch;
   }
   
   .control-group {
-    min-width: auto;
-    width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero-section {
-    margin: 1rem 1rem;
-    padding: 3rem 1.5rem;
+    flex: 1;
   }
   
-  .hero-text h1 {
-    font-size: 1.8rem;
-  }
-  
-  .hero-text p {
-    font-size: 1.1rem;
-  }
-  
-  .use-cases-section {
-    margin: 1rem 2rem;
-  }
-  
-  .use-cases-header {
-    padding: 1rem;
-  }
-  
-  .controls-section {
-    padding: 1rem;
-  }
-  
-  .main-content {
-    padding: 1rem;
-  }
-  
-  .genome-viewer {
-    height: 250px;
-  }
-  
-  .placeholder-icon {
-    font-size: 2.5rem;
-  }
-  
-  .placeholder-text {
-    font-size: 1rem;
-  }
-  
-  .placeholder-mode {
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-section {
-    margin: 0.5rem 0.5rem;
-    padding: 2rem 1rem;
-  }
-  
-  .hero-text h1 {
-    font-size: 1.5rem;
-  }
-  
-  .hero-text p {
-    font-size: 1rem;
-  }
-  
-  .use-cases-section {
-    margin: 0.5rem 1rem;
-  }
-  
-  .genome-viewer {
-    height: 200px;
-  }
-  
-  .placeholder-icon {
-    font-size: 2rem;
-  }
-  
-  .placeholder-text {
-    font-size: 0.9rem;
-  }
-  
-  .placeholder-mode {
-    font-size: 0.8rem;
+  .dropdown-menu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    max-width: 600px;
+    max-height: 80vh;
+    border-radius: 12px;
+    border: 1px solid #d1d5db;
   }
 }
 </style>

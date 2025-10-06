@@ -13,7 +13,7 @@
     </div>
     <el-row :gutter="20">
       <!-- Metadata Section -->
-      <el-col :span="12">
+      <el-col :span="13">
         <div class="section-block">
           <h3>Metadata</h3>
           <el-row :gutter="10" class="metadata-grid">
@@ -28,7 +28,7 @@
       </el-col>
 
       <!-- Examples Section -->
-      <el-col :span="12">
+      <el-col :span="11">
         <div class="section-block">
           <el-tabs v-model="activeLang" type="card">
             <el-tab-pane v-for="(blocks, lang) in model.examples" :key="lang" :label="lang" :name="lang">
@@ -601,13 +601,11 @@ pre {
 }
 
 .back-button {
-  background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
+  background: #1c84cd;
   border: none;
-  color: white;
   font-weight: 600;
   padding: 1rem 3rem;
   border-radius: 0.75rem;
-  box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
   transition: all 0.3s ease;
   display: inline-flex;
   align-items: center;
@@ -622,11 +620,11 @@ pre {
   overflow: hidden;
 }
 
-.back-button:hover {
+/* .back-button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(6, 182, 212, 0.5);
-  background: linear-gradient(135deg, #0e7490 0%, #0891b2 100%);
-}
+  box-shadow: 0 8px 24px rgba(6, 44, 212, 0.5);
+  background: linear-gradient(135deg, #1d62a3 0%, #0b5285 100%);
+} */
 
 .back-button:active {
   transform: translateY(-1px);

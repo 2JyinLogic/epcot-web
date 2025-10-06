@@ -8,12 +8,12 @@
     >
       <el-table-column label="Model name">
         <template #default="scope">
-          <el-link
-            type="primary"
+          <span
+            class="model-name-link"
             @click="goToModel(scope.row.id)"
           >
             {{ scope.row.name }}
-          </el-link>
+          </span>
         </template>
       </el-table-column>
 
@@ -168,33 +168,26 @@ const goToModel = (id: string) => {
   border-bottom: 2px solid var(--line) !important;
 }
 
-/* ===== 移除模型名称的按钮样式 ===== */
-.model-table :deep(.el-link--primary) {
+/* ===== 优化模型名称链接样式 ===== */
+.model-name-link {
   color: var(--accent);
   font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease;
   text-decoration: none;
-  background: none;
-  border: none;
-  padding: 0;
-  transition: color 0.3s ease;
 }
 
-.model-table :deep(.el-link--primary:hover) {
-  color: #0891b2;
-  background: none;
-  transform: none;
-  box-shadow: none;
-  text-decoration: underline;
+.model-name-link:hover {
+  color: #0371a8;
 }
 
-.model-table :deep(.el-link--primary:focus) {
+.model-name-link:focus {
   color: var(--accent);
-  background: none;
+  outline: none;
 }
 
-.model-table :deep(.el-link--primary:active) {
-  color: var(--accent);
-  background: none;
+.model-name-link:active {
+  color: #036498;
 }
 
 /* ===== 版本标签样式 ===== */
