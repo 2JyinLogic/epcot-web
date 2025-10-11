@@ -8,7 +8,12 @@
           <h1>EPCOT</h1>
           <p>EPCOT is a deep learning framework designed to comprehensively predict multiple genomic modalities—including the epigenome, chromatin organization, transcriptome, and enhancer activity—within a single architecture. By leveraging a pre-training and fine-tuning strategy, EPCOT achieves strong performance in individual prediction tasks while maintaining generalizability across diverse cell and tissue types.</p>
           <p class="call-to-action">Try EPCOT and experience differently.</p>
-          <button class="btn" @click="tryNow">Try it now</button>
+          <button class="btn" @click="tryNow">
+            Try it now
+            <svg class="external-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
         </div>
         
         <!-- Right Column: Image -->
@@ -148,7 +153,10 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router'
 import GenomeChart from '@/components/GenomeChart.vue'
+
+const router = useRouter()
 
 // Type definitions
 type MainCategory = 'tf-binding' | 'epigenomic' | 'gene-expression' | 'enhancer-activity' | '3d-chromatin' | 'nascent-rna' | 'rna-strand'
@@ -177,21 +185,21 @@ const isMainMenuOpen = ref(false)
 
 // Data - Based on runbook examples
 const runbookExamples: Record<SubCategory, { locus: string, cellType: string }> = {
-  '1000-tfs': { locus: 'chr6:191752-691752', cellType: 'MCF10A' }, // Additional TFs example - CBX2
-  'h3k27ac': { locus: 'chr8:116638207-117138207', cellType: 'MCF10A' }, // Epigenomic features - CTCF around AARD
-  'rna-seq': { locus: 'chr3:15000000-15500000', cellType: 'MCF10A' }, // RNA example - Total RNA around CAPN7
-  'starr-seq': { locus: 'chr16:28731965-29231965', cellType: 'MCF10A' }, // STARR-seq around CD19
-  'micro-c': { locus: 'chr9:36834268-37334268', cellType: 'MCF10A' }, // Micro-C around PAX5
-  'hic': { locus: 'chr8:127535434-128035434', cellType: 'MCF10A' }, // HiC around MYC
-  'intact-hic': { locus: 'chr2:135914349-136414349', cellType: 'MCF10A' }, // Intact Hi-C around CXCR4
-  'bru-seq': { locus: 'chr14:106428615-106928615', cellType: 'MCF10A' }, // Bru-seq around IGH
-  'tt-seq': { locus: 'chr3:187521377-188021377', cellType: 'MCF10A' }, // TT-seq around BCL6
-  'gro-seq': { locus: 'chr3:8302155-8802155', cellType: 'MCF10A' }, // GRO-seq around AID
-  'gro-cap': { locus: 'chr3:8302155-8802155', cellType: 'MCF10A' }, // GRO-cap around AID
-  'pro-seq': { locus: 'chr2:135914349-136414349', cellType: 'MCF10A' }, // Pro-seq around CXCR4
-  'net-cage': { locus: 'chr19:41677279-42177279', cellType: 'MCF10A' }, // NET-CAGE around CD79A
-  'rna-strand-forward': { locus: 'chr3:187521377-188021377', cellType: 'MCF10A' }, // RNA Strand around BCL6
-  'rna-strand-reverse': { locus: 'chr3:187521377-188021377', cellType: 'MCF10A' } // RNA Strand around BCL6
+  '1000-tfs': { locus: 'chr6:191752-691752', cellType: 'GM12878' }, // Additional TFs example - CBX2
+  'h3k27ac': { locus: 'chr8:116638207-117138207', cellType: 'GM12878' }, // Epigenomic features - CTCF around AARD
+  'rna-seq': { locus: 'chr3:15000000-15500000', cellType: 'GM12878' }, // RNA example - Total RNA around CAPN7
+  'starr-seq': { locus: 'chr16:28731965-29231965', cellType: 'GM12878' }, // STARR-seq around CD19
+  'micro-c': { locus: 'chr9:36834268-37334268', cellType: 'GM12878' }, // Micro-C around PAX5
+  'hic': { locus: 'chr8:127535434-128035434', cellType: 'GM12878' }, // HiC around MYC
+  'intact-hic': { locus: 'chr2:135914349-136414349', cellType: 'GM12878' }, // Intact Hi-C around CXCR4
+  'bru-seq': { locus: 'chr14:106428615-106928615', cellType: 'GM12878' }, // Bru-seq around IGH
+  'tt-seq': { locus: 'chr3:187521377-188021377', cellType: 'GM12878' }, // TT-seq around BCL6
+  'gro-seq': { locus: 'chr3:8302155-8802155', cellType: 'GM12878' }, // GRO-seq around AID
+  'gro-cap': { locus: 'chr3:8302155-8802155', cellType: 'GM12878' }, // GRO-cap around AID
+  'pro-seq': { locus: 'chr2:135914349-136414349', cellType: 'GM12878' }, // Pro-seq around CXCR4
+  'net-cage': { locus: 'chr19:41677279-42177279', cellType: 'GM12878' }, // NET-CAGE around CD79A
+  'rna-strand-forward': { locus: 'chr3:187521377-188021377', cellType: 'GM12878' }, // RNA Strand around BCL6
+  'rna-strand-reverse': { locus: 'chr3:187521377-188021377', cellType: 'GM12878' } // RNA Strand around BCL6
 }
 
 // Category labels mapping
@@ -214,7 +222,8 @@ const subCategories: Record<MainCategory, SubCategoryItem[]> = {
     { value: 'h3k27ac', label: 'H3K27ac' }
   ],
   'gene-expression': [
-    { value: 'rna-seq', label: 'RNA-seq' }
+    { value: 'rna-seq', label: 'RNA-seq' },
+    { value: 'net-cage', label: 'NET-CAGE' }
   ],
   'enhancer-activity': [
     { value: 'starr-seq', label: 'STARR-seq' }
@@ -229,8 +238,7 @@ const subCategories: Record<MainCategory, SubCategoryItem[]> = {
     { value: 'tt-seq', label: 'TT-seq' },
     { value: 'gro-seq', label: 'GRO-seq' },
     { value: 'gro-cap', label: 'GRO-cap' },
-    { value: 'pro-seq', label: 'PRO-seq' },
-    { value: 'net-cage', label: 'NET-CAGE' }
+    { value: 'pro-seq', label: 'PRO-seq' }
   ],
   'rna-strand': [
     { value: 'rna-strand-forward', label: 'RNA Forward Strand' },
@@ -244,7 +252,7 @@ const categories: Record<SubCategory, CategoryData> = {
     definition: 'Predict binding profiles for 708 additional transcription factors from ATAC-seq and DNA sequence. This comprehensive prediction covers a wide range of TFs including transcriptional regulators, chromatin remodelers, and developmental factors.',
     outputs: ['TF binding scores', 'Transcription factor occupancy', 'Cell-type specific TF activity'],
     examples: [
-      'MCF10A: predicted <strong>CBX2</strong> binding at chr6:191752-691752 (around IRF4 gene). CBX2 shows strong binding signal in this regulatory region.',
+      'GM12878: predicted <strong>CBX2</strong> binding at chr6:191752-691752 (around IRF4 gene). CBX2 shows strong binding signal in this regulatory region.',
       'K562: identified <strong>GATA1</strong> binding sites across erythroid-specific enhancers with high confidence scores.'
     ],
     legend: ['Input: ATAC', 'Input: DNA', 'Prediction: TF binding']
@@ -254,7 +262,7 @@ const categories: Record<SubCategory, CategoryData> = {
     definition: 'Predict 247 epigenomic features including histone modifications from ATAC-seq and DNA sequence. This includes active enhancers (H3K27ac), active promoters (H3K4me3), and repressive marks (H3K27me3, H3K9me3).',
     outputs: ['Histone modification signals', 'Epigenomic feature predictions', 'Regulatory element identification'],
     examples: [
-      'MCF10A: predicted <strong>H3K27ac</strong> signal at chr8:116638207-117138207 (around AARD gene). Strong active enhancer signal detected.',
+      'GM12878: predicted <strong>H3K27ac</strong> signal at chr8:116638207-117138207 (around AARD gene). Strong active enhancer signal detected.',
       'K562: identified <strong>H3K4me3</strong> peaks at erythroid gene promoters with high confidence.'
     ],
     legend: ['Input: ATAC', 'Input: DNA', 'Prediction: Epigenomic features']
@@ -264,7 +272,7 @@ const categories: Record<SubCategory, CategoryData> = {
     definition: 'Predict RNA-seq expression including CAGE-seq, Total RNA-seq, and PolyA+ RNA-seq. This captures both steady-state mRNA levels and nascent transcription activity.',
     outputs: ['RNA-seq expression levels', 'Gene activity scores', 'Transcriptional state'],
     examples: [
-      'MCF10A: predicted Total RNA expression at chr3:15000000-15500000 (around CAPN7 gene). High expression signal detected in epithelial cells.',
+      'GM12878: predicted Total RNA expression at chr3:15000000-15500000 (around CAPN7 gene). High expression signal detected in B-lymphocyte cells.',
       'K562: identified upregulated genes in erythroid differentiation pathway with strong RNA-seq signals.'
     ],
     legend: ['Input: ATAC', 'Input: DNA', 'Prediction: RNA-seq']
@@ -274,7 +282,7 @@ const categories: Record<SubCategory, CategoryData> = {
     definition: 'Predict enhancer regulatory activity and functional validation scores using STARR-seq.',
     outputs: ['STARR-seq activity scores', 'Enhancer strength predictions', 'Regulatory element validation'],
     examples: [
-      'MCF10A: predicted enhancer activity at chr16:28731965-29231965 (around CD19).',
+      'GM12878: predicted enhancer activity at chr16:28731965-29231965 (around CD19).',
       'Example from runbook: STARR-seq prediction for enhancer activity.'
     ],
     legend: ['Input: ATAC', 'Input: DNA', 'Prediction: Enhancer activity']
@@ -284,7 +292,7 @@ const categories: Record<SubCategory, CategoryData> = {
     definition: 'Predict Micro-C contact maps including O/E normalized and KR normalized interactions.',
     outputs: ['Micro-C contact maps', 'Chromatin loops', 'Long-range interactions'],
     examples: [
-      'MCF10A: predicted O/E normalized Micro-C at chr9:36834268-37334268 (around PAX5).',
+      'GM12878: predicted O/E normalized Micro-C at chr9:36834268-37334268 (around PAX5).',
       'Example from runbook: Micro-C prediction with O/E normalization at index 0.'
     ],
     legend: ['Input: ATAC', 'Input: DNA', 'Prediction: Micro-C contacts']
@@ -294,7 +302,7 @@ const categories: Record<SubCategory, CategoryData> = {
     definition: 'Predict Hi-C interactions including CTCF ChIA-PET, RNApol2 ChIA-PET, and Hi-C.',
     outputs: ['Hi-C contact maps', 'ChIA-PET interactions', '3D structure predictions'],
     examples: [
-      'MCF10A: predicted Hi-C interactions at chr8:127535434-128035434 (around MYC).',
+      'GM12878: predicted Hi-C interactions at chr8:127535434-128035434 (around MYC).',
       'Example from runbook: Hi-C prediction with Hi-C at index 2.'
     ],
     legend: ['Input: ATAC', 'Input: DNA', 'Prediction: Hi-C contacts']
@@ -304,7 +312,7 @@ const categories: Record<SubCategory, CategoryData> = {
     definition: 'Predict Intact Hi-C contact maps including O/E normalized and KR normalized interactions.',
     outputs: ['Intact Hi-C contact maps', 'Chromatin loops', 'Long-range interactions'],
     examples: [
-      'MCF10A: predicted O/E normalized Intact Hi-C at chr2:135914349-136414349 (around CXCR4).',
+      'GM12878: predicted O/E normalized Intact Hi-C at chr2:135914349-136414349 (around CXCR4).',
       'Example from runbook: Intact Hi-C prediction with O/E normalization at index 0.'
     ],
     legend: ['Input: ATAC', 'Input: DNA', 'Prediction: Intact Hi-C contacts']
@@ -314,7 +322,7 @@ const categories: Record<SubCategory, CategoryData> = {
     definition: 'Predict Bru-seq profiles including Bru-seq, BruUV-seq, and BruChase-seq.',
     outputs: ['Bru-seq profiles', 'Transcription rates', 'Nascent RNA levels'],
     examples: [
-      'MCF10A: predicted Bru-seq at chr14:106428615-106928615 (around IGH).',
+      'GM12878: predicted Bru-seq at chr14:106428615-106928615 (around IGH).',
       'Example from runbook: Bru-seq prediction with Bru-seq at index 0.'
     ],
     legend: ['Input: ATAC', 'Input: DNA', 'Prediction: Bru-seq']
@@ -324,7 +332,7 @@ const categories: Record<SubCategory, CategoryData> = {
     definition: 'Predict TT-seq profiles including forward and reverse strand transcription.',
     outputs: ['TT-seq profiles', 'Transcription rates', 'Nascent RNA levels'],
     examples: [
-      'MCF10A: predicted TT-seq at chr3:187521377-188021377 (around BCL6).',
+      'GM12878: predicted TT-seq at chr3:187521377-188021377 (around BCL6).',
       'Example from runbook: TT-seq prediction with forward and reverse strands.'
     ],
     legend: ['Input: ATAC', 'Input: DNA', 'Prediction: TT-seq']
@@ -334,7 +342,7 @@ const categories: Record<SubCategory, CategoryData> = {
     definition: 'Predict GRO-seq profiles including forward and reverse strand transcription.',
     outputs: ['GRO-seq profiles', 'Transcription rates', 'Nascent RNA levels'],
     examples: [
-      'MCF10A: predicted GRO-seq at chr3:8302155-8802155 (around AID).',
+      'GM12878: predicted GRO-seq at chr3:8302155-8802155 (around AID).',
       'Example from runbook: GRO-seq prediction with forward and reverse strands.'
     ],
     legend: ['Input: ATAC', 'Input: DNA', 'Prediction: GRO-seq']
@@ -344,7 +352,7 @@ const categories: Record<SubCategory, CategoryData> = {
     definition: 'Predict GRO-cap profiles including forward, reverse, and GRO-cap_wTAP variants.',
     outputs: ['GRO-cap profiles', 'Transcription rates', 'Nascent RNA levels'],
     examples: [
-      'MCF10A: predicted GRO-cap at chr3:8302155-8802155 (around AID).',
+      'GM12878: predicted GRO-cap at chr3:8302155-8802155 (around AID).',
       'Example from runbook: GRO-cap prediction with forward and reverse strands.'
     ],
     legend: ['Input: ATAC', 'Input: DNA', 'Prediction: GRO-cap']
@@ -354,17 +362,17 @@ const categories: Record<SubCategory, CategoryData> = {
     definition: 'Predict PRO-seq profiles including forward, reverse, and PRO-cap variants.',
     outputs: ['PRO-seq profiles', 'Transcription rates', 'Nascent RNA levels'],
     examples: [
-      'MCF10A: predicted PRO-seq at chr2:135914349-136414349 (around CXCR4).',
+      'GM12878: predicted PRO-seq at chr2:135914349-136414349 (around CXCR4).',
       'Example from runbook: PRO-seq prediction with forward and reverse strands.'
     ],
     legend: ['Input: ATAC', 'Input: DNA', 'Prediction: PRO-seq']
   },
   'net-cage': {
-    name: 'Nascent RNA: NET-CAGE',
+    name: 'Gene Expression: NET-CAGE',
     definition: 'Predict NET-CAGE profiles including forward and reverse strand transcription.',
-    outputs: ['NET-CAGE profiles', 'Transcription rates', 'Nascent RNA levels'],
+    outputs: ['NET-CAGE profiles', 'Transcription rates', 'Gene expression levels'],
     examples: [
-      'MCF10A: predicted NET-CAGE at chr19:41677279-42177279 (around CD79A).',
+      'GM12878: predicted NET-CAGE at chr19:41677279-42177279 (around CD79A).',
       'Example from runbook: NET-CAGE prediction with forward and reverse strands.'
     ],
     legend: ['Input: ATAC', 'Input: DNA', 'Prediction: NET-CAGE']
@@ -374,7 +382,7 @@ const categories: Record<SubCategory, CategoryData> = {
     definition: 'Predict forward strand Total RNA-seq profiles from ATAC-seq and DNA sequence.',
     outputs: ['Forward strand RNA', 'Sense transcription', 'Gene expression patterns'],
     examples: [
-      'MCF10A: predicted forward strand RNA at chr3:187521377-188021377 (around BCL6).',
+      'GM12878: predicted forward strand RNA at chr3:187521377-188021377 (around BCL6).',
       'Example from runbook: RNA Strand prediction with forward strand at index 0.'
     ],
     legend: ['Input: ATAC', 'Input: DNA', 'Prediction: Forward RNA']
@@ -384,7 +392,7 @@ const categories: Record<SubCategory, CategoryData> = {
     definition: 'Predict reverse strand Total RNA-seq profiles from ATAC-seq and DNA sequence.',
     outputs: ['Reverse strand RNA', 'Antisense transcription', 'Non-coding RNA patterns'],
     examples: [
-      'MCF10A: predicted reverse strand RNA at chr3:187521377-188021377 (around BCL6).',
+      'GM12878: predicted reverse strand RNA at chr3:187521377-188021377 (around BCL6).',
       'Example from runbook: RNA Strand prediction with reverse strand at index 1.'
     ],
     legend: ['Input: ATAC', 'Input: DNA', 'Prediction: Reverse RNA']
@@ -444,7 +452,7 @@ onUnmounted(() => {
 })
 
 const tryNow = () => {
-  alert('This button would open the EPCOT demo interface.')
+  window.open('https://huggingface.co/spaces/drjieliu/EPCOTv2-app', '_blank')
 }
 
 const flashViz = () => {
@@ -480,7 +488,7 @@ const onCompareToggle = (value: boolean) => {
 }
 
 .hero-content {
-  max-width: 1200px;
+  max-width: 1180px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -508,7 +516,7 @@ const onCompareToggle = (value: boolean) => {
 }
 
 .hero-text .call-to-action {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: #374151;
   line-height: 1.6;
   margin: 0 0 2rem 0;
@@ -522,13 +530,27 @@ const onCompareToggle = (value: boolean) => {
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: 1rem;
   transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero-text .btn .hf-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.hero-text .btn .external-icon {
+  width: 18px;
+  height: 18px;
+  margin-left: 0.25rem;
 }
 
 .hero-text .btn:hover {
-  background: #0891b2;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(28, 132, 205, 0.3);
 }
 
 .hero-image {
@@ -543,6 +565,7 @@ const onCompareToggle = (value: boolean) => {
   width: 100%;
   height: auto;
   max-height: 600px;
+  margin:1 rem;
   object-fit: cover;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

@@ -55,13 +55,13 @@
         shape the future of genomic prediction. The models, source code, and tutorials are publicly available.
       </p>
       <div class="hero-actions">
-        <a href="https://huggingface.co/spaces/epcot-project/epcot-demo" target="_blank" class="btn-primary" aria-label="Try EPCOT web demo">
+        <a href="https://huggingface.co/spaces/drjieliu/EPCOTv2-app" target="_blank" class="btn-primary" aria-label="Try EPCOT web demo">
           Try Web Version
         </a>
-        <a href="https://github.com/epcot-project/epcot" target="_blank" class="btn-secondary" aria-label="Browse source code on GitHub">
+        <a href="https://github.com/liu-bioinfo-lab/general_AI_model" target="_blank" class="btn-secondary" aria-label="Browse source code on GitHub">
           View Source Code
         </a>
-        <a href="#" class="btn-secondary" aria-label="Read the paper">
+        <a href="https://www.biorxiv.org/content/10.1101/2025.05.08.652986v1" target="_blank" class="btn-secondary" aria-label="Read the paper">
           Read the Paper
         </a>
       </div>
@@ -192,7 +192,7 @@ h3 {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
+  background: #1c84cd;
   color: white;
   padding: 1rem 2.5rem;
   border-radius: 0.75rem;
@@ -201,7 +201,6 @@ h3 {
   font-size: 1rem;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   transition: all 0.3s ease;
-  box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
   border: none;
   letter-spacing: 0.01em;
   text-align: center;
@@ -212,14 +211,12 @@ h3 {
 }
 
 .btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(6, 182, 212, 0.5);
-  background: linear-gradient(135deg, #0e7490 0%, #0891b2 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(28, 132, 205, 0.3);
 }
 
 .btn-primary:active {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
 }
 
 .btn-secondary {
@@ -241,10 +238,9 @@ h3 {
 
 .btn-secondary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-color: #06b6d4;
+  border-color: #1c84cd;
   background: #f8fafc;
-  color: #06b6d4;
+  color: #1c84cd;
 }
 
 .btn-secondary:active {

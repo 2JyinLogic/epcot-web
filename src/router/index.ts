@@ -32,6 +32,11 @@ const router = createRouter({
       path: '/docs',
       name: 'docs',
       component: () => import('../views/DocsView.vue')
+    },
+    {
+      path: '/gradio',
+      name: 'gradio',
+      component: () => import('../views/Epcotgradio.vue')
     }
   ]
 })
