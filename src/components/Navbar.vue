@@ -12,7 +12,7 @@
         <router-link to="/model">Models</router-link>
         <router-link to="/about">About</router-link>
         <router-link to="/docs">Docs</router-link>
-        <a href="#">Contact</a>
+        <a href="https://jieliu6.github.io/" target="_blank" rel="noopener noreferrer">Contact</a>
       </nav>
     </div>
   </header>

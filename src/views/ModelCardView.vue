@@ -604,7 +604,7 @@ pre {
   background: #1c84cd;
   border: none;
   font-weight: 600;
-  padding: 1rem 3rem;
+  padding: 1rem 2.5rem;
   border-radius: 0.75rem;
   transition: all 0.3s ease;
   display: inline-flex;
@@ -614,17 +614,16 @@ pre {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   letter-spacing: 0.01em;
   text-align: center;
-  min-width: 200px;
+  min-width: 220px;
   width: 200px;
   position: relative;
   overflow: hidden;
 }
 
-/* .back-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(6, 44, 212, 0.5);
-  background: linear-gradient(135deg, #1d62a3 0%, #0b5285 100%);
-} */
+.back-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(28, 132, 205, 0.3);
+}
 
 .back-button:active {
   transform: translateY(-1px);

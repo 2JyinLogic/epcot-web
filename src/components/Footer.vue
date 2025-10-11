@@ -14,29 +14,25 @@
       <div class="links-section">
         <h3>Quick Links</h3>
         <div class="links-grid">
-          <a href="/docs" class="link-item">Documentation</a>
-          <a href="https://doi.org/10.1093/nar/gkad436" target="_blank" class="link-item">Research Paper</a>
-          <a href="https://github.com/liu-bioinfo-lab/EPCOT" target="_blank" class="link-item">GitHub Repository</a>
-          <a href="https://huggingface.co/spaces/luosanj/EPCOTv2" target="_blank" class="link-item">Try Demo</a>
+          <a href="https://colab.research.google.com/github/liu-bioinfo-lab/general_AI_model/blob/main/epcotv2_basic_tutorial.ipynb" target="_blank" class="link-item">Basic notebook (Colab)</a>
+          <a href="https://www.biorxiv.org/content/10.1101/2025.05.08.652986v1" target="_blank" class="link-item">Research Paper</a>
+          <a href="https://github.com/liu-bioinfo-lab/general_AI_model" target="_blank" class="link-item">GitHub Repository</a>
+          <a href="https://huggingface.co/spaces/drjieliu/EPCOTv2-app" target="_blank" class="link-item">Try web version</a>
         </div>
       </div>
 
       <!-- Right Column: Contact Section -->
       <div class="contact-section">
-        <h3>Contact Us</h3>
+        <h3>Help</h3>
         <div class="contact-info">
-        
-          <button class="contact-button">
-            <span class="button-icon"></span>
-            <span>Send us a message</span>
-          </button>
+          <a href="https://jieliu6.github.io/" target="_blank" rel="noopener noreferrer" class="link-item">Contact Us</a>
         </div>
       </div>
     </div>
 
     <!-- Bottom Copyright Section -->
     <div class="copyright-section">
-      <p>© 2025 EPCOT. All rights reserved.</p>
+      <p>© 2025 Liu Lab, Department of Computational Medicine and Bioinformatics, University of Michigan</p>
     </div>
   </footer>
 </template>
@@ -132,7 +128,7 @@
 }
 
 .link-item:hover {
-  color: #06b6d4;
+  color: #ffffff;
   transform: translateX(4px);
 }
 
