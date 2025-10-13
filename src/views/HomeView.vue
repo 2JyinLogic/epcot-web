@@ -80,6 +80,22 @@
                     >
                       <span class="sub-category-label">{{ sub.label }}</span>
                     </div>
+                    
+                    <!-- Info box for TF-binding and Epigenomic features -->
+                    <div v-if="selectedMainCategory === 'tf-binding' || selectedMainCategory === 'epigenomic'" class="category-info-box">
+                      <svg class="info-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 16v-4M12 8h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      </svg>
+                      <div class="info-text">
+                        <span v-if="selectedMainCategory === 'tf-binding'">
+                          <strong>Note:</strong> The model supports prediction for 1,000 transcription factors. Only one example is shown here.
+                        </span>
+                        <span v-else-if="selectedMainCategory === 'epigenomic'">
+                          <strong>Note:</strong> The model supports prediction for 11 histone modifications. Only one example is shown here.
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -153,10 +169,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { useRouter } from 'vue-router'
 import GenomeChart from '@/components/GenomeChart.vue'
-
-const router = useRouter()
 
 // Type definitions
 type MainCategory = 'tf-binding' | 'epigenomic' | 'gene-expression' | 'enhancer-activity' | '3d-chromatin' | 'nascent-rna' | 'rna-strand'
@@ -917,6 +930,36 @@ const onCompareToggle = (value: boolean) => {
   flex-direction: column;
   gap: 0.25rem;
   padding-left: 0.5rem;
+}
+
+.category-info-box {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.category-info-box .info-icon {
+  width: 20px;
+  height: 20px;
+  color: #3b82f6;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.category-info-box .info-text {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: #1e40af;
+}
+
+.category-info-box .info-text strong {
+  font-weight: 600;
+  color: #1e3a8a;
 }
 
 .sub-category-item {
