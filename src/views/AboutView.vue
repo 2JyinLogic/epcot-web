@@ -13,7 +13,7 @@
     <!-- EPCOTv2 Block -->
     <div class="component-box">
       <div class="image-container">
-        <img src="../../public/images/figure_1a_epcotv2.png" alt="EPCOTv2 Architecture">
+        <img src="/images/figure_1a_epcotv2.png" alt="EPCOTv2 Architecture">
       </div>
       <div class="text-container">
         <h3>EPCOTv2: A General-Purpose Genomic AI Model</h3>
@@ -31,7 +31,7 @@
     <!-- EPCOT Block -->
     <div class="component-box">
       <div class="image-container">
-        <img src="../../public/images/graphical_abstract_epcot1.png" alt="EPCOT Framework">
+        <img src="/images/graphical_abstract_epcot1.png" alt="EPCOT Framework">
       </div>
       <div class="text-container">
         <h3>EPCOT: A Foundational Framework for Genomic Prediction</h3>

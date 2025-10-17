@@ -8,12 +8,20 @@
           <h1>EPCOT</h1>
           <p>EPCOT is a deep learning framework designed to comprehensively predict multiple genomic modalities—including the epigenome, chromatin organization, transcriptome, and enhancer activity—within a single architecture. By leveraging a pre-training and fine-tuning strategy, EPCOT achieves strong performance in individual prediction tasks while maintaining generalizability across diverse cell and tissue types.</p>
           <p class="call-to-action">Try EPCOT and experience differently.</p>
-          <button class="btn" @click="tryNow">
-            Try it now
-            <svg class="external-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
+            <div class="button-group">
+              <button class="btn" @click="tryNow">
+                Try it now
+                <svg class="external-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <button class="btn btn-secondary" @click="readPaper">
+                Read the paper
+              </button>
+              <button class="btn btn-secondary" @click="viewSourceCode">
+                View Source Code
+              </button>
+            </div>
         </div>
         
         <!-- Right Column: Image -->
@@ -156,6 +164,7 @@
               :category="selectedMainCategory"
               :sub-category="selectedSubCategory"
               :cell-type="currentCellType"
+              :locus="currentLocus"
               :is-flashing="isFlashing"
               @overlay-toggle="onOverlayToggle"
               @compare-toggle="onCompareToggle"
@@ -468,6 +477,14 @@ const tryNow = () => {
   window.open('https://huggingface.co/spaces/drjieliu/EPCOTv2-app', '_blank')
 }
 
+const readPaper = () => {
+  window.open('https://www.biorxiv.org/content/10.1101/2025.05.08.652986v1', '_blank')
+}
+
+const viewSourceCode = () => {
+  window.open('https://github.com/liu-bioinfo-lab/general_AI_model', '_blank')
+}
+
 const flashViz = () => {
   isFlashing.value = true
   setTimeout(() => {
@@ -563,6 +580,24 @@ const onCompareToggle = (value: boolean) => {
 
 .hero-text .btn:hover {
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(28, 132, 205, 0.3);
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.hero-text .btn-secondary {
+  background: white;
+  color: #1c84cd;
+  border: 2px solid #1c84cd;
+}
+
+.hero-text .btn-secondary:hover {
+  background: #1c84cd;
+  color: white;
   box-shadow: 0 4px 12px rgba(28, 132, 205, 0.3);
 }
 
