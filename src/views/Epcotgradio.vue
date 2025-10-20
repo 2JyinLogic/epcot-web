@@ -295,7 +295,16 @@
                   <span class="step-number-badge">2</span>
                   <h4 class="step-title">Epigenome features</h4>
                 </div>
-                <input type="text" v-model="epigenomeFeatures" class="control-input-full" placeholder="Enter features to visualize">
+                <input 
+                  type="text" 
+                  v-model="epigenomeFeatures" 
+                  class="control-input-full" 
+                  placeholder="Enter features to visualize"
+                  autocomplete="off"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  spellcheck="false"
+                >
               </div>
 
               <!-- Step 3: Upload Prediction File & Generate Visualization -->
@@ -649,12 +658,27 @@ const downloadPredictions = () => {
   background: white;
   transition: border-color 0.3s ease;
   width: 100%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .control-input-full:focus {
   outline: none;
   border-color: #007acc;
   box-shadow: 0 0 0 3px rgba(0, 122, 204, 0.1);
+}
+
+/* 确保没有额外的浏览器默认样式 */
+.control-input-full::-webkit-outer-spin-button,
+.control-input-full::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.control-input-full::-webkit-search-cancel-button,
+.control-input-full::-webkit-search-decoration {
+  -webkit-appearance: none;
 }
 
 .select-arrow {

@@ -8,17 +8,25 @@
           <h1>EPCOT</h1>
           <p>EPCOT is a deep learning framework designed to comprehensively predict multiple genomic modalities—including the epigenome, chromatin organization, transcriptome, and enhancer activity—within a single architecture. By leveraging a pre-training and fine-tuning strategy, EPCOT achieves strong performance in individual prediction tasks while maintaining generalizability across diverse cell and tissue types.</p>
           <p class="call-to-action">Try EPCOT and experience differently.</p>
-          <button class="btn" @click="tryNow">
-            Try it now
-            <svg class="external-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
+            <div class="button-group">
+              <button class="btn" @click="tryNow">
+                Try it now
+                <svg class="external-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <button class="btn btn-secondary" @click="readPaper">
+                Read the paper
+              </button>
+              <button class="btn btn-secondary" @click="viewSourceCode">
+                View Source Code
+              </button>
+            </div>
         </div>
         
         <!-- Right Column: Image -->
         <div class="hero-image">
-          <img src="/images/epcot-overview.png" alt="EPCOT Overview" class="epcot-hero-image" />
+          <img src="/images/EPCOT.png" alt="EPCOT Overview" class="epcot-hero-image" />
         </div>
       </div>
     </section>
@@ -156,6 +164,7 @@
               :category="selectedMainCategory"
               :sub-category="selectedSubCategory"
               :cell-type="currentCellType"
+              :locus="currentLocus"
               :is-flashing="isFlashing"
               @overlay-toggle="onOverlayToggle"
               @compare-toggle="onCompareToggle"
@@ -468,6 +477,14 @@ const tryNow = () => {
   window.open('https://huggingface.co/spaces/drjieliu/EPCOTv2-app', '_blank')
 }
 
+const readPaper = () => {
+  window.open('https://www.biorxiv.org/content/10.1101/2025.05.08.652986v1', '_blank')
+}
+
+const viewSourceCode = () => {
+  window.open('https://github.com/liu-bioinfo-lab/general_AI_model', '_blank')
+}
+
 const flashViz = () => {
   isFlashing.value = true
   setTimeout(() => {
@@ -505,7 +522,7 @@ const onCompareToggle = (value: boolean) => {
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2.5rem;
+  gap: 3rem;
   align-items: start;
 }
 
@@ -517,7 +534,7 @@ const onCompareToggle = (value: boolean) => {
   font-size: 2.5rem;
   font-weight: bold;
   color: #000000;
-  margin: 0 0 1.5rem 0;
+  margin: 4rem 0 1.5rem 0;
   line-height: 1.2;
 }
 
@@ -563,6 +580,24 @@ const onCompareToggle = (value: boolean) => {
 
 .hero-text .btn:hover {
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(28, 132, 205, 0.3);
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.hero-text .btn-secondary {
+  background: white;
+  color: #1c84cd;
+  border: 2px solid #1c84cd;
+}
+
+.hero-text .btn-secondary:hover {
+  background: #1c84cd;
+  color: white;
   box-shadow: 0 4px 12px rgba(28, 132, 205, 0.3);
 }
 
@@ -1120,9 +1155,53 @@ const onCompareToggle = (value: boolean) => {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .hero-section {
+    padding: 0.5rem 1rem;
+    margin: 1rem 0.5rem;
+  }
+  
   .hero-content {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+  }
+  
+  .hero-text h1 {
+    font-size: 2rem;
+    margin: 2rem 0 1rem 0;
+    text-align: center;
+  }
+  
+  .hero-text p {
+    font-size: 1rem;
+    line-height: 1.7;
+    text-align: center;
+    margin: 0 0 1.5rem 0;
+  }
+  
+  .hero-text .call-to-action {
+    font-size: 1rem;
+    text-align: center;
+    margin: 0 0 1.5rem 0;
+  }
+  
+  .button-group {
+    justify-content: center;
+    gap: 0.75rem;
+  }
+  
+  .hero-text .btn {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+  }
+  
+  .hero-image {
+    padding-top: 1rem;
+    justify-content: center;
+  }
+  
+  .epcot-hero-image {
+    max-height: 400px;
+    transform: scale(1);
   }
   
   .content-layout {
@@ -1150,6 +1229,143 @@ const onCompareToggle = (value: boolean) => {
     max-height: 80vh;
     border-radius: 12px;
     border: 1px solid #d1d5db;
+  }
+  
+  .use-cases-section {
+    margin: 1rem 0.5rem 2rem;
+  }
+  
+  .use-cases-header {
+    padding: 0.75rem 1rem;
+  }
+  
+  .use-cases-header h2 {
+    font-size: 1.3rem;
+  }
+  
+  .use-cases-header p {
+    font-size: 0.9rem;
+  }
+  
+  .controls-section {
+    padding: 1rem;
+  }
+  
+  .main-content {
+    padding: 1rem;
+  }
+  
+  .description-panel, .visualization-panel {
+    padding: 1rem;
+  }
+  
+  .description-panel h3, .visualization-panel h3 {
+    font-size: 1.1rem;
+  }
+  
+  .definition h4, .outputs h4, .examples h4 {
+    font-size: 0.95rem;
+  }
+  
+  .definition p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+  
+  .example-card {
+    font-size: 0.8rem;
+    padding: 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 0.25rem 0.5rem;
+    margin: 0.5rem 0.25rem;
+  }
+  
+  .hero-text h1 {
+    font-size: 1.8rem;
+    margin: 1.5rem 0 0.75rem 0;
+  }
+  
+  .hero-text p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin: 0 0 1rem 0;
+  }
+  
+  .hero-text .call-to-action {
+    font-size: 0.95rem;
+    margin: 0 0 1rem 0;
+  }
+  
+  .button-group {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .hero-text .btn {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  .epcot-hero-image {
+    max-height: 300px;
+  }
+  
+  .use-cases-section {
+    margin: 0.5rem 0.25rem 1.5rem;
+  }
+  
+  .use-cases-header {
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .use-cases-header h2 {
+    font-size: 1.2rem;
+  }
+  
+  .use-cases-header p {
+    font-size: 0.85rem;
+  }
+  
+  .controls-section {
+    padding: 0.75rem;
+  }
+  
+  .main-content {
+    padding: 0.75rem;
+  }
+  
+  .description-panel, .visualization-panel {
+    padding: 0.75rem;
+  }
+  
+  .description-panel h3, .visualization-panel h3 {
+    font-size: 1rem;
+  }
+  
+  .definition h4, .outputs h4, .examples h4 {
+    font-size: 0.9rem;
+  }
+  
+  .definition p {
+    font-size: 0.8rem;
+    line-height: 1.7;
+  }
+  
+  .example-card {
+    font-size: 0.75rem;
+    padding: 0.5rem;
+  }
+  
+  .output-tag {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.4rem;
   }
 }
 </style>

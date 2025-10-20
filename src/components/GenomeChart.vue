@@ -41,6 +41,7 @@ interface Props {
   category: string
   subCategory: string
   cellType: string
+  locus: string
   isFlashing?: boolean
 }
 
@@ -103,40 +104,6 @@ const chartMapping: Record<string, string> = {
   'hic': '/images/HiC.png'
 }
 
-// Legend mapping
-const legendMapping: Record<string, string[]> = {
-  '1000-tfs': ['Input: ATAC', 'Input: DNA', 'Prediction: TF binding'],
-  'h3k27ac': ['Input: ATAC', 'Input: DNA', 'Prediction: H3K27ac'],
-  'h3k4me3': ['Input: ATAC', 'Input: DNA', 'Prediction: H3K4me3'],
-  'h3k27me3': ['Input: ATAC', 'Input: DNA', 'Prediction: H3K27me3'],
-  'h3k9me3': ['Input: ATAC', 'Input: DNA', 'Prediction: H3K9me3'],
-  'h3k36me3': ['Input: ATAC', 'Input: DNA', 'Prediction: H3K36me3'],
-  'h3k4me1': ['Input: ATAC', 'Input: DNA', 'Prediction: H3K4me1'],
-  'h3k9ac': ['Input: ATAC', 'Input: DNA', 'Prediction: H3K9ac'],
-  'h3k14ac': ['Input: ATAC', 'Input: DNA', 'Prediction: H3K14ac'],
-  'h3k18ac': ['Input: ATAC', 'Input: DNA', 'Prediction: H3K18ac'],
-  'h3k23ac': ['Input: ATAC', 'Input: DNA', 'Prediction: H3K23ac'],
-  'h3k122ac': ['Input: ATAC', 'Input: DNA', 'Prediction: H3K122ac'],
-  'rna-seq': ['Input: ATAC', 'Input: DNA', 'Prediction: RNA-seq'],
-  'cage-seq': ['Input: ATAC', 'Input: DNA', 'Prediction: CAGE-seq'],
-  'net-cage': ['Input: ATAC', 'Input: DNA', 'Prediction: NET-CAGE'],
-  'starr-seq': ['Input: ATAC', 'Input: DNA', 'Prediction: Enhancer activity'],
-  'micro-c': ['Input: ATAC', 'Input: DNA', 'Prediction: Micro-C contacts'],
-  'rcmc': ['Input: ATAC', 'Input: DNA', 'Prediction: RCMC contacts'],
-  'intact-hic': ['Input: ATAC', 'Input: DNA', 'Prediction: Hi-C contacts'],
-  'chia-pet': ['Input: ATAC', 'Input: DNA', 'Prediction: ChIA-PET contacts'],
-  'bru-seq': ['Input: ATAC', 'Input: DNA', 'Prediction: Bru-seq'],
-  'tt-seq': ['Input: ATAC', 'Input: DNA', 'Prediction: TT-seq'],
-  'gro-seq': ['Input: ATAC', 'Input: DNA', 'Prediction: GRO-seq'],
-  'bruuv-seq': ['Input: ATAC', 'Input: DNA', 'Prediction: BruUV-seq'],
-  'bruchase': ['Input: ATAC', 'Input: DNA', 'Prediction: BruChase'],
-  'pro-seq': ['Input: ATAC', 'Input: DNA', 'Prediction: PRO-seq'],
-  'pro-cap': ['Input: ATAC', 'Input: DNA', 'Prediction: PRO-cap'],
-  'gro-cap': ['Input: ATAC', 'Input: DNA', 'Prediction: GRO-cap'],
-  'rna-strand-forward': ['Input: ATAC', 'Input: DNA', 'Prediction: RNA Forward'],
-  'rna-strand-reverse': ['Input: ATAC', 'Input: DNA', 'Prediction: RNA Reverse'],
-  'hic': ['Input: ATAC', 'Input: DNA', 'Prediction: Hi-C contacts']
-}
 
 // Reactive state
 const showOverlay = ref(false)
@@ -163,7 +130,10 @@ const chartTitle = computed(() => {
 })
 
 const legendItems = computed(() => {
-  return legendMapping[props.subCategory] || ['Input: ATAC', 'Input: DNA', 'Prediction: Signal']
+  return [
+    `Locus: ${props.locus}`,
+    `Cell type: ${props.cellType}`
+  ]
 })
 
 // Methods
