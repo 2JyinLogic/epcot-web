@@ -26,7 +26,7 @@
         
         <!-- Right Column: Image -->
         <div class="hero-image">
-          <img src="/images/epcot-overview.png" alt="EPCOT Overview" class="epcot-hero-image" />
+          <img src="/images/EPCOT.png" alt="EPCOT Overview" class="epcot-hero-image" />
         </div>
       </div>
     </section>
@@ -522,7 +522,7 @@ const onCompareToggle = (value: boolean) => {
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2.5rem;
+  gap: 3rem;
   align-items: start;
 }
 
@@ -534,7 +534,7 @@ const onCompareToggle = (value: boolean) => {
   font-size: 2.5rem;
   font-weight: bold;
   color: #000000;
-  margin: 0 0 1.5rem 0;
+  margin: 4rem 0 1.5rem 0;
   line-height: 1.2;
 }
 
@@ -1155,9 +1155,53 @@ const onCompareToggle = (value: boolean) => {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .hero-section {
+    padding: 0.5rem 1rem;
+    margin: 1rem 0.5rem;
+  }
+  
   .hero-content {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+  }
+  
+  .hero-text h1 {
+    font-size: 2rem;
+    margin: 2rem 0 1rem 0;
+    text-align: center;
+  }
+  
+  .hero-text p {
+    font-size: 1rem;
+    line-height: 1.7;
+    text-align: center;
+    margin: 0 0 1.5rem 0;
+  }
+  
+  .hero-text .call-to-action {
+    font-size: 1rem;
+    text-align: center;
+    margin: 0 0 1.5rem 0;
+  }
+  
+  .button-group {
+    justify-content: center;
+    gap: 0.75rem;
+  }
+  
+  .hero-text .btn {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+  }
+  
+  .hero-image {
+    padding-top: 1rem;
+    justify-content: center;
+  }
+  
+  .epcot-hero-image {
+    max-height: 400px;
+    transform: scale(1);
   }
   
   .content-layout {
@@ -1185,6 +1229,143 @@ const onCompareToggle = (value: boolean) => {
     max-height: 80vh;
     border-radius: 12px;
     border: 1px solid #d1d5db;
+  }
+  
+  .use-cases-section {
+    margin: 1rem 0.5rem 2rem;
+  }
+  
+  .use-cases-header {
+    padding: 0.75rem 1rem;
+  }
+  
+  .use-cases-header h2 {
+    font-size: 1.3rem;
+  }
+  
+  .use-cases-header p {
+    font-size: 0.9rem;
+  }
+  
+  .controls-section {
+    padding: 1rem;
+  }
+  
+  .main-content {
+    padding: 1rem;
+  }
+  
+  .description-panel, .visualization-panel {
+    padding: 1rem;
+  }
+  
+  .description-panel h3, .visualization-panel h3 {
+    font-size: 1.1rem;
+  }
+  
+  .definition h4, .outputs h4, .examples h4 {
+    font-size: 0.95rem;
+  }
+  
+  .definition p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+  
+  .example-card {
+    font-size: 0.8rem;
+    padding: 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 0.25rem 0.5rem;
+    margin: 0.5rem 0.25rem;
+  }
+  
+  .hero-text h1 {
+    font-size: 1.8rem;
+    margin: 1.5rem 0 0.75rem 0;
+  }
+  
+  .hero-text p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin: 0 0 1rem 0;
+  }
+  
+  .hero-text .call-to-action {
+    font-size: 0.95rem;
+    margin: 0 0 1rem 0;
+  }
+  
+  .button-group {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .hero-text .btn {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  .epcot-hero-image {
+    max-height: 300px;
+  }
+  
+  .use-cases-section {
+    margin: 0.5rem 0.25rem 1.5rem;
+  }
+  
+  .use-cases-header {
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .use-cases-header h2 {
+    font-size: 1.2rem;
+  }
+  
+  .use-cases-header p {
+    font-size: 0.85rem;
+  }
+  
+  .controls-section {
+    padding: 0.75rem;
+  }
+  
+  .main-content {
+    padding: 0.75rem;
+  }
+  
+  .description-panel, .visualization-panel {
+    padding: 0.75rem;
+  }
+  
+  .description-panel h3, .visualization-panel h3 {
+    font-size: 1rem;
+  }
+  
+  .definition h4, .outputs h4, .examples h4 {
+    font-size: 0.9rem;
+  }
+  
+  .definition p {
+    font-size: 0.8rem;
+    line-height: 1.7;
+  }
+  
+  .example-card {
+    font-size: 0.75rem;
+    padding: 0.5rem;
+  }
+  
+  .output-tag {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.4rem;
   }
 }
 </style>

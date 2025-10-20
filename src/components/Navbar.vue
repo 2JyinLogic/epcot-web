@@ -89,45 +89,85 @@ a:hover {
 /* Responsive design */
 @media (max-width: 768px) {
   .navbar {
-    padding: 1rem;
+    padding: 0.75rem 1rem;
+    flex-wrap: wrap;
   }
   
-  .logo-image {
-    height: 40px;
-  }
-  
-  .logo-text {
-    font-size: 1.5rem;
-  }
-  
-  .logo-container {
-    gap: 0.4rem;
-  }
-  
-  nav {
-    gap: 0.75rem;
-  }
-  
-  nav a {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
   .logo-image {
     height: 36px;
   }
   
   .logo-text {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
   
   .logo-container {
     gap: 0.3rem;
   }
   
+  nav {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  
   nav a {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    padding: 0.25rem 0.5rem;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 640px) {
+  .navbar {
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .logo-image {
+    height: 32px;
+  }
+  
+  .logo-text {
+    font-size: 1.2rem;
+  }
+  
+  nav {
+    gap: 0.4rem;
+  }
+  
+  nav a {
+    font-size: 0.85rem;
+    padding: 0.2rem 0.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.5rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .left, .right {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .logo-image {
+    height: 28px;
+  }
+  
+  .logo-text {
+    font-size: 1.1rem;
+  }
+  
+  nav {
+    gap: 0.3rem;
+    justify-content: center;
+  }
+  
+  nav a {
+    font-size: 0.8rem;
+    padding: 0.15rem 0.3rem;
   }
 }
 </style>
