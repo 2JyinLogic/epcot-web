@@ -8,22 +8,18 @@
           <h1>EPCOT</h1>
           <p>EPCOT-v2 is a general AI model that predicts diverse genomic modalities (over 1,000 transcription factors, histone marks, RNA, and chromatin contact maps) from DNA sequences and chromatin accessibility. It generalizes across human and mouse cell types and tissues to capture transcriptional regulation and characterize non-coding variant functions.</p>
             <div class="button-group">
-              <div class="button-row">
-                <button class="btn" @click="tryNow">
-                  Try it now
-                  <svg class="external-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </button>
-              </div>
-              <div class="button-row">
-                <button class="btn btn-secondary" @click="readPaper">
-                  Read the paper
-                </button>
-                <button class="btn btn-secondary" @click="viewSourceCode">
-                  View Source Code
-                </button>
-              </div>
+              <button class="btn" @click="tryNow">
+                Try it now
+                <svg class="external-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <button class="btn btn-secondary" @click="readPaper">
+                Read the paper
+              </button>
+              <button class="btn btn-secondary" @click="viewSourceCode">
+                View Source Code
+              </button>
             </div>
         </div>
         
@@ -490,7 +486,7 @@ const onCompareToggle = (value: boolean) => {
 
 .hero-text {
   text-align: left;
-  margin-right: 55px;
+  margin-right: 21px;
 }
 
 .hero-text h1 {
@@ -547,12 +543,6 @@ const onCompareToggle = (value: boolean) => {
 }
 
 .button-group {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.button-row {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
@@ -1154,13 +1144,10 @@ const onCompareToggle = (value: boolean) => {
   }
   
   .button-group {
-    align-items: center;
-    gap: 0.75rem;
-  }
-  
-  .button-row {
+    display: flex;
     justify-content: center;
     gap: 0.75rem;
+    flex-wrap: wrap;
   }
   
   .hero-text .btn {
@@ -1275,21 +1262,17 @@ const onCompareToggle = (value: boolean) => {
   }
   
   .button-group {
-    align-items: center;
+    flex-direction: row;
+    justify-content: center;
     gap: 0.5rem;
-  }
-  
-  .button-row {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
+    flex-wrap: wrap;
   }
   
   .hero-text .btn {
     font-size: 0.85rem;
     padding: 0.5rem 1rem;
-    width: 100%;
-    max-width: 200px;
+    flex: 1;
+    min-width: 120px;
   }
   
   .epcot-hero-image {
