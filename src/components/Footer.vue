@@ -7,25 +7,26 @@
           <img src="/images/logo.png" alt="EPCOT Logo" class="footer-logo" />
           <span class="brand-name">EPCOT</span>
         </div>
-        <p class="brand-tagline">A unified deep learning framework for genomics across cells, tissues, and species</p>
+        <p class="brand-tagline">A unified multi-task AI model for predicting genomic modalities from DNA sequences and chromatin accessibility</p>
       </div>
 
       <!-- Middle Column: Quick Links -->
       <div class="links-section">
         <h3>Quick Links</h3>
         <div class="links-grid">
-          <a href="https://colab.research.google.com/github/liu-bioinfo-lab/general_AI_model/blob/main/epcotv2_basic_tutorial.ipynb" target="_blank" class="link-item">Basic notebook (Colab)</a>
-          <a href="https://www.biorxiv.org/content/10.1101/2025.05.08.652986v1" target="_blank" class="link-item">Research Paper</a>
-          <a href="https://github.com/liu-bioinfo-lab/general_AI_model" target="_blank" class="link-item">GitHub Repository</a>
+          <a href="https://www.biorxiv.org/content/10.1101/2025.05.08.652986v1" target="_blank" class="link-item">Paper</a>
+          <a href="https://github.com/liu-bioinfo-lab/general_AI_model" target="_blank" class="link-item">GitHub</a>
+          <a href="https://colab.research.google.com/github/liu-bioinfo-lab/general_AI_model/blob/main/epcotv2_basic_tutorial.ipynb" target="_blank" class="link-item">Colab Tutorial</a>
           <a href="https://huggingface.co/spaces/drjieliu/EPCOTv2-app" target="_blank" class="link-item">Try web version</a>
         </div>
       </div>
 
       <!-- Right Column: Contact Section -->
       <div class="contact-section">
-        <h3>Help</h3>
+        <h3>Contact us</h3>
         <div class="contact-info">
-          <a href="https://jieliu6.github.io/" target="_blank" rel="noopener noreferrer" class="link-item">Contact Us</a>
+          <div class="email-text">drjieliu@umich.edu</div>
+          <a href="https://jieliu6.github.io/" target="_blank" rel="noopener noreferrer" class="link-item">Liu Lab</a>
         </div>
       </div>
     </div>
