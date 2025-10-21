@@ -7,7 +7,7 @@
       </router-link>
     </div>
     <div class="right">
-      <nav>
+      <nav style="display: none;">
         <router-link to="/">Home</router-link>
         <router-link to="/model">Models</router-link>
         <router-link to="/about">About</router-link>
